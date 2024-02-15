@@ -1,5 +1,5 @@
 package org.example.kitchenorganizer;
 
-public class Food {
+public class InventoryItem {
 
 }
