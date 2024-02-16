@@ -6,11 +6,18 @@ import java.util.List;
 
 public class FoodCollection {
     private List<Food> items;
+    private String collectionName;
 
+    // Constructors
     public FoodCollection() {
         this.items = new ArrayList<Food>();
     }
+    public FoodCollection(String name) {
+        this.collectionName = name;
+        this.items = new ArrayList<Food>();
+    }
 
+    // Methods
     public void sortByName() {
         items.sort(Comparator.comparing(Food::getName));
     }
