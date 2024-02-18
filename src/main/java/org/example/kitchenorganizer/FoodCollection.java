@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FoodCollection {
     private List<Food> items;
-    private String collectionName;
+    private String collectionName; // add getter and setter
 
     // Constructors
     public FoodCollection() {
