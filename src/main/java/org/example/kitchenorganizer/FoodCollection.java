@@ -18,18 +18,35 @@ public class FoodCollection {
     }
 
     // Methods
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
     public void sortByName() {
         items.sort(Comparator.comparing(Food::getName));
     }
 
+    public void sortByExpiration() {
+        items.sort(Comparator.comparing(Food::getExpDate));
+    }
 
-//    + SortByExpiration()
-//
-//    + AddItem(item: Food): void
-//
-//    + RemoveItem(item: Food): void
-//
-//    + GetItems(items: String):
-//
-//    + GetItemList: List<Food>
+    public void addItem(Food item) {
+        this.items.add(item);
+    }
+
+    public void removeItem(Food item) {
+        this.items.remove(item);
+    }
+
+    // Forgot what this method was supposed to do
+    //    + GetItems(items: String):
+
+    public List<Food> getItemsList() {
+        return new ArrayList<>(items);
+    }
 }
