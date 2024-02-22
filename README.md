@@ -1,5 +1,9 @@
 Milestone 3 Due: 03/20/2024
+A README.md or README.txt file that answers the following questions:
 
-Milestone 4 Due: 04/10/2024
+How is the code structured? Where are the classes that satisfy the “Code Implementation” requirements?
 
-Final Project Presentation: 04/17/2024
+How does one run the application?
+
+Zip your project folder which should contain all of your code, including the gradle build files and
+the README and submit the zip file to D2L
