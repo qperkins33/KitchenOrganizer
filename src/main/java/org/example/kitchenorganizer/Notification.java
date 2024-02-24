@@ -14,7 +14,7 @@ public class Notification implements Notify{
         return lowQuantityMessage;
     }
     public void checkUserInventoryQuantity(Food f) {
-        if (f.getQuantity() < f.getMinQuanity()) {
+        if (f.getQuantity() < f.getMinQuantity()) {
             //Do something to send a notification to the user about low quantity
         }
     }
