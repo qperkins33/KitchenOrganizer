@@ -1,4 +1,4 @@
-package org.example.kitchenorganizer;
+package org.example.kitchenorganizer.classes;
 
 public abstract class InventoryItem {
 

@@ -1,4 +1,6 @@
-package org.example.kitchenorganizer;
+package org.example.kitchenorganizer.classes;
+
+import org.example.kitchenorganizer.classes.FoodCollection;
 
 import java.util.ArrayList;
 import java.util.List;

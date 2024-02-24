@@ -1,6 +1,9 @@
-package org.example.kitchenorganizer;
+package org.example.kitchenorganizer.notification;
 
-public class Notification implements Notify{
+import org.example.kitchenorganizer.classes.Food;
+import org.example.kitchenorganizer.classes.User;
+
+public class Notification implements Notify {
     private User currentUser;
     private String lowQuantityMessage = "Low Quantity Message";
 
