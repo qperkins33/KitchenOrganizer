@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.kitchenorganizer.App"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.Text?>
+<VBox fx:controller="org.example.kitchenorganizer.AppController" xmlns:fx="http://javafx.com/fxml">
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER_LEFT">
+                <Text fx:id="appTitle" text="Kitchen Organizer" HBox.hgrow="NEVER"></Text>
+                <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
+                <Button text="Search" onAction="#handleSearch"></Button>
+                <Button text="Settings" onAction="#openSettings" HBox.hgrow="NEVER" />
+            </HBox>
+        </top>
+        <center>
 
-</AnchorPane>
+        </center>
+    </BorderPane>
+</VBox>
