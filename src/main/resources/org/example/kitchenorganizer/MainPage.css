@@ -1,6 +1,6 @@
 .appTitle {
     -fx-font: 40px "Serif Bold";
-    -fx-fill: rgb(211, 211, 211);
+    -fx-fill: rgba(226,226,226,255)
 }
 
 .appTitleContainer {
@@ -10,4 +10,9 @@
 .menuContainer {
     -fx-background-color: rgba(0, 0, 255, 0.75);
     -fx-border-color: black;
+}
+
+.menuContainer2 {
+    -fx-border-color: black;
+    -fx-background-color: rgba(226,226,226,255)
 }

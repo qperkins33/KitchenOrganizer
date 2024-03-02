@@ -4,6 +4,8 @@
 
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox fx:controller="org.example.kitchenorganizer.MainPageController" xmlns:fx="http://javafx.com/fxml">
     <BorderPane>
         <stylesheets>
@@ -11,18 +13,57 @@
         </stylesheets>
 
         <top>
-            <HBox alignment="CENTER_LEFT" styleClass="menuContainer">
-                <StackPane styleClass="appTitleContainer">
-                    <Text fx:id="appTitle" styleClass="appTitle" text="Kitchen Organizer"/>
-                </StackPane>
-                <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
-                <Button text="Search" onAction="#handleSearch"></Button>
-                <Button text="Settings" onAction="#openSettings" HBox.hgrow="NEVER" />
-            </HBox>
+            <VBox>
+                <HBox alignment="CENTER_LEFT" styleClass="menuContainer">
+                    <StackPane styleClass="appTitleContainer">
+                        <Text fx:id="appTitle" styleClass="appTitle" text="Kitchen Organizer"/>
+                    </StackPane>
+                    <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
+                    <Button text="Search" onAction="#handleSearch"></Button>
+                    <Button text="Settings" onAction="#openSettings" HBox.hgrow="NEVER" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" styleClass="menuContainer2">
+                    <StackPane styleClass="appTitleContainer">
+                        <Text text="Select Kitchen: "/>
+                    </StackPane>
+
+                    <ComboBox fx:id="kitchenSelector">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+<!--                                TO DO: Hard code an example database inventory-->
+                                <String fx:value="Kitchen 1"/>
+                                <String fx:value="Kitchen 2"/>
+                                <String fx:value="Kitchen 3"/>
+                                <String fx:value="Kitchen 4"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+
+                    <Pane HBox.hgrow="ALWAYS"/>
+
+                    <StackPane styleClass="appTitleContainer">
+                        <Text text="Sort By: "/>
+                    </StackPane>
+                    <ComboBox fx:id="sortBy">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+<!--                                TO DO: Code a method to sort -->
+                                <String fx:value="Name"/>
+                                <String fx:value="Quantity"/>
+                                <String fx:value="Expiration"/>
+                                <String fx:value="Test"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+
+            </VBox>
         </top>
         <center>
 <!--            Test to process search-->
             <Label fx:id="searchResult" alignment="CENTER"/>
+<!--            Select query to displays foods within kitchen that match searched food-->
         </center>
     </BorderPane>
 </VBox>
