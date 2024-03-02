@@ -21,6 +21,7 @@
             </HBox>
         </top>
         <center>
+<!--            Test to process search-->
             <Label fx:id="searchResult" alignment="CENTER"/>
         </center>
     </BorderPane>

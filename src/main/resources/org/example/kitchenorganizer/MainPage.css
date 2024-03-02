@@ -1,6 +1,6 @@
 .appTitle {
-    -fx-font: 40px "Serif";
-    -fx-fill: darkgray;
+    -fx-font: 40px "Serif Bold";
+    -fx-fill: rgb(211, 211, 211);
 }
 
 .appTitleContainer {
