@@ -1,0 +1,13 @@
+.appTitle {
+    -fx-font: 40px "Serif";
+    -fx-fill: darkgray;
+}
+
+.appTitleContainer {
+    -fx-padding: 10;
+}
+
+.menuContainer {
+    -fx-background-color: rgba(0, 0, 255, 0.75);
+    -fx-border-color: black;
+}

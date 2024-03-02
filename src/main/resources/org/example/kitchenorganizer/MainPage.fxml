@@ -3,11 +3,18 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
+<?import java.net.URL?>
 <VBox fx:controller="org.example.kitchenorganizer.MainPageController" xmlns:fx="http://javafx.com/fxml">
     <BorderPane>
+        <stylesheets>
+            <URL value="@MainPage.css" />
+        </stylesheets>
+
         <top>
-            <HBox alignment="CENTER_LEFT">
-                <Text fx:id="appTitle" text="Kitchen Organizer" HBox.hgrow="NEVER"></Text>
+            <HBox alignment="CENTER_LEFT" styleClass="menuContainer">
+                <StackPane styleClass="appTitleContainer">
+                    <Text fx:id="appTitle" styleClass="appTitle" text="Kitchen Organizer"/>
+                </StackPane>
                 <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
                 <Button text="Search" onAction="#handleSearch"></Button>
                 <Button text="Settings" onAction="#openSettings" HBox.hgrow="NEVER" />
