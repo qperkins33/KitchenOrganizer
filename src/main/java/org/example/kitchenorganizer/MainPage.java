@@ -5,13 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.example.kitchenorganizer.AppController;
 
-public class App extends Application {
+public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 800, 800);

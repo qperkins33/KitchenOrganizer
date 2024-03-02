@@ -1,20 +1,19 @@
 package org.example.kitchenorganizer;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import org.example.kitchenorganizer.classes.Food;
 
-public class AppController {
-    String searchedText;
+public class MainPageController {
+    @FXML
+    private Label searchResult; // Reference to the Label added in FXML
 
     @FXML
     private TextField searchBar;
 
     @FXML
     private void handleSearch() {
-        searchedText = searchBar.getText();
+        searchResult.setText("Search for: " + searchBar.getText());
 
         // Implement search logic
     }
