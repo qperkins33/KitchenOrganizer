@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Pos?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.kitchenorganizer.login.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
-</AnchorPane>
+<?import javafx.scene.layout.HBox?>
+<VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+    <Text text="Login Form"/>
+    <HBox alignment="CENTER">
+        <Text text="Username:"></Text>
+        <TextField></TextField>
+    </HBox>
+    <HBox alignment="CENTER">
+        <Text text="Password:"></Text>
+        <PasswordField></PasswordField>
+    </HBox>
+    <Button text="Login"></Button>
+</VBox>

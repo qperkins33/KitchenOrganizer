@@ -15,12 +15,17 @@ import java.util.ResourceBundle;
 public class AppController implements Initializable {
     @FXML
     private Parent mainPageContent;
+    @FXML
+    private Parent loginFormContent;
 
     @FXML
     private MainPageController MainPageController;
+    @FXML
+    private LoginController LoginController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.mainPageContent.setVisible(true);
+        this.loginFormContent.setVisible(true);
+        this.mainPageContent.setVisible(false);
     }
 }

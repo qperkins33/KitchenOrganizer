@@ -11,6 +11,6 @@
            fx:controller="org.example.kitchenorganizer.AppController"
            prefHeight="400.0" prefWidth="600.0">
     <fx:include source="MainPage.fxml" fx:id="mainPageContent" />
-    <!-- <fx:include source="LoginForm.fxml" fx:id="loginForm" /> -->
+    <fx:include source="LoginForm.fxml" fx:id="loginFormContent" />
 </StackPane>
 
