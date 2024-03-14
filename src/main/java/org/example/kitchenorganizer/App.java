@@ -13,7 +13,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 800, 800);
+        Scene scene = new Scene(root, 900, 800);
 
         primaryStage.setTitle("Kitchen Organizer");
         primaryStage.setScene(scene);

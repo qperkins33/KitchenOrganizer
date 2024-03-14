@@ -45,6 +45,7 @@
                     <StackPane styleClass="appTitleContainer">
                         <Text text="Sort By: "/>
                     </StackPane>
+
                     <ComboBox fx:id="sortBy">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
@@ -52,58 +53,27 @@
                                 <String fx:value="Name"/>
                                 <String fx:value="Quantity"/>
                                 <String fx:value="Expiration"/>
-                                <String fx:value="Test"/>
                             </FXCollections>
                         </items>
                     </ComboBox>
                 </HBox>
-
             </VBox>
         </top>
-<!--        <center>-->
-
-<!--            In Milestone 4, write Select query to displays foods within kitchen that match searched food-->
-<!--            <VBox>-->
-<!--                <HBox alignment="TOP_CENTER" styleClass="foodRow">-->
-<!--                    <VBox alignment="CENTER_LEFT" styleClass="foodCell">-->
-<!--                        <Text text="food1"/>-->
-<!--                    </VBox>-->
-<!--                    <VBox styleClass="foodColumn"/>-->
-<!--                    <VBox alignment="CENTER" styleClass="foodCell">-->
-<!--                        <Text text="food2"/>-->
-<!--                    </VBox>-->
-<!--                    <VBox styleClass="foodColumn"/>-->
-<!--                    <VBox alignment="CENTER" styleClass="foodCell">-->
-<!--                        <Text text="food3"/>-->
-<!--                    </VBox>-->
-<!--                </HBox>-->
-<!--                <HBox alignment="TOP_CENTER" styleClass="foodRow">-->
-<!--                    <VBox alignment="CENTER_LEFT" styleClass="foodCell">-->
-<!--                        <Text text="food4"/>-->
-<!--                    </VBox>-->
-<!--                    <VBox styleClass="foodColumn"/>-->
-<!--                    <VBox alignment="CENTER" styleClass="foodCell">-->
-<!--                        <Text text="food5"/>-->
-<!--                    </VBox>-->
-<!--                    <VBox styleClass="foodColumn"/>-->
-<!--                    <VBox alignment="CENTER_RIGHT" styleClass="foodCell">-->
-<!--                        <Text text="food6"/>-->
-<!--                    </VBox>-->
-<!--                </HBox>-->
-
-<!--            </VBox>-->
-
-<!--        </center>-->
 
         <center>
 <!--            Scrollable-->
-            <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="800" prefHeight="600">
+            <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="900" prefHeight="625">
                 <VBox fx:id="centerVBox" alignment="TOP_CENTER" ></VBox>
             </ScrollPane>
         </center>
 
         <bottom>
             <HBox alignment="CENTER_LEFT">
+                <HBox>
+                    <Label text=" User's Name: "/>
+                    <Text fx:id="userName" />
+                </HBox>
+
                 <!--Test to process search (Bottom left corner)-->
                 <Label fx:id="searchResult" alignment="CENTER"/>
                 <Pane HBox.hgrow="ALWAYS"/>

@@ -9,17 +9,17 @@ import java.util.List;
 
 public class ExampleUser {
     public static User testUser() {
-        User user = new User("Name");
+        User user = new User("App User");
 
         FoodCollection foodCollection = new FoodCollection();
 
-        Food food1 = new Food("Apple", 2, "Quantity", 4, 14);
+        Food food1 = new Food("Burger", 55, "Quantity", 4, 14);
         Food food2 = new Food("Pear", 3, "Quantity", 4, 8);
-        Food food3 = new Food("Orange", 1, "Quantity", 4, 5);
+        Food food3 = new Food("Flour", 1.15, "Lbs", 4, 5);
         Food food4 = new Food("Banana", 500, "Quantity", 4, 10);
         Food food5 = new Food("Egg", 10, "Quantity", 4, 12);
         Food food6 = new Food("Milk", 1, "Quantity", 4, 6);
-        Food food7 = new Food("Peanuts", 54, "Quantity", 4, 4);
+        Food food7 = new Food("Sugar", 54, "Cups", 4, 4);
         Food food8 = new Food("Cake", 2, "Quantity", 4, 31);
 
         foodCollection.addItem(food1);

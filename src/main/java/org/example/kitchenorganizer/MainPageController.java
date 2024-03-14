@@ -1,6 +1,7 @@
 package org.example.kitchenorganizer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -19,10 +20,13 @@ public class MainPageController implements Initializable {
 
     @FXML
     private VBox centerVBox;
+    @FXML
+    private Text userName;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         User user = ExampleUser.testUser(); // Obtain test user
+        userName.setText(user.getName());
         // Display the collection 1 at index 0
         if (!user.getFoodInventoryList().isEmpty()) {
             displayFoods(user.getFoodInventoryList().get(0).getItemsList());
@@ -48,9 +52,17 @@ public class MainPageController implements Initializable {
             foodCell.getStyleClass().add("foodCell");
 
             // Food info
+            HBox foodNameBox = new HBox();
+            foodNameBox.getStyleClass().add("foodName");
+            foodNameBox.setAlignment(Pos.CENTER);
             Text foodName = new Text(food.getName());
-            Text expDateText = new Text("Days to Exp: " + String.valueOf(food.getExpDate())); // Convert int to String
-            Text quantityText = new Text("Quantity: " + String.format("%.2f", food.getQuantity())); // Format double to String
+
+            foodNameBox.getChildren().add(foodName);
+
+
+            Text expDateText = new Text("Days to Expiration: " + String.valueOf(food.getExpDate())); // Convert int to String
+            Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
+            Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
             // Buttons
             HBox buttons = new HBox();
@@ -60,7 +72,7 @@ public class MainPageController implements Initializable {
             buttons.getChildren().addAll(minus, plus);
 
             // Add Food info and Buttons
-            foodCell.getChildren().addAll(foodName, expDateText, quantityText, buttons);
+            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons);
 
             // Add foodCell to currentRow
             currentRow.getChildren().add(foodCell);
