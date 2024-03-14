@@ -3,17 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.layout.HBox?>
-<VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+
+<VBox alignment="CENTER" spacing="20"
+      style="-fx-padding: 20;"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.kitchenorganizer.login.LoginController">
     <Text text="Login Form"/>
     <HBox alignment="CENTER">
         <Text text="Username:"></Text>
-        <TextField></TextField>
+        <TextField fx:id="usernameField"></TextField>
     </HBox>
     <HBox alignment="CENTER">
         <Text text="Password:"></Text>
-        <PasswordField></PasswordField>
+        <PasswordField fx:id="passwordField"></PasswordField>
     </HBox>
-    <Button text="Login"></Button>
+    <Label fx:id="loginMessageLabel" text="" />
+    <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
 </VBox>

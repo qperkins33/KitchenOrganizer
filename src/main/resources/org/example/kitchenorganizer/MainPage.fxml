@@ -31,7 +31,7 @@
                     <ComboBox fx:id="kitchenSelector">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
-<!--                                TO DO: Hard code an example database inventory-->
+                                <!--                                TO DO: Hard code an example database inventory-->
                                 <String fx:value="Kitchen 1"/>
                                 <String fx:value="Kitchen 2"/>
                                 <String fx:value="Kitchen 3"/>
@@ -48,7 +48,7 @@
                     <ComboBox fx:id="sortBy">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
-<!--                                TO DO: Code a method to sort -->
+                                <!--                                TO DO: Code a method to sort -->
                                 <String fx:value="Name"/>
                                 <String fx:value="Quantity"/>
                                 <String fx:value="Expiration"/>
@@ -61,9 +61,9 @@
             </VBox>
         </top>
         <center>
-<!--            Test to process search-->
+            <!--            Test to process search-->
             <Label fx:id="searchResult" alignment="CENTER"/>
-<!--            Select query to displays foods within kitchen that match searched food-->
+            <!--            Select query to displays foods within kitchen that match searched food-->
         </center>
     </BorderPane>
 </VBox>
