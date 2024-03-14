@@ -64,6 +64,41 @@
 <!--            Test to process search-->
             <Label fx:id="searchResult" alignment="CENTER"/>
 <!--            Select query to displays foods within kitchen that match searched food-->
+            <VBox>
+                <HBox alignment="TOP_CENTER" styleClass="foodRow">
+                    <VBox alignment="CENTER_LEFT" styleClass="foodCell">
+                        <Text text="food1"/>
+                    </VBox>
+                    <VBox styleClass="foodColumn"/>
+                    <VBox alignment="CENTER" styleClass="foodCell">
+                        <Text text="food2"/>
+                    </VBox>
+                    <VBox styleClass="foodColumn"/>
+                    <VBox alignment="CENTER" styleClass="foodCell">
+                        <Text text="food3"/>
+                    </VBox>
+                </HBox>
+                <HBox alignment="TOP_CENTER" styleClass="foodRow">
+                    <VBox alignment="CENTER_LEFT" styleClass="foodCell">
+                        <Text text="food4"/>
+                    </VBox>
+                    <VBox styleClass="foodColumn"/>
+                    <VBox alignment="CENTER" styleClass="foodCell">
+                        <Text text="food5"/>
+                    </VBox>
+                    <VBox styleClass="foodColumn"/>
+                    <VBox alignment="CENTER_RIGHT" styleClass="foodCell">
+                        <Text text="food6"/>
+                    </VBox>
+                </HBox>
+            </VBox>
         </center>
+        <bottom>
+            <HBox alignment="CENTER_LEFT">
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="Add Food" HBox.hgrow="NEVER"/>
+            </HBox>
+
+        </bottom>
     </BorderPane>
 </VBox>
