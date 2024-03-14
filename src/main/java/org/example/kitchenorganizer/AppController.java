@@ -25,7 +25,7 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.loginFormContent.setVisible(true);
-        this.mainPageContent.setVisible(false);
+        this.loginFormContent.setVisible(false);
+        this.mainPageContent.setVisible(true);
     }
 }
