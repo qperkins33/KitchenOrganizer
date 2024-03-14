@@ -1,14 +1,17 @@
 package org.example.kitchenorganizer;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import org.example.kitchenorganizer.classes.InventoryItem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainPageController {
+
+    @FXML
+    private Label loginMessageLabel;
 
     @FXML
     private Label searchResult; // Reference to the Label added in FXML (using to test if searchbar works)
@@ -22,6 +25,7 @@ public class MainPageController {
 
         // Implement search logic
     }
+
 
     @FXML
     private void openSettings() {
@@ -49,6 +53,5 @@ public class MainPageController {
     private void logout() {
         // Logout logic
     }
-
-
 }
+

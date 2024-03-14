@@ -15,6 +15,12 @@ import javafx.scene.Node;
 import java.io.IOException;
 
 public class LoginController {
+
+    public interface LoginListener {
+        void onLoginComplete();
+    }
+
+    private LoginListener loginListener;
     private static final String CORRECT_USERNAME = "user";
     private static final String CORRECT_PASSWORD = "pass";
 
@@ -39,12 +45,19 @@ public class LoginController {
 
             // If the entered username and password are correct, switch to the main page
             switchToMainPage(event);
+
+            if(loginListener != null) {
+                loginListener.onLoginComplete();
+            }
+
         } else {
             loginMessageLabel.setTextFill(Color.RED);
             loginMessageLabel.setText("Incorrect username or password");
         }
     }
-
+    public void setLoginListener(LoginListener loginListener) {
+        this.loginListener = loginListener;
+    }
     private void switchToMainPage(ActionEvent event) {
         try {
 

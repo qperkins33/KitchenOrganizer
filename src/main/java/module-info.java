@@ -2,6 +2,9 @@ module org.example.kitchenorganizer {
     requires javafx.controls;
     requires javafx.fxml;
 
+    exports org.example.kitchenorganizer.login to javafx.fxml;
+
+    opens org.example.kitchenorganizer.login to javafx.fxml;
 
     opens org.example.kitchenorganizer to javafx.fxml;
     exports org.example.kitchenorganizer;
