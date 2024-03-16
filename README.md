@@ -1,40 +1,52 @@
 Project Milestone 3 – Implementation
 Due March 20, 2024 @ 6:00 PM
 
-{Requirements}:
+How is the code structured?
+
+The code is structured into several packages, each containing classes related to specific
+functionalities of the kitchen organizer application.
+
+- org.example.kitchenorganizer.classes: This package contains classes representing various entities
+in the kitchen organizer application, such as Food, FoodCollection, InventoryItem, and User.
+These classes permit to manage food items, user inventory...
+
+- org.example.kitchenorganizer.notification: This package includes the Notification class,
+which implements the Notify interface. It handles notifications related to low food quantity in the user's inventory.
+
+- org.example.kitchenorganizer.login: This package contains the LoginController class, which manages the user
+authentication process and login UI. It interacts with the FXML files for the login form.
+
+- org.example.kitchenorganizer: This package contains the main classes and controllers for the application.
+The App class serves as the entry point for the JavaFX application. The MainPageController class manages the main page UI
+and displays food items from the user's inventory.
 
 
-Code Implementation:
+Where are the classes that satisfy the “Code Implementation” requirements?
 
-Review your submission for Project Milestone 2 and consider the class diagrams you drew. Are the
-classes still relevant to your implementation? If you have decided to make any changes that’s okay.
-Software design and implementation details change as project features are added.
-Implement in Java the classes you drew in your class diagrams from Project Milestone 2 but update the
-classes implementations and relationships as necessary. It is okay at this point to mock external systems.
-In other words, if your application communicates with a database or a network server, the class that
-interfaces with these components can return hard coded values.
-
-At a minimum the code should implement at least the following:
-- Four (4) class definitions of classes that can be instantiated with the “new” keyword.
-- One (1) Interface.
-- One (1) Abstract Class.
+- Food.java
+- FoodCollection.java
+- InventoryItem.java
+- User.java
+- Notification.java
+- LoginController.java
 
 
-User Interface Implementation:
+How does one run the application?
 
-Implement the main screen of the user interface for your application. All values can be hardcoded at this
-point. You may either hard code the values directly in the UI code, or you can create hard coded objects
-that expose the values to the UI layer. The UI does not need to have any functionality. It does not need
-to validate user input. It does not need to respond to clicks. Use the wireframe you submitted in Project
-Milestone 2 but incorporate any changes you have decided to make.
+1. Extract the Zip File: First, extract the zip file to a location on your computer where you want to work with the project.
 
+2. Open the Project in Your IDE: Open your preferred Integrated Development Environment (IDE) such as IntelliJ IDEA.
 
-Deliverables:
-- A README.md or README.txt file that answers the following questions:
-- How is the code structured? Where are the classes that satisfy the “Code Implementation” requirements?
-- How does one run the application?
-- Zip your project folder which should contain all of your code, including the gradle build files and the README and submit the zip file to D2L.
+3. Import the Project: Import the project into your IDE
 
-Further considerations:
-- Working code is required. The project should compile and run without modification. If the code requires modification to compile or crashes when running, there is a 25% penalty. For example, if after grading you receive 90/100 for the implementation, but the project crashes or does not compile, your final grade will be (90 * 0.75) / 100 = 68/100.
-- Before submitting, copy the zip file to another directory and then extract it. Follow the instructions in your README. Ensure that the project compiles and runs.
+4. Build the Project: Once the project is imported, your IDE should automatically start downloading the required
+dependencies specified in the Gradle build files. Wait for the build process to complete.
+
+5. Run the Application: After the build process is finished, you should be able to run the application.
+Run the App class, which serves as the entry point for the JavaFX application.
+
+- Login: The application will launch, and you will be presented with a login screen.
+Enter the correct username and password (in this case, "user" and "pass") and click the login button.
+
+- Main Page: Upon successful login, you will be directed to the main page of the application.
+Here, you can view food items and perform actions based on the application's features.
