@@ -145,7 +145,7 @@ public class MainPageController implements Initializable {
         TextField minQuantityField = new TextField();
         minQuantityField.setPromptText("Minimum Quantity");
         TextField expDateField = new TextField();
-        expDateField.setPromptText("Expiration Date");
+        expDateField.setPromptText("Days Until Expiration");
 
         grid.add(new Label("Name:"), 0, 0);
         grid.add(nameField, 1, 0);
@@ -155,7 +155,7 @@ public class MainPageController implements Initializable {
         grid.add(measurementUnitField, 1, 2);
         grid.add(new Label("Minimum Quantity:"), 0, 3);
         grid.add(minQuantityField, 1, 3);
-        grid.add(new Label("Expiration Date:"), 0, 4);
+        grid.add(new Label("Days Until Expiration:"), 0, 4);
         grid.add(expDateField, 1, 4);
 
         dialog.getDialogPane().setContent(grid);

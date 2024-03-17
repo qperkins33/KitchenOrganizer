@@ -31,23 +31,6 @@ public class ExampleUser {
         foodCollection.addItem(food7);
         foodCollection.addItem(food8);
 
-        foodCollection.addItem(food1);
-        foodCollection.addItem(food2);
-        foodCollection.addItem(food3);
-        foodCollection.addItem(food4);
-        foodCollection.addItem(food5);
-        foodCollection.addItem(food6);
-        foodCollection.addItem(food7);
-        foodCollection.addItem(food8);
-
-        foodCollection.addItem(food1);
-        foodCollection.addItem(food2);
-        foodCollection.addItem(food3);
-        foodCollection.addItem(food4);
-        foodCollection.addItem(food5);
-        foodCollection.addItem(food6);
-        foodCollection.addItem(food7);
-        foodCollection.addItem(food8);
 
         List<FoodCollection> list = new ArrayList<>();
 
