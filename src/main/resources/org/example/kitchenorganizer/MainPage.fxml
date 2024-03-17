@@ -77,7 +77,9 @@
                 <!--Test to process search (Bottom left corner)-->
                 <Label fx:id="searchResult" alignment="CENTER"/>
                 <Pane HBox.hgrow="ALWAYS"/>
-                <Button text="Add Food" HBox.hgrow="NEVER"/>
+
+                <Button text="Check Inventory" HBox.hgrow="NEVER"/>
+                <Button text="Add New Food" onAction="#showAddFoodDialog" HBox.hgrow="NEVER"/>
             </HBox>
 
         </bottom>

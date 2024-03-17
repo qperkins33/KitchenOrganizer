@@ -4,6 +4,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -122,6 +123,59 @@ public class MainPageController implements Initializable {
         });
 
         settingsPopup.showAndWait();
+    }
+
+    @FXML
+    public void showAddFoodDialog() {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Add New Food");
+        ButtonType submitButtonType = new ButtonType("Submit");
+        dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        TextField nameField = new TextField();
+        nameField.setPromptText("Name");
+        TextField quantityField = new TextField();
+        quantityField.setPromptText("Quantity");
+        TextField measurementUnitField = new TextField();
+        measurementUnitField.setPromptText("Measurement Unit");
+        TextField minQuantityField = new TextField();
+        minQuantityField.setPromptText("Minimum Quantity");
+        TextField expDateField = new TextField();
+        expDateField.setPromptText("Expiration Date");
+
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Quantity:"), 0, 1);
+        grid.add(quantityField, 1, 1);
+        grid.add(new Label("Measurement Unit:"), 0, 2);
+        grid.add(measurementUnitField, 1, 2);
+        grid.add(new Label("Minimum Quantity:"), 0, 3);
+        grid.add(minQuantityField, 1, 3);
+        grid.add(new Label("Expiration Date:"), 0, 4);
+        grid.add(expDateField, 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == submitButtonType) {
+                String name = nameField.getText();
+                double quantity = Double.parseDouble(quantityField.getText());
+                String measurementUnit = measurementUnitField.getText();
+                double minQuantity = Double.parseDouble(minQuantityField.getText());
+                int expDate = Integer.parseInt(expDateField.getText());
+
+                // ******************************************
+                // Add  method to add the food to your inventory
+                // ******************************************
+            }
+            return null;
+        });
+
+        dialog.showAndWait();
     }
 
     private void logout() {
