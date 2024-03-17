@@ -78,7 +78,7 @@
                 <Label fx:id="searchResult" alignment="CENTER"/>
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Button text="Check Inventory" HBox.hgrow="NEVER"/>
+                <Button text="Check Inventory" onAction="#showCheckInventoryDialog" HBox.hgrow="NEVER"/>
                 <Button text="Add New Food" onAction="#showAddFoodDialog" HBox.hgrow="NEVER"/>
             </HBox>
 

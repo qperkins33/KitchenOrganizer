@@ -12,6 +12,7 @@ import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.classes.InventoryItem;
 import org.example.kitchenorganizer.classes.User;
+import org.example.kitchenorganizer.notification.Notification;
 
 import java.net.URL;
 import java.util.List;
@@ -123,6 +124,15 @@ public class MainPageController implements Initializable {
         });
 
         settingsPopup.showAndWait();
+    }
+
+    @FXML
+    public void showCheckInventoryDialog() {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Low Inventory Notification");
+
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+        dialog.showAndWait();
     }
 
     @FXML
