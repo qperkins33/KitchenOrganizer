@@ -33,11 +33,12 @@ public class AppController implements Initializable, LoginController.LoginListen
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         this.loginFormContent.setVisible(true);
         this.mainPageContent.setVisible(false);
+    }
 
-
+    public void logout() {
+        this.loginFormContent.setVisible(true);
+        this.mainPageContent.setVisible(false);
     }
 }

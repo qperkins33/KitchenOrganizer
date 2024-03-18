@@ -20,21 +20,35 @@ import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
 
+    User user;
+    int currentCollection;
+
     @FXML
-    private VBox centerVBox;
+    private VBox centerVBox; // VBox used to display main content in center of page (Foods)
     @FXML
     private Text userName;
 
+    /**
+     * Initializes a test user and calls displayFoods() for current inventory
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        User user = ExampleUser.testUser(); // Obtain test user
+        user = ExampleUser.testUser(); // Obtain test user
+        currentCollection = 0;
+
         userName.setText(user.getName());
         // Display the collection 1 at index 0
         if (!user.getFoodInventoryList().isEmpty()) {
-            displayFoods(user.getFoodInventoryList().get(0).getItemsList());
+            displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
         }
     }
 
+    /**
+     * Displays foods from user's current inventory on the main page
+     * @param foods
+     */
     private void displayFoods(List<Food> foods) {
         HBox currentRow = new HBox();
         currentRow.setAlignment(Pos.TOP_CENTER);
@@ -88,9 +102,6 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    private Label loginMessageLabel;
-
-    @FXML
     private Label searchResult; // Reference to the Label added in FXML (using to test if searchbar works)
 
     @FXML
@@ -98,11 +109,13 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleSearch() {
-        searchResult.setText("Search for: " + searchBar.getText());
-
+        searchResult.setText(" Search for: " + searchBar.getText()); //test
         // Implement search logic
     }
 
+    /**
+     * Popup for settings
+     */
     @FXML
     private void openSettings() {
         Dialog<Void> settingsPopup = new Dialog<>();
@@ -126,15 +139,31 @@ public class MainPageController implements Initializable {
         settingsPopup.showAndWait();
     }
 
+    /**
+     * Popup that displays food from all inventories that are low quantity
+     */
     @FXML
     public void showCheckInventoryDialog() {
+        Notification notification = new Notification(user); // Create an instance of Notification
+        String lowInventoryNotifications = notification.gatherLowInventoryFoods(); // Get the low inventory foods
+
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Low Inventory Notification");
 
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL);
+        VBox content = new VBox();
+        TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
+        textArea.setEditable(false);
+        content.getChildren().add(textArea);
+
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();
     }
 
+
+    /**
+     * Popup that allows user to enter new foods into inventory
+     */
     @FXML
     public void showAddFoodDialog() {
         Dialog<Void> dialog = new Dialog<>();
@@ -188,8 +217,11 @@ public class MainPageController implements Initializable {
         dialog.showAndWait();
     }
 
+    /**
+     * Logout button located within settings
+     */
     private void logout() {
-        // Implement logout logic
+        // implement
     }
 }
 
