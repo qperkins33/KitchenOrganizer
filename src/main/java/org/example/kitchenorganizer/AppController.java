@@ -22,7 +22,7 @@ public class AppController implements Initializable, LoginController.LoginListen
     private Parent loginFormContent;
 
     @FXML
-    private MainPageController MainPageController;
+    private org.example.kitchenorganizer.mainpage.MainPageController MainPageController;
     @FXML
     private LoginController LoginController;
 

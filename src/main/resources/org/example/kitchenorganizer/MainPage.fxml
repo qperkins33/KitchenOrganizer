@@ -6,7 +6,7 @@
 <?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<VBox fx:controller="org.example.kitchenorganizer.MainPageController" xmlns:fx="http://javafx.com/fxml">
+<VBox fx:controller="org.example.kitchenorganizer.mainpage.MainPageController" xmlns:fx="http://javafx.com/fxml">
     <BorderPane>
         <stylesheets>
             <URL value="@MainPage.css" />

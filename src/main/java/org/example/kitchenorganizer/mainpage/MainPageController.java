@@ -1,4 +1,4 @@
-package org.example.kitchenorganizer;
+package org.example.kitchenorganizer.mainpage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.example.kitchenorganizer.ExampleUser;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.classes.InventoryItem;

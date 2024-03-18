@@ -12,4 +12,6 @@ module org.example.kitchenorganizer {
     opens org.example.kitchenorganizer.classes to javafx.fxml;
     exports org.example.kitchenorganizer.notification;
     opens org.example.kitchenorganizer.notification to javafx.fxml;
+    exports org.example.kitchenorganizer.mainpage;
+    opens org.example.kitchenorganizer.mainpage to javafx.fxml;
 }
