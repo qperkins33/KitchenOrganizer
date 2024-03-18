@@ -16,6 +16,8 @@ which implements the Notify interface. It handles notifications related to low f
 - org.example.kitchenorganizer.login: This package contains the LoginController class, which manages the user
 authentication process and login UI. It interacts with the FXML files for the login form.
 
+- org.example.kitchenorganizer.mainpage: This package contains the MainPageController class, which manages the display process of the main page and handles user inputs. It interacts with the FXML files for the main page.
+
 - org.example.kitchenorganizer: This package contains the main classes and controllers for the application.
 The App class serves as the entry point for the JavaFX application. The MainPageController class manages the main page UI
 and displays food items from the user's inventory.
