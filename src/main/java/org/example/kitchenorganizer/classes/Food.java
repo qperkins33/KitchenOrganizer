@@ -60,5 +60,3 @@ public class Food extends InventoryItem {
         return this.minQuantity;
     }
 }
-
-// Hi team

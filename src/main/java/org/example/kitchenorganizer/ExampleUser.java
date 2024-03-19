@@ -7,6 +7,9 @@ import org.example.kitchenorganizer.classes.User;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an example instance of a test filled with test values.
+ */
 public class ExampleUser {
     public static User testUser() {
         User user = new User("FirstName LastName");
@@ -38,6 +41,7 @@ public class ExampleUser {
 
         user.addCollectionToInventoryList(list);
 
+        // Return user with values
         return user;
     }
 }

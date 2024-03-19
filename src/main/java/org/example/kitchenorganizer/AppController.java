@@ -10,12 +10,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-//Use this when login is made
 public class AppController implements Initializable, LoginController.LoginListener {
 
-
     private List<InventoryItem> itemList;
-    //public class AppController implements Initializable {
+
     @FXML
     private Parent mainPageContent;
     @FXML
@@ -37,6 +35,9 @@ public class AppController implements Initializable, LoginController.LoginListen
         this.mainPageContent.setVisible(false);
     }
 
+    /**
+     * TODO: Implement logout (logout button located in settings popup)
+     */
     public void logout() {
         this.loginFormContent.setVisible(true);
         this.mainPageContent.setVisible(false);

@@ -6,6 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * [START APP IN THIS FILE]
+ *
+ * Login Info:
+ * Username: user
+ * Password: pass
+ *
+ */
 public class App extends Application {
 
     @Override

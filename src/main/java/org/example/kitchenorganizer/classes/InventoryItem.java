@@ -2,7 +2,6 @@ package org.example.kitchenorganizer.classes;
 
 public abstract class InventoryItem {
 
-    // Attributes common to all inventory items
     protected String name;
     protected double quantity;
     protected String measurementUnit;
@@ -16,13 +15,13 @@ public abstract class InventoryItem {
         this.minQuantity = minQuantity;
     }
 
-    // Abstract methods - to be implemented by subclasses
+    // Abstract Methods - to be implemented by subclasses
     public abstract void setName(String name);
     public abstract void setQuantity(double quantity);
     public abstract String getName();
     public abstract double getQuantity();
 
-    // Concrete methods - common implementation across all subclasses
+    // Concrete Methods
     public String getMeasurementUnit() {
         return measurementUnit;
     }

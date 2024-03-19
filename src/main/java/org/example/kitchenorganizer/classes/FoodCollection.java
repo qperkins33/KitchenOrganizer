@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FoodCollection {
     private List<Food> items;
-    private String collectionName; // add getter and setter
+    private String collectionName;
 
     // Constructors
     public FoodCollection() {
@@ -45,7 +45,7 @@ public class FoodCollection {
         this.items.remove(item);
     }
 
-    // Forgot what this method was supposed to do
+    // Possibly implement in Milestone 4
     //    + GetItems(items: String):
 
     public List<Food> getItemsList() {

@@ -1,7 +1,6 @@
 package org.example.kitchenorganizer.mainpage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -10,8 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.ExampleUser;
 import org.example.kitchenorganizer.classes.Food;
-import org.example.kitchenorganizer.classes.FoodCollection;
-import org.example.kitchenorganizer.classes.InventoryItem;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.notification.Notification;
 
@@ -19,6 +16,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * TODO: In Milestone 4, increase cohesion. Currently, this class has too many different jobs.
+ */
 public class MainPageController implements Initializable {
 
     User user;
@@ -75,7 +75,6 @@ public class MainPageController implements Initializable {
             Text foodName = new Text(food.getName());
 
             foodNameBox.getChildren().add(foodName);
-
 
             Text expDateText = new Text("Days to Expiration: " + String.valueOf(food.getExpDate())); // Convert int to String
             Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
@@ -209,7 +208,7 @@ public class MainPageController implements Initializable {
                 int expDate = Integer.parseInt(expDateField.getText());
 
                 // ******************************************
-                // Add  method to add the food to your inventory
+                // TODO: Add  method to add the food to your inventory
                 // ******************************************
             }
             return null;
@@ -222,7 +221,7 @@ public class MainPageController implements Initializable {
      * Logout button located within settings
      */
     private void logout() {
-        // implement
+        // TODO: Make settings logout button work
     }
 }
 

@@ -31,7 +31,7 @@
                     <ComboBox fx:id="kitchenSelector">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
-<!--                                TO DO: Hard code an example database inventory-->
+<!--                                TODO: Update displayed inventory based on what user selects-->
                                 <String fx:value="Kitchen 1"/>
                                 <String fx:value="Kitchen 2"/>
                                 <String fx:value="Kitchen 3"/>
@@ -49,7 +49,7 @@
                     <ComboBox fx:id="sortBy">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
-<!--                                TO DO: Code a method to sort -->
+<!--                                TODO: Code a method to sort displayed foods from database-->
                                 <String fx:value="Name"/>
                                 <String fx:value="Quantity"/>
                                 <String fx:value="Expiration"/>
@@ -74,7 +74,7 @@
                     <Text fx:id="userName" />
                 </HBox>
 
-                <!--Test to process search (Bottom left corner)-->
+                <!--Test to process search (Displays in bottom left corner)-->
                 <Label fx:id="searchResult" alignment="CENTER"/>
                 <Pane HBox.hgrow="ALWAYS"/>
 
