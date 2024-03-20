@@ -1,6 +1,7 @@
 module org.example.kitchenorganizer {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
     exports org.example.kitchenorganizer.login to javafx.fxml;
 
@@ -14,4 +15,6 @@ module org.example.kitchenorganizer {
     opens org.example.kitchenorganizer.notification to javafx.fxml;
     exports org.example.kitchenorganizer.mainpage;
     opens org.example.kitchenorganizer.mainpage to javafx.fxml;
+    exports org.example.kitchenorganizer.database;
+    opens org.example.kitchenorganizer.database to javafx.fxml;
 }

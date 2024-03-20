@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ExampleUser {
     public static User testUser() {
-        User user = new User("FirstName LastName");
+        User user = new User("FirstName", "LastName");
 
         FoodCollection foodCollection = new FoodCollection();
 
