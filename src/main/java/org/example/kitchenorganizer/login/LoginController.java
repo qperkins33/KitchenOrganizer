@@ -116,7 +116,7 @@ public class LoginController {
 
             ResultSet results = preparedStatement.executeQuery();
 
-            return results.next(); // If the result set has an entry, the credentials are correct.
+            return results.next(); // If the result set has an entry, the user and pass are correct.
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,9 +138,9 @@ public class LoginController {
             if (resultSet.next()) {
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
+                int id = resultSet.getInt("id");
 
-                user = new User(firstName, lastName);
-                user.setUsername(username);
+                user = new User(id, username, firstName, lastName);
             }
 
         } catch (SQLException e) {
@@ -149,6 +149,7 @@ public class LoginController {
 
         return user;
     }
+
     @FXML
     public void handleLoginButtonAction(ActionEvent event) {
         String enteredUsername = usernameField.getText();
@@ -197,9 +198,10 @@ public class LoginController {
 //            loginMessageLabel.setText("Incorrect username or password");
 //        }
 //    }
-    public void setLoginListener(LoginListener loginListener) {
+    public void setLoginListener(LoginListener loginListener) { // no usage?
         this.loginListener = loginListener;
     }
+
     private void switchToMainPage(ActionEvent event) {
         try {
 
