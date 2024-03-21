@@ -59,14 +59,14 @@ public class DatabaseInitializer {
         }
     }
 
-    public static void displayAllUsers() {
+    public static void displayAllUsers() { // Displays all users in output terminal for testing
         String sql = "SELECT * FROM Users";
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") + ", Username: " + rs.getString("username") +
+                System.out.println("ID: " + rs.getInt("id") + ", Username: " + rs.getString("username") + ", Password: " + rs.getString("password") +
                         ", First Name: " + rs.getString("firstName") + ", Last Name: " + rs.getString("lastName"));
             }
         } catch (Exception e) {
