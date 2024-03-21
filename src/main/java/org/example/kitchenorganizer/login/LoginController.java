@@ -62,9 +62,9 @@ public class LoginController {
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         String username = newUsernameField.getText().trim();
-        String password = newPasswordField.getText().trim(); // In a real-world scenario, you should hash the password
+        String password = newPasswordField.getText().trim();
 
-        // Validate input fields
+        // Validate inputs and add error state if not valid
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || password.isEmpty()) {
             createAccountMessageLabel.setTextFill(Color.RED);
             createAccountMessageLabel.setText("Please fill in all fields.");
@@ -78,7 +78,7 @@ public class LoginController {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
-            pstmt.setString(2, password); // Store a hashed password instead
+            pstmt.setString(2, password);
             pstmt.setString(3, firstName);
             pstmt.setString(4, lastName);
 
