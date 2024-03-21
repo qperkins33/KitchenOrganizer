@@ -35,6 +35,10 @@ public class LoginController {
     private Label loginMessageLabel;
 
     @FXML
+    public void handleCreateAccountButtonAction(ActionEvent event) {
+
+    }
+    @FXML
     public void handleLoginButtonAction(ActionEvent event) {
         String enteredUsername = usernameField.getText();
         String enteredPassword = passwordField.getText();

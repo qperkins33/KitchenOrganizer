@@ -4,19 +4,54 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.HBox?>
 
-<VBox alignment="CENTER" spacing="20"
-      style="-fx-padding: 20;"
-    xmlns="http://javafx.com/javafx"
-    xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.kitchenorganizer.login.LoginController">
-    <Text text="Login Form"/>
-    <HBox alignment="CENTER">
-        <Text text="Username:"></Text>
-        <TextField fx:id="usernameField"></TextField>
-    </HBox>
-    <HBox alignment="CENTER">
-        <Text text="Password:"></Text>
-        <PasswordField fx:id="passwordField"></PasswordField>
-    </HBox>
-    <Label fx:id="loginMessageLabel" text="" />
-    <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
-</VBox>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.kitchenorganizer.login.LoginController">
+
+    <top>
+        <Text text="Kitchen Organizer"/>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20"
+              style="-fx-padding: 20;">
+            <Text text="Login Form"/>
+            <HBox alignment="CENTER">
+                <Text text="Username:"></Text>
+                <TextField fx:id="usernameField"></TextField>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Text text="Password:"></Text>
+                <PasswordField fx:id="passwordField"></PasswordField>
+            </HBox>
+            <Label fx:id="loginMessageLabel" text="" />
+            <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
+        </VBox>
+    </center>
+
+
+    <bottom>
+        <VBox alignment="CENTER" spacing="20"
+              style="-fx-padding: 20;">
+        <Text text="New User? Create Account"/>
+        <HBox alignment="CENTER">
+            <Text text="First Name:"></Text>
+            <TextField fx:id="firstNameField"></TextField>
+        </HBox>
+        <HBox alignment="CENTER">
+            <Text text="Last Name:"></Text>
+            <TextField fx:id="lastNameField"></TextField>
+        </HBox>
+        <HBox alignment="CENTER">
+            <Text text="Username:"></Text>
+            <TextField fx:id="newUsernameField"></TextField>
+        </HBox>
+        <HBox alignment="CENTER">
+            <Text text="Password:"></Text>
+            <PasswordField fx:id="newPasswordField"></PasswordField>
+        </HBox>
+        <Button fx:id="createAccountButton" onAction="#handleCreateAccountButtonAction" text="Create Account"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>
