@@ -35,7 +35,8 @@ javafx {
 }
 
 dependencies {
-//  implementation 'org.xerial:sqlite-jdbc:3.34.0' // Use the latest version
+  //Database
+  implementation 'org.xerial:sqlite-jdbc:3.34.0'
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

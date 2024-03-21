@@ -8,7 +8,7 @@ public class DatabaseInitializer {
 
     private static final String URL = "jdbc:sqlite:mydatabase.db";
 
-    private static void initializeDatabase() {
+    public static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement()) {
 
