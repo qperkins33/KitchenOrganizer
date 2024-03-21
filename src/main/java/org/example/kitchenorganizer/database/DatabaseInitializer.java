@@ -2,6 +2,7 @@ package org.example.kitchenorganizer.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DatabaseInitializer {
@@ -55,6 +56,21 @@ public class DatabaseInitializer {
 
         } catch (Exception e) {
             System.out.println("Database setup failed: " + e.getMessage());
+        }
+    }
+
+    public static void displayAllUsers() {
+        String sql = "SELECT * FROM Users";
+        try (Connection conn = DriverManager.getConnection(URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + ", Username: " + rs.getString("username") +
+                        ", First Name: " + rs.getString("firstName") + ", Last Name: " + rs.getString("lastName"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error fetching users: " + e.getMessage());
         }
     }
 }
