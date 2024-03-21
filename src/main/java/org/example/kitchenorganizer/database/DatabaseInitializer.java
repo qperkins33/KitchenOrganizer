@@ -6,7 +6,8 @@ import java.sql.Statement;
 
 public class DatabaseInitializer {
 
-    private static final String URL = "jdbc:sqlite:mydatabase.db";
+    // problem?
+    public static final String URL = "jdbc:sqlite:mydatabase.db";
 
     public static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(URL);

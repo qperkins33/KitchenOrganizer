@@ -24,16 +24,19 @@
                 <Text text="Password:"></Text>
                 <PasswordField fx:id="passwordField"></PasswordField>
             </HBox>
-            <Label fx:id="loginMessageLabel" text="" />
             <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
         </VBox>
     </center>
 
 
     <bottom>
+
         <VBox alignment="CENTER" spacing="20"
               style="-fx-padding: 20;">
-        <Text text="New User? Create Account"/>
+
+            <Label fx:id="createAccountMessageLabel" text="" />
+
+            <Text text="New User? Create Account"/>
         <HBox alignment="CENTER">
             <Text text="First Name:"></Text>
             <TextField fx:id="firstNameField"></TextField>
