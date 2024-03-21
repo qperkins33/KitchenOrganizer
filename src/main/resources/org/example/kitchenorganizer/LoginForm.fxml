@@ -25,6 +25,8 @@
                 <PasswordField fx:id="passwordField"></PasswordField>
             </HBox>
             <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
+            <Label fx:id="loginMessageLabel" text="" />
+
         </VBox>
     </center>
 
