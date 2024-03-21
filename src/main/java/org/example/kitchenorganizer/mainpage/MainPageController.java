@@ -23,11 +23,13 @@ public class MainPageController implements Initializable {
 
     User user;
     int currentCollection;
-
     @FXML
     private VBox centerVBox; // VBox used to display main content in center of page (Foods)
     @FXML
     private Text userName;
+    @FXML
+    private ComboBox<String> sortBy;
+    private SearchAndSortController searchAndSortController;
 
     /**
      * Initializes a test user and calls displayFoods() for current inventory
@@ -39,6 +41,8 @@ public class MainPageController implements Initializable {
         user = ExampleUser.testUser(); // Obtain test user
         currentCollection = 0;
 
+        searchAndSortController = new SearchAndSortController(sortBy);
+
         userName.setText(user.getName());
         // Display the collection 1 at index 0
         if (!user.getFoodInventoryList().isEmpty()) {
@@ -49,6 +53,7 @@ public class MainPageController implements Initializable {
     /**
      * Displays foods from user's current inventory on the main page
      * @param foods
+     * Changed to public because SearchAndSortController needs to use this class -Austin
      */
     private void displayFoods(List<Food> foods) {
         HBox currentRow = new HBox();
@@ -215,6 +220,12 @@ public class MainPageController implements Initializable {
         });
 
         dialog.showAndWait();
+    }
+
+    @FXML
+    public void sort() {
+        searchAndSortController.sort(user.getFoodInventoryList().get(currentCollection));
+        displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
     }
 
     /**

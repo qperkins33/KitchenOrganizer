@@ -45,8 +45,7 @@
                     <StackPane styleClass="appTitleContainer">
                         <Text text="Sort By: "/>
                     </StackPane>
-
-                    <ComboBox fx:id="sortBy">
+                    <ComboBox fx:id="sortBy" onAction="#sort">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
 <!--                                TODO: Code a method to sort displayed foods from database-->
