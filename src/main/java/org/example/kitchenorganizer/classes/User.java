@@ -6,8 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    /**
+     * Used to set current user for app session
+     */
+    private static User currentUser;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+//    *********************
+
     private String firstName;
     private String lastName;
+
+    private String username;
     private List<FoodCollection> foodInventoryList;
 
     // Constructor
@@ -29,6 +45,10 @@ public class User {
     public void setName(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void addCollectionToInventoryList(List<FoodCollection> newCollection) {

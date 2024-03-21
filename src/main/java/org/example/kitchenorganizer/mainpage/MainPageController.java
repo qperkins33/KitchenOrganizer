@@ -41,18 +41,27 @@ public class MainPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        user = ExampleUser.testUser(); // Obtain test user
-        currentCollection = 0;
+        currentCollection = 0; //Change this value to change displayed collection. (Default is 0)
+        user = ExampleUser.testUser(); // Obtain example test user
+
+        /**
+         * Use this to user the actual signed in user.
+         * It works, but I commented it out because it's empty
+         * and so that Austin can test the searchAndSortController on the Example User.
+         */
+//        user = User.getCurrentUser();
 
         /**
          * Had to comment it out for the program to run
          */
 //        searchAndSortController = new SearchAndSortController(sortBy);
 
-        userName.setText(user.getName());
-        // Display the collection 1 at index 0
-        if (!user.getFoodInventoryList().isEmpty()) {
-            displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
+        if (user != null) {
+            userName.setText(user.getName());
+            // Display the collection 1 at index 0
+            if (!user.getFoodInventoryList().isEmpty()) {
+                displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
+            }
         }
     }
 
@@ -170,7 +179,6 @@ public class MainPageController implements Initializable {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();
     }
-
 
     /**
      * Popup that allows user to enter new foods into inventory

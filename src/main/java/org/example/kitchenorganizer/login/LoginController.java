@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Node;
+import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
 
 import java.io.IOException;
@@ -26,10 +27,6 @@ public class LoginController {
     }
 
     private LoginListener loginListener;
-
-    // Was used in OLD test
-//    private static final String CORRECT_USERNAME = "user";
-//    private static final String CORRECT_PASSWORD = "pass";
 
     /**
      * Used in Login Form
@@ -127,12 +124,42 @@ public class LoginController {
         }
     }
 
+    private User fetchUserFromDatabase(String username) {
+        User user = null;
+        String sql = "SELECT * FROM Users WHERE username = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+
+                user = new User(firstName, lastName);
+                user.setUsername(username);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
     @FXML
     public void handleLoginButtonAction(ActionEvent event) {
         String enteredUsername = usernameField.getText();
         String enteredPassword = passwordField.getText();
 
         if (checkCredentials(enteredUsername, enteredPassword)) {
+            // Set current user for login session
+            User user = fetchUserFromDatabase(enteredUsername);
+            User.setCurrentUser(user);
+            switchToMainPage(event);
+
             loginMessageLabel.setTextFill(Color.GREEN);
             loginMessageLabel.setText("Logged in successfully");
 
