@@ -18,28 +18,36 @@ public class User {
     public static void setCurrentUser(User user) {
         currentUser = user;
     }
-//    *********************
 
+    private int id;
     private String firstName;
     private String lastName;
-
     private String username;
     private List<FoodCollection> foodInventoryList;
 
-    // Constructor
-    public User(String firstName, String lastName) {
+    // Constructors
+    public User(String firstName, String lastName) { // used for example user
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.foodInventoryList = new ArrayList<>();
+    }
+
+    public User(int id, String username, String firstName, String lastName) { // used in actual app
+        this.id = id;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.foodInventoryList = new ArrayList<>();
     }
 
     // Methods
-    public String getName() {
-        return firstName + " " + lastName;
-    }
 
     public List<FoodCollection> getFoodInventoryList() {
         return foodInventoryList;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
     }
 
     public void setName(String firstName, String lastName) {
@@ -51,7 +59,19 @@ public class User {
         this.username = username;
     }
 
+    public String getUsername() {
+        return this.username;
+    }
+
     public void addCollectionToInventoryList(List<FoodCollection> newCollection) {
         this.foodInventoryList = newCollection;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
