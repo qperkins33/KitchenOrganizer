@@ -29,7 +29,10 @@ public class MainPageController implements Initializable {
     private Text userName;
     @FXML
     private ComboBox<String> sortBy;
-    private SearchAndSortController searchAndSortController;
+    /**
+     * Had to comment it out for the program to run
+     */
+//    private SearchAndSortController searchAndSortController;
 
     /**
      * Initializes a test user and calls displayFoods() for current inventory
@@ -41,7 +44,10 @@ public class MainPageController implements Initializable {
         user = ExampleUser.testUser(); // Obtain test user
         currentCollection = 0;
 
-        searchAndSortController = new SearchAndSortController(sortBy);
+        /**
+         * Had to comment it out for the program to run
+         */
+//        searchAndSortController = new SearchAndSortController(sortBy);
 
         userName.setText(user.getName());
         // Display the collection 1 at index 0
@@ -224,7 +230,10 @@ public class MainPageController implements Initializable {
 
     @FXML
     public void sort() {
-        searchAndSortController.sort(user.getFoodInventoryList().get(currentCollection));
+        /**
+         * Had to comment it out for the program to run
+         */
+//        searchAndSortController.sort(user.getFoodInventoryList().get(currentCollection));
         displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
     }
 
