@@ -25,20 +25,25 @@
 
                 <HBox alignment="CENTER_LEFT" styleClass="menuContainer2">
                     <StackPane styleClass="appTitleContainer">
-                        <Text text="Select Kitchen: "/>
+                        <Text text="Select Kitchen Collection: "/>
                     </StackPane>
 
-                    <ComboBox fx:id="kitchenSelector">
-                        <items>
-                            <FXCollections fx:factory="observableArrayList">
-<!--                                TODO: Update displayed inventory based on what user selects-->
-                                <String fx:value="Kitchen 1"/>
-                                <String fx:value="Kitchen 2"/>
-                                <String fx:value="Kitchen 3"/>
-                                <String fx:value="Kitchen 4"/>
-                            </FXCollections>
-                        </items>
-                    </ComboBox>
+                    <ComboBox fx:id="kitchenSelector" onAction="#handleKitchenSelection"/>
+
+                    <!--                    <ComboBox fx:id="kitchenSelector">-->
+<!--                        <items>-->
+<!--                            <FXCollections fx:factory="observableArrayList">-->
+<!--                                <String fx:value="Kitchen 1"/>-->
+<!--                                <String fx:value="Kitchen 2"/>-->
+<!--                                <String fx:value="Kitchen 3"/>-->
+<!--                                <String fx:value="Kitchen 4"/>-->
+<!--                            </FXCollections>-->
+<!--                        </items>-->
+<!--                    </ComboBox>-->
+
+                    <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER"/>
+                    <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER"/>
+
 
                     <Pane HBox.hgrow="ALWAYS"/>
 
