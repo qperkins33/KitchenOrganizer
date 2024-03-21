@@ -15,10 +15,7 @@ import javafx.scene.Node;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 import static org.example.kitchenorganizer.database.DatabaseInitializer.URL;
 
@@ -29,27 +26,38 @@ public class LoginController {
     }
 
     private LoginListener loginListener;
-    private static final String CORRECT_USERNAME = "user";
-    private static final String CORRECT_PASSWORD = "pass";
 
+    // Was used in OLD test
+//    private static final String CORRECT_USERNAME = "user";
+//    private static final String CORRECT_PASSWORD = "pass";
+
+    /**
+     * Used in Login Form
+     */
     @FXML
     private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
 
+    /**
+     * Used in Create Account Form
+     */
     @FXML
-    private TextField firstNameField;  // Make sure this fx:id is defined in FXML
+    private TextField firstNameField;
 
     @FXML
-    private TextField lastNameField;   // Make sure this fx:id is defined in FXML
+    private TextField lastNameField;
 
     @FXML
-    private TextField newUsernameField;  // Make sure this fx:id is defined in FXML
+    private TextField newUsernameField;
 
     @FXML
-    private PasswordField newPasswordField;  // Make sure this fx:id is defined in FXML
+    private PasswordField newPasswordField;
 
+    /**
+     * Messages for both forms
+     */
     @FXML
     private Label loginMessageLabel;
 
@@ -100,12 +108,31 @@ public class LoginController {
         }
     }
 
+    private boolean checkCredentials(String username, String password) {
+        String sql = "SELECT id FROM Users WHERE username = ? AND password = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            ResultSet results = preparedStatement.executeQuery();
+
+            return results.next(); // If the result set has an entry, the credentials are correct.
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @FXML
     public void handleLoginButtonAction(ActionEvent event) {
         String enteredUsername = usernameField.getText();
         String enteredPassword = passwordField.getText();
 
-        if (enteredUsername.equals(CORRECT_USERNAME) && enteredPassword.equals(CORRECT_PASSWORD)) {
+        if (checkCredentials(enteredUsername, enteredPassword)) {
             loginMessageLabel.setTextFill(Color.GREEN);
             loginMessageLabel.setText("Logged in successfully");
 
@@ -121,6 +148,28 @@ public class LoginController {
             loginMessageLabel.setText("Incorrect username or password");
         }
     }
+
+    //    @FXML // OLD Test Method
+//    public void handleLoginButtonAction(ActionEvent event) {
+//        String enteredUsername = usernameField.getText();
+//        String enteredPassword = passwordField.getText();
+//
+//        if (enteredUsername.equals(CORRECT_USERNAME) && enteredPassword.equals(CORRECT_PASSWORD)) {
+//            loginMessageLabel.setTextFill(Color.GREEN);
+//            loginMessageLabel.setText("Logged in successfully");
+//
+//            // If the entered username and password are correct, switch to the main page
+//            switchToMainPage(event);
+//
+//            if(loginListener != null) {
+//                loginListener.onLoginComplete();
+//            }
+//
+//        } else {
+//            loginMessageLabel.setTextFill(Color.RED);
+//            loginMessageLabel.setText("Incorrect username or password");
+//        }
+//    }
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
     }
