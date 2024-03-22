@@ -299,11 +299,15 @@ public class MainPageController implements Initializable {
         grid.add(new Label("Collection:"), 0, 0);
         grid.add(collections, 1, 0);
 
-
         TextField nameField = new TextField();
         nameField.setPromptText("Food Name");
-        TextField measurementUnitField = new TextField();
-        measurementUnitField.setPromptText("Measurement Unit"); //TODO: add drop down with unit options
+
+        ComboBox<String> measurementUnitDropdown = new ComboBox<>();
+        measurementUnitDropdown.getItems().addAll(
+                "Quantity", "Grams (g)", "Liters (L)", "Teaspoons (tsp)", "Cups"
+        );
+        measurementUnitDropdown.setPromptText("Select Measurement Unit");
+
         TextField quantityField = new TextField();
         quantityField.setPromptText("Quantity");
         TextField minQuantityField = new TextField();
@@ -314,7 +318,7 @@ public class MainPageController implements Initializable {
         grid.add(new Label("Food Name:"), 0, 1);
         grid.add(nameField, 1, 1);
         grid.add(new Label("Measurement Unit:"), 0, 2);
-        grid.add(measurementUnitField, 1, 2);
+        grid.add(measurementUnitDropdown, 1, 2);
         grid.add(new Label("Quantity:"), 0, 3);
         grid.add(quantityField, 1, 3);
         grid.add(new Label("Minimum Quantity:"), 0, 4);
@@ -329,14 +333,13 @@ public class MainPageController implements Initializable {
                 String collection = collections.getValue();
                 String name = nameField.getText();
                 double quantity = Double.parseDouble(quantityField.getText());
-                String measurementUnit = measurementUnitField.getText();
+                String measurementUnit = measurementUnitDropdown.getValue();
                 double minQuantity = Double.parseDouble(minQuantityField.getText());
                 int expDate = Integer.parseInt(expDateField.getText());
 
                 // Add the food to the specified collection in the database
                 addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
                 //refresh
-//                refreshKitchenSelector();
                 updateFoodDisplay(collection);
             }
             return null;
