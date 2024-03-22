@@ -174,6 +174,8 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleSearch() {
+        foodDisplayController.search(searchBar.getText(), user.getFoodInventoryList().get(currentCollection));
+
         searchResult.setText(" Search for: " + searchBar.getText()); //test
         // Implement search logic
     }

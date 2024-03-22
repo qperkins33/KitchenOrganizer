@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -83,7 +84,6 @@ public class FoodDisplayController {
             centerVBox.getChildren().add(currentRow);
         }
     }
-    @FXML
     public void sort(FoodCollection foodList) {
         if (sortBy.getValue().equals("Name")) {
             foodList.sortByName();
@@ -91,5 +91,16 @@ public class FoodDisplayController {
         else if (sortBy.getValue().equals("Expiration")) {
             foodList.sortByExpiration();
         }
+    }
+    @FXML
+    public void search(String query, FoodCollection foodList) {
+        List<Food> matchingFoods = new ArrayList<Food>();
+        for (Food f : foodList.getItemsList()) {
+            //Using toLowerCase to effectively ignore case
+            if (f.getName().toLowerCase().contains(query.toLowerCase())) {
+                matchingFoods.add(f);
+            }
+        }
+        displayFoods(matchingFoods);
     }
 }
