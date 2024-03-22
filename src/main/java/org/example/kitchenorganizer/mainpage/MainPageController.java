@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 /**
- * TODO: In Milestone 4, increase cohesion. Currently, this class has too many different jobs.
+ * TODO: Check inventory, "-" and "+" in food cell, search, logout button, check inventory when signed in
  */
 public class MainPageController implements Initializable {
 
