@@ -3,21 +3,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.ExampleUser;
-import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
 import org.example.kitchenorganizer.notification.Notification;
 
 import java.net.URL;
 import java.sql.*;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -36,7 +32,7 @@ public class MainPageController implements Initializable {
     private Text userName;
     @FXML
     private ComboBox<String> sortBy;
-    private SearchAndSortController searchAndSortController;
+    private FoodDisplayController foodDisplayController;
 
     /**
      * Initializes a test user and calls displayFoods() for current inventory
@@ -51,11 +47,10 @@ public class MainPageController implements Initializable {
         /**
          * Use this to user the actual signed in user.
          * It works, but I commented it out because it's empty
-         * and so that Austin can test the searchAndSortController on the Example User.
+         * and so that Austin can test the foodDisplayController on the Example User.
          */
 //        user = User.getCurrentUser(); // use in actual program (QUIN)
-
-        searchAndSortController = new SearchAndSortController(sortBy);
+        foodDisplayController = new FoodDisplayController(sortBy, centerVBox);
 
         if (user != null) {
             userName.setText(user.getName());
@@ -63,7 +58,7 @@ public class MainPageController implements Initializable {
 
 //             Test to Display the collection 1 at index 0
             if (!user.getFoodInventoryList().isEmpty()) { // not used in actual program (TEST)
-                displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
+                foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
             }
         }
     }
@@ -166,61 +161,9 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
 
-    /**
-     * Displays foods from user's current inventory on the main page
-     * @param foods
-     * Changed to public because SearchAndSortController needs to use this class -Austin
-     */
-    private void displayFoods(List<Food> foods) {
-        HBox currentRow = new HBox();
-        currentRow.setAlignment(Pos.TOP_CENTER);
-        currentRow.getStyleClass().add("foodRow");
-        int count = 0;
 
-        for (Food food : foods) {
-            if (count % 3 == 0 && count > 0) { // rows of 3
-                centerVBox.getChildren().add(currentRow);
-                currentRow = new HBox();
-                currentRow.setAlignment(Pos.TOP_CENTER);
-                currentRow.getStyleClass().add("foodRow");
-            }
 
-            VBox foodCell = new VBox();
-            foodCell.setAlignment(Pos.CENTER);
-            foodCell.getStyleClass().add("foodCell");
 
-            // Food info
-            HBox foodNameBox = new HBox();
-            foodNameBox.getStyleClass().add("foodName");
-            foodNameBox.setAlignment(Pos.CENTER);
-            Text foodName = new Text(food.getName());
-
-            foodNameBox.getChildren().add(foodName);
-
-            Text expDateText = new Text("Days to Expiration: " + String.valueOf(food.getExpDate())); // Convert int to String
-            Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
-            Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
-
-            // Buttons
-            HBox buttons = new HBox();
-            buttons.setAlignment(Pos.CENTER);
-            Button minus = new Button("-");
-            Button plus = new Button("+");
-            buttons.getChildren().addAll(minus, plus);
-
-            // Add Food info and Buttons
-            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons);
-
-            // Add foodCell to currentRow
-            currentRow.getChildren().add(foodCell);
-            count++;
-        }
-
-        // Add the last row if not already added
-        if (!currentRow.getChildren().isEmpty()) {
-            centerVBox.getChildren().add(currentRow);
-        }
-    }
 
     //*********************************************************************
     @FXML
@@ -341,8 +284,8 @@ public class MainPageController implements Initializable {
     //*********************************************************************
     @FXML
     public void sort() {
-        searchAndSortController.sort(user.getFoodInventoryList().get(currentCollection));
-        displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
+        foodDisplayController.sort(user.getFoodInventoryList().get(currentCollection));
+        foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
     }
 
     //*********************************************************************
