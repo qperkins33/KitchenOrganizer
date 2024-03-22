@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -63,14 +64,16 @@ public class FoodDisplayController {
             Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
-
-
             // Buttons
             HBox buttons = new HBox();
             buttons.setAlignment(Pos.CENTER);
             Button minus = new Button("-");
+
+            TextField usedQuantity = new TextField();
+            usedQuantity.setPromptText("+/-");
+
             Button plus = new Button("+");
-            buttons.getChildren().addAll(minus, plus);
+            buttons.getChildren().addAll(minus, usedQuantity, plus);
 
             // Add Food info and Buttons
             foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons);
