@@ -52,20 +52,15 @@ public class MainPageController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         currentCollection = 0; // value to change displayed collection. (TEST)
 
-        /**
-         * Use this to user the actual signed in user.
-         * It works, but I commented it out because it's empty
-         * and so that Austin can test the foodDisplayController on the Example User.
-         */
         user = User.getCurrentUser(); // use in actual program (QUIN)
 
         foodDisplayController = new FoodDisplayController(sortBy, centerVBox);
 
         if (user != null) {
             userName.setText(user.getName());
-            addKitchensToKitchenSelector(); // use in actual program (QUIN)
+            addKitchensToKitchenSelector();
 
-            if (!user.getFoodInventoryList().isEmpty()) { // not used in actual program (TEST)
+            if (!user.getFoodInventoryList().isEmpty()) {
                 foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
             }
         }
@@ -168,7 +163,7 @@ public class MainPageController implements Initializable {
 
                 // Call the method to add the collection to the database
                 if (user != null && !name.isEmpty()) {
-                    addCollectionToSignedInUsersDatabase(name, user.getId());
+                    addCollectionToUserDatabase(name, user.getId());
                     refreshKitchenSelector();
                 }
 
@@ -190,17 +185,17 @@ public class MainPageController implements Initializable {
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField collectionNameField = new TextField();
-        collectionNameField.setPromptText("Collection Name");
-
-        grid.add(new Label("Remove Collection (Name):"), 0, 0);
-        grid.add(collectionNameField, 1, 0);
+        ComboBox<String> collections = new ComboBox<>();
+        collections.setPromptText("Select Collection");
+        populateCollectionNameDropdown(collections);
+        grid.add(new Label("Collection:"), 0, 0);
+        grid.add(collections, 1, 0);
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == submitButtonType) {
-                String name = collectionNameField.getText();
+                String name = collections.getValue();
 
                 // Ensure the name field is not empty and a user is signed in
                 if (!name.isEmpty() && user != null) {
@@ -340,7 +335,9 @@ public class MainPageController implements Initializable {
 
                 // Add the food to the specified collection in the database
                 addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
-                //TODO: Add Refresh
+                //refresh
+//                refreshKitchenSelector();
+                updateFoodDisplay(collection);
             }
             return null;
         });
@@ -349,14 +346,6 @@ public class MainPageController implements Initializable {
     }
 
     //*********************************************************************
-//    I made a new sort() with interacts with the database
-
-//    @FXML
-//    public void sort() {
-//
-//        foodDisplayController.sort(user.getFoodInventoryList().get(currentCollection));
-//        foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
-//    }
 
     @FXML
     public void sort() {
@@ -366,7 +355,6 @@ public class MainPageController implements Initializable {
             updateFoodDisplay(selectedKitchen); // sorting is done in updateFoodDisplay()
         }
     }
-
 
     //*********************************************************************
     /**

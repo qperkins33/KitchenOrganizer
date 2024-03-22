@@ -7,7 +7,6 @@ import java.sql.Statement;
 
 public class DatabaseInitializer {
 
-    // problem?
     public static final String URL = "jdbc:sqlite:mydatabase.db";
 
     public static void initializeDatabase() {
@@ -31,8 +30,9 @@ public class DatabaseInitializer {
                     CREATE TABLE IF NOT EXISTS FoodCollections (
                     id INTEGER PRIMARY KEY,
                     userId INTEGER,
-                    name TEXT NOT NULL,
+                    name TEXT NOT NULL, 
                     FOREIGN KEY(userId) REFERENCES Users(id)
+                    UNIQUE(userId, name)
                     );
                     """;
             stmt.execute(createFoodCollectionsTable);

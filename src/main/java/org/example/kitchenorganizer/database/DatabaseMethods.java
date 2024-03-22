@@ -9,6 +9,30 @@ import java.util.List;
 
 public class DatabaseMethods {
 
+//    public static List<Food> fetchFoods(int collectionId) {
+//        List<Food> foods = new ArrayList<>();
+//        String sql = "SELECT * FROM Foods WHERE collectionId = ?";
+//
+//        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setInt(1, collectionId);
+//            try (ResultSet rs = pstmt.executeQuery()) {
+//                while (rs.next()) {
+//                    foods.add(new Food(
+//                            rs.getString("name"),
+//                            rs.getDouble("quantity"),
+//                            rs.getString("measurementUnit"),
+//                            rs.getDouble("minQuantity"),
+//                            rs.getInt("expDate") //TODO: Change to Date
+//                    ));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return foods;
+//    }
+
     public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
         List<Food> foods = new ArrayList<>();
         String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
@@ -33,23 +57,56 @@ public class DatabaseMethods {
         return foods;
     }
 
-    public static void addCollectionToSignedInUsersDatabase(String collectionName, int userId) {
-        String sql = "INSERT INTO FoodCollections (name, userId) VALUES (?, ?)";
+    public static void addCollectionToUserDatabase(String collectionName, int userId) {
+        // Check if the collection name already exists for the user
+        String checkSql = "SELECT id FROM FoodCollections WHERE name = ? AND userId = ?";
+        String insertSql = "INSERT INTO FoodCollections (name, userId) VALUES (?, ?)";
 
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkSql);
+             PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
 
-            pstmt.setString(1, collectionName);
-            pstmt.setInt(2, userId);
-            pstmt.executeUpdate();
+            checkStmt.setString(1, collectionName);
+            checkStmt.setInt(2, userId);
+            ResultSet rs = checkStmt.executeQuery();
 
-            System.out.println("New collection added successfully.");
+            if (rs.next()) {
+                System.out.println("A collection with this name already exists for the user.");
+            } else {
+                insertStmt.setString(1, collectionName);
+                insertStmt.setInt(2, userId);
+                insertStmt.executeUpdate();
+                System.out.println("New collection added successfully.");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding new collection: " + e.getMessage());
         }
     }
+
     public static void removeCollectionFromSignedInUsersDatabase(String collectionName, int userId) {
+        // Step 1: Find the collection ID
+        int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
+        if (collectionId == -1) {
+            System.out.println("Collection not found or access error.");
+            return;
+        }
+
+        // Step 2: Delete all foods in the collection
+        String deleteFoodsSql = "DELETE FROM Foods WHERE collectionId = ?";
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmtFoods = conn.prepareStatement(deleteFoodsSql)) {
+            pstmtFoods.setInt(1, collectionId);
+            int foodsDeleted = pstmtFoods.executeUpdate();
+            System.out.println("Deleted " + foodsDeleted + " food items from the collection.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error removing foods from the collection: " + e.getMessage());
+        }
+
+        // Step 3: Delete collection
+
         String sql = "DELETE FROM FoodCollections WHERE name = ? AND userId = ?";
 
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
