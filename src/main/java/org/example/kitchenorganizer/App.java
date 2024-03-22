@@ -32,6 +32,7 @@ public class App extends Application {
     public static void main(String[] args) {
         DatabaseInitializer.initializeDatabase();
         DatabaseInitializer.displayAllUsers(); // this line to displays users in terminal to test
+        DatabaseInitializer.displayAllFoods();
 
         launch(args);
     }

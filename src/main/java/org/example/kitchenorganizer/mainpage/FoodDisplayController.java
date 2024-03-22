@@ -84,14 +84,16 @@ public class FoodDisplayController {
             centerVBox.getChildren().add(currentRow);
         }
     }
-    public void sort(FoodCollection foodList) {
-        if (sortBy.getValue().equals("Name")) {
-            foodList.sortByName();
-        }
-        else if (sortBy.getValue().equals("Expiration")) {
-            foodList.sortByExpiration();
-        }
-    }
+
+    // Sorting database instead (not used anymore)
+//    public void sort(FoodCollection foodList) {
+//        if (sortBy.getValue().equals("Name")) {
+//            foodList.sortByName();
+//        }
+//        else if (sortBy.getValue().equals("Expiration")) {
+//            foodList.sortByExpiration();
+//        }
+//    }
     @FXML
     public void search(String query, FoodCollection foodList) {
         List<Food> matchingFoods = new ArrayList<Food>();

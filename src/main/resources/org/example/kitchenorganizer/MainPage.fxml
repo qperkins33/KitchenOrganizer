@@ -55,7 +55,6 @@
                             <FXCollections fx:factory="observableArrayList">
 <!--                                TODO: Code a method to sort displayed foods from database-->
                                 <String fx:value="Name"/>
-                                <String fx:value="Quantity"/>
                                 <String fx:value="Expiration"/>
                             </FXCollections>
                         </items>

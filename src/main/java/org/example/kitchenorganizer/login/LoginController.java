@@ -202,18 +202,44 @@ public class LoginController {
         this.loginListener = loginListener;
     }
 
+//    private void switchToMainPage(ActionEvent event) {
+//        try {
+//
+//            Parent root = FXMLLoader.load(getClass().getResource("/org/example/kitchenorganizer/MainPage.fxml"));
+//            // Change the scene to main page
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("IOException occurred: " + e.getMessage());
+//        }
+//    }
+
     private void switchToMainPage(ActionEvent event) {
         try {
-
+            // Load the FXML for the main page
             Parent root = FXMLLoader.load(getClass().getResource("/org/example/kitchenorganizer/MainPage.fxml"));
-            // Change the scene to main page
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+
+            // Get the current stage from the event's source
+            Node source = (Node) event.getSource();
+            if (source != null) {
+                Stage stage = (Stage) source.getScene().getWindow();
+
+                // Check if stage is not null before proceeding
+                if (stage != null) {
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    System.out.println("Stage is null, can't switch scenes");
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("IOException occurred: " + e.getMessage());
         }
     }
+
 }
 
