@@ -215,7 +215,7 @@ public class MainPageController implements Initializable {
     }
 
     //*********************************************************************
-    // SEARCH
+    // SEARCH TODO: Update to work with database
 
     @FXML
     private Label searchResult; // Reference to the Label added in FXML (using to test if searchbar works)
@@ -282,6 +282,11 @@ public class MainPageController implements Initializable {
     /**
      * Popup that allows user to enter new foods into inventory
      */
+
+    private void populateCollectionNameDropdown(ComboBox<String> comboBox) {
+        List<String> collectionNames = getCollectionNamesForUser(user.getId());
+        comboBox.getItems().addAll(collectionNames);
+    }
     @FXML
     public void showAddFoodDialog() {
         Dialog<Void> dialog = new Dialog<>();
@@ -293,28 +298,30 @@ public class MainPageController implements Initializable {
         grid.setHgap(10);
         grid.setVgap(10);
 
-        TextField collectionNameField = new TextField();
-        collectionNameField.setPromptText("Collection Name");
-        grid.add(new Label("Collection Name:"), 0, 0);
-        grid.add(collectionNameField, 1, 0);
+        ComboBox<String> collections = new ComboBox<>();
+        collections.setPromptText("Select Collection");
+        populateCollectionNameDropdown(collections);
+        grid.add(new Label("Collection:"), 0, 0);
+        grid.add(collections, 1, 0);
+
 
         TextField nameField = new TextField();
-        nameField.setPromptText("Name");
+        nameField.setPromptText("Food Name");
+        TextField measurementUnitField = new TextField();
+        measurementUnitField.setPromptText("Measurement Unit"); //TODO: add drop down with unit options
         TextField quantityField = new TextField();
         quantityField.setPromptText("Quantity");
-        TextField measurementUnitField = new TextField();
-        measurementUnitField.setPromptText("Measurement Unit");
         TextField minQuantityField = new TextField();
         minQuantityField.setPromptText("Minimum Quantity");
         TextField expDateField = new TextField();
         expDateField.setPromptText("Days Until Expiration");
 
-        grid.add(new Label("Name:"), 0, 1);
+        grid.add(new Label("Food Name:"), 0, 1);
         grid.add(nameField, 1, 1);
-        grid.add(new Label("Quantity:"), 0, 2);
-        grid.add(quantityField, 1, 2);
-        grid.add(new Label("Measurement Unit:"), 0, 3);
-        grid.add(measurementUnitField, 1, 3);
+        grid.add(new Label("Measurement Unit:"), 0, 2);
+        grid.add(measurementUnitField, 1, 2);
+        grid.add(new Label("Quantity:"), 0, 3);
+        grid.add(quantityField, 1, 3);
         grid.add(new Label("Minimum Quantity:"), 0, 4);
         grid.add(minQuantityField, 1, 4);
         grid.add(new Label("Days Until Expiration:"), 0, 5);
@@ -324,7 +331,7 @@ public class MainPageController implements Initializable {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == submitButtonType) {
-                String collection = collectionNameField.getText();
+                String collection = collections.getValue();
                 String name = nameField.getText();
                 double quantity = Double.parseDouble(quantityField.getText());
                 String measurementUnit = measurementUnitField.getText();
@@ -333,6 +340,7 @@ public class MainPageController implements Initializable {
 
                 // Add the food to the specified collection in the database
                 addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
+                //TODO: Add Refresh
             }
             return null;
         });

@@ -29,21 +29,8 @@
                     </StackPane>
 
                     <ComboBox fx:id="kitchenSelector" onAction="#handleKitchenSelection"/>
-
-                    <!--                    <ComboBox fx:id="kitchenSelector">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="Kitchen 1"/>-->
-<!--                                <String fx:value="Kitchen 2"/>-->
-<!--                                <String fx:value="Kitchen 3"/>-->
-<!--                                <String fx:value="Kitchen 4"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-
                     <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER"/>
                     <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER"/>
-
 
                     <Pane HBox.hgrow="ALWAYS"/>
 

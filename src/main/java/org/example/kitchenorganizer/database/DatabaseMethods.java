@@ -114,4 +114,25 @@ public class DatabaseMethods {
         }
         return -1; // Return -1 if not found or error
     }
+
+    public static List<String> getCollectionNamesForUser(int userID) {
+        List<String> collections = new ArrayList<>();
+        // Correct the SQL query by removing the concatenation with userID, as you're setting it via PreparedStatement
+        String sql = "SELECT name FROM FoodCollections WHERE userId = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    // Correctly close the parentheses
+                    collections.add(rs.getString("name"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return collections;
+    }
+
 }
