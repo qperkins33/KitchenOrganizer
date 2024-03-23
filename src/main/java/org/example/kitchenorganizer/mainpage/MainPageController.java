@@ -29,7 +29,7 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.*;
  */
 public class MainPageController implements Initializable {
 
-    public static String currentCollectionName;//TODO: Make sure this is always up to date
+    public String currentCollectionName;//TODO: Make sure this is always up to date
 
     User user;
     int currentCollection;
@@ -62,6 +62,7 @@ public class MainPageController implements Initializable {
             addKitchensToKitchenSelector();
 
             if (!user.getFoodInventoryList().isEmpty()) {
+                currentCollectionName = user.getFoodInventoryList().get(currentCollection).getCollectionName();
                 foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
             }
         }
@@ -93,7 +94,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void handleKitchenSelection() {
 //        String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
-        String currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
+        currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
 
         if (currentCollectionName != null) {
             System.out.println("CURRENT KITCHEN: " + currentCollectionName);
@@ -111,7 +112,6 @@ public class MainPageController implements Initializable {
         }
 
         List<Food> foods = fetchSortedFoods(collectionId, sortOrder);
-        // Assuming FoodDisplayController is correctly set up to display these foods
         foodDisplayController.displayFoods(foods);
     }
 
@@ -343,8 +343,10 @@ public class MainPageController implements Initializable {
 
                 // Add the food to the specified collection in the database
                 addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
+
                 //refresh
-                updateFoodDisplay(collection);
+                updateFoodDisplay(currentCollectionName);
+
             }
             return null;
         });
