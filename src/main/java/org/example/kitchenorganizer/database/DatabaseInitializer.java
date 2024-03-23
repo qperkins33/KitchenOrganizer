@@ -30,7 +30,7 @@ public class DatabaseInitializer {
                     CREATE TABLE IF NOT EXISTS FoodCollections (
                     id INTEGER PRIMARY KEY,
                     userId INTEGER,
-                    name TEXT NOT NULL, 
+                    name TEXT NOT NULL,
                     FOREIGN KEY(userId) REFERENCES Users(id)
                     UNIQUE(userId, name)
                     );
@@ -89,7 +89,7 @@ public class DatabaseInitializer {
                         ", Quantity: " + rs.getDouble("quantity") +
                         ", Measurement Unit: " + rs.getString("measurementUnit") +
                         ", Min Quantity: " + rs.getDouble("minQuantity") +
-                        ", Expiration Date: " + rs.getString("expDate"));
+                        ", Expiration Date: " + rs.getString("expDate")); // TODO
             }
         } catch (Exception e) {
             System.out.println("Error fetching foods: " + e.getMessage());

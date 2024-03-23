@@ -10,10 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
+import org.example.kitchenorganizer.database.DatabaseMethods;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.kitchenorganizer.database.DatabaseMethods.fetchSortedFoods;
 
 public class FoodDisplayController {
 
@@ -70,16 +72,39 @@ public class FoodDisplayController {
             Button minus = new Button("-");
 
             TextField usedQuantity = new TextField();
-            usedQuantity.setPromptText("+/-");
+            usedQuantity.setPromptText("Quantity");
 
             Button plus = new Button("+");
             buttons.getChildren().addAll(minus, usedQuantity, plus);
+
+            //TODO: Add delete food button
+
+            minus.setOnAction(event -> { //TODO: Update and don't allow negative quantity
+                double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
+                DatabaseMethods.updateFoodQuantity(food.getFoodId(), food.getQuantity() - quantityChange);
+
+                // refreshDisplay
+                List<Food> refreshedFoods = new ArrayList<>();
+                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
+                displayFoods(refreshedFoods);
+            });
+
+            plus.setOnAction(event -> {
+                double quantityChange = Double.parseDouble(usedQuantity.getText()); // Increase quantity
+                DatabaseMethods.updateFoodQuantity(food.getFoodId(), food.getQuantity() + quantityChange);
+
+                // refreshDisplay
+                List<Food> refreshedFoods = new ArrayList<>();
+                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
+                displayFoods(refreshedFoods);
+            });
 
             // Add Food info and Buttons
             foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons);
             // Add foodCell to currentRow
             currentRow.getChildren().add(foodCell);
             count++;
+
         }
 
         // Add the last row if not already added
@@ -88,15 +113,7 @@ public class FoodDisplayController {
         }
     }
 
-    // Sorting database instead (not used anymore)
-//    public void sort(FoodCollection foodList) {
-//        if (sortBy.getValue().equals("Name")) {
-//            foodList.sortByName();
-//        }
-//        else if (sortBy.getValue().equals("Expiration")) {
-//            foodList.sortByExpiration();
-//        }
-//    }
+    // TODO: Make compatible with database
     @FXML
     public void search(String query, FoodCollection foodList) {
         List<Food> matchingFoods = new ArrayList<Food>();
