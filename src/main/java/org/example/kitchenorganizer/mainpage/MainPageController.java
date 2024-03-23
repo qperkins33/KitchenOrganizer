@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.example.kitchenorganizer.ExampleUser;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.classes.User;
@@ -29,6 +28,8 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.*;
  * TODO: Check inventory, "-" and "+" in food cell, search, logout button, check inventory when signed in
  */
 public class MainPageController implements Initializable {
+
+    public static String currentCollectionName;//TODO: Make sure this is always up to date
 
     User user;
     int currentCollection;
@@ -91,9 +92,12 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleKitchenSelection() {
-        String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
-        if (selectedKitchen != null) {
-            updateFoodDisplay(selectedKitchen);
+//        String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
+        String currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
+
+        if (currentCollectionName != null) {
+            System.out.println("CURRENT KITCHEN: " + currentCollectionName);
+            updateFoodDisplay(currentCollectionName);
         }
     }
 
@@ -227,7 +231,7 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     // SETTINGS POPUP
-
+    //TODO enlarge popup and implement logout
     @FXML
     private void openSettings() {
         Dialog<Void> settingsPopup = new Dialog<>();
@@ -252,8 +256,8 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     // NOTIFICATIONS
-
     // TODO: INTERACT WITH USER DATABASE
+
     @FXML
     public void showCheckInventoryDialog() {
         Notification notification = new Notification(user); // Create an instance of Notification
@@ -283,7 +287,7 @@ public class MainPageController implements Initializable {
         comboBox.getItems().addAll(collectionNames);
     }
     @FXML
-    public void showAddFoodDialog() {
+    public void showAddFoodDialog() { //TODO: Update Select Kitchen Selector when user adds food to non opened collection
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add New Food");
         ButtonType submitButtonType = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
