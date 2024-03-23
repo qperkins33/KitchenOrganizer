@@ -1,13 +1,34 @@
 package org.example.kitchenorganizer.classes;
 
 public class Food extends InventoryItem {
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+    private int foodId;
 
     private int expDate;
 
+    public int getCollectionId() {
+        return collectionId;
+    }
+
+    public void setCollectionId(int collectionId) {
+        this.collectionId = collectionId;
+    }
+
+    private int collectionId;
+
     // Constructor
-    public Food(String name, double quantity, String measurementUnit, double minQuantity, int expDate) {
+    public Food(String name, double quantity, String measurementUnit, double minQuantity, int expDate, int foodId, int collectionId) {
         super(name, quantity, measurementUnit, minQuantity); // Call the superclass constructor
         this.expDate = expDate;
+        this.foodId = foodId;
+        this.collectionId = collectionId;
     }
 
     // Methods
