@@ -7,31 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseMethods {
 
-//    public static List<Food> fetchFoods(int collectionId) {
-//        List<Food> foods = new ArrayList<>();
-//        String sql = "SELECT * FROM Foods WHERE collectionId = ?";
-//
-//        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setInt(1, collectionId);
-//            try (ResultSet rs = pstmt.executeQuery()) {
-//                while (rs.next()) {
-//                    foods.add(new Food(
-//                            rs.getString("name"),
-//                            rs.getDouble("quantity"),
-//                            rs.getString("measurementUnit"),
-//                            rs.getDouble("minQuantity"),
-//                            rs.getInt("expDate") //TODO: Change to Date
-//                    ));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return foods;
-//    }
+public class DatabaseMethods {
 
     public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
         List<Food> foods = new ArrayList<>();
@@ -47,7 +24,9 @@ public class DatabaseMethods {
                             rs.getDouble("quantity"),
                             rs.getString("measurementUnit"),
                             rs.getDouble("minQuantity"),
-                            rs.getInt("expDate") //TODO: Change to Date
+                            rs.getInt("expDate"), //TODO: Change to Date
+                            rs.getInt("id"),
+                            rs.getInt("collectionId")
                     ));
                 }
             }
@@ -143,8 +122,8 @@ public class DatabaseMethods {
                 pstmt.setInt(6, expDate); // TODO: Adjust to convert to a date format
                 pstmt.executeUpdate();
                 System.out.println("New food added successfully to the collection.");
+                //TODO: add refresh?
 
-                //TODO: add refresh
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Error adding new food: " + e.getMessage());
@@ -192,4 +171,27 @@ public class DatabaseMethods {
         return collections;
     }
 
+    public static void updateFoodQuantity(int foodId, double quantityChange) {
+        String sql = "UPDATE Foods SET quantity = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters for the update statement
+            pstmt.setDouble(1, quantityChange);
+            pstmt.setInt(2, foodId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Food quantity updated successfully.");
+            } else {
+                System.out.println("Error: Food item not found.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating food quantity: " + e.getMessage());
+        }
+    }
 }
