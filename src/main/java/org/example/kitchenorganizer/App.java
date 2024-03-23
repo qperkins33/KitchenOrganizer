@@ -33,9 +33,9 @@ public class App extends Application {
 
     public static void main(String[] args) {
         DatabaseInitializer.initializeDatabase();
-//        resetFoodsTable(); //uncomment and run program when you want you reset food database
-        DatabaseInitializer.displayAllUsers(); // this line to displays users in terminal to test
-        DatabaseInitializer.displayAllFoods(); //
+//        resetFoodsTable(); // uncomment and run program when you want you reset food database
+        DatabaseInitializer.displayAllUsers(); // this line displays users in terminal
+        DatabaseInitializer.displayAllFoods(); // this line displays foods in terminal
 
         launch(args);
     }

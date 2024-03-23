@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 /**
- * TODO: Check inventory, "-" and "+" in food cell, search, logout button, check inventory when signed in
+ * TODO: Make check inventory check database contents, search, logout button, call check inventory when signed in
  */
 public class MainPageController implements Initializable {
 
-    public String currentCollectionName;//TODO: Make sure this is always up to date
+    public String currentCollectionName;
 
     User user;
     int currentCollection;
@@ -214,7 +214,7 @@ public class MainPageController implements Initializable {
     }
 
     //*********************************************************************
-    // SEARCH TODO: Update to work with database
+    // TODO SEARCH: Update to work with database, make popup that displays search results
 
     @FXML
     private Label searchResult; // Reference to the Label added in FXML (using to test if searchbar works)
@@ -255,8 +255,7 @@ public class MainPageController implements Initializable {
         settingsPopup.showAndWait();
     }
     //*********************************************************************
-    // NOTIFICATIONS
-    // TODO: INTERACT WITH USER DATABASE
+    // TODO NOTIFICATIONS: INTERACT WITH USER DATABASE
 
     @FXML
     public void showCheckInventoryDialog() {
@@ -287,7 +286,7 @@ public class MainPageController implements Initializable {
         comboBox.getItems().addAll(collectionNames);
     }
     @FXML
-    public void showAddFoodDialog() { //TODO: Update Select Kitchen Selector when user adds food to non opened collection
+    public void showAddFoodDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add New Food");
         ButtonType submitButtonType = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);

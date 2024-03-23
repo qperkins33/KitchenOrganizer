@@ -45,9 +45,6 @@ public class FoodCollection {
         this.items.remove(item);
     }
 
-    // Possibly implement in Milestone 4
-    //    + GetItems(items: String):
-
     public List<Food> getItemsList() {
         return new ArrayList<>(items);
     }
