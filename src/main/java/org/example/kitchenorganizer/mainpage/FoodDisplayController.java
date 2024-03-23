@@ -79,9 +79,13 @@ public class FoodDisplayController {
 
             //TODO: Add delete food button
 
-            minus.setOnAction(event -> { //TODO: Update and don't allow negative quantity
+            minus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
-                DatabaseMethods.updateFoodQuantity(food.getFoodId(), food.getQuantity() - quantityChange);
+                double newQuantity = food.getQuantity() - quantityChange;
+                if (newQuantity < 0) { // newQuantity cannot be negative
+                    newQuantity = 0;
+                }
+                DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
 
                 // refreshDisplay
                 List<Food> refreshedFoods = new ArrayList<>();
