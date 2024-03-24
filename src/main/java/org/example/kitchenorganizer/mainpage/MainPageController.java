@@ -71,7 +71,7 @@ public class MainPageController implements Initializable {
     //*********************************************************************
     // KITCHEN COLLECTION
 
-    public void addKitchensToKitchenSelector() {
+    private void addKitchensToKitchenSelector() {
         ObservableList<String> kitchens = FXCollections.observableArrayList();
         // Fetch kitchen names from the database
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
@@ -114,7 +114,7 @@ public class MainPageController implements Initializable {
         foodDisplayController.displayFoods(foods);
     }
 
-    public void refreshKitchenSelector() {
+    private void refreshKitchenSelector() {
         ObservableList<String> kitchens = FXCollections.observableArrayList();
         String sql = "SELECT name FROM FoodCollections WHERE userId = ?";
 
@@ -142,7 +142,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void showAddCollectionDialog() {
+    private void showAddCollectionDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add New Collection");
         ButtonType submitButtonType = new ButtonType("Submit");
@@ -178,7 +178,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void showRemoveCollectionDialog() {
+    private void showRemoveCollectionDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Remove Collection");
         ButtonType submitButtonType = new ButtonType("Submit");
@@ -257,7 +257,7 @@ public class MainPageController implements Initializable {
     // TODO NOTIFICATIONS: INTERACT WITH USER DATABASE
 
     @FXML
-    public void showCheckInventoryDialog() {
+    private void showCheckInventoryDialog() {
         Notification notification = new Notification(user); // Create an instance of Notification
         String lowInventoryNotifications = notification.gatherLowInventoryFoods(); // Get the low inventory foods
 
@@ -285,7 +285,7 @@ public class MainPageController implements Initializable {
         comboBox.getItems().addAll(collectionNames);
     }
     @FXML
-    public void showAddFoodDialog() {
+    private void showAddFoodDialog() {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Add New Food");
         ButtonType submitButtonType = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
@@ -356,7 +356,7 @@ public class MainPageController implements Initializable {
     //*********************************************************************
 
     @FXML
-    public void sort() {
+    private void sort() {
         // Refresh display with sorted foods based on current kitchen and sort selection
         String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
         if (selectedKitchen != null) {
