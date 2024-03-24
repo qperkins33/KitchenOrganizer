@@ -131,11 +131,11 @@ public class MainPageController implements Initializable {
             kitchenSelector.setItems(kitchens);
 
             // Optionally, select a default or newly added kitchen
-            if (!kitchens.isEmpty()) {
-                kitchenSelector.getSelectionModel().selectFirst();
-                // You may want to update the display based on the newly selected kitchen
-                updateFoodDisplay(kitchenSelector.getSelectionModel().getSelectedItem());
-            }
+//            if (!kitchens.isEmpty()) {
+////                kitchenSelector.getSelectionModel().selectFirst();
+//                // You may want to update the display based on the newly selected kitchen
+////                updateFoodDisplay(kitchenSelector.getSelectionModel().getSelectedItem());
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -167,6 +167,8 @@ public class MainPageController implements Initializable {
                 // Call the method to add the collection to the database
                 if (user != null && !name.isEmpty()) {
                     addCollectionToUserDatabase(name, user.getId());
+
+                    updateFoodDisplay(currentCollectionName);
                     refreshKitchenSelector();
                 }
 
@@ -203,8 +205,9 @@ public class MainPageController implements Initializable {
                 // Ensure the name field is not empty and a user is signed in
                 if (!name.isEmpty() && user != null) {
                     removeCollectionFromSignedInUsersDatabase(name, user.getId());
-                    refreshKitchenSelector();
+
                     updateFoodDisplay(currentCollectionName);
+                    refreshKitchenSelector();
                 }
             }
             return null;
