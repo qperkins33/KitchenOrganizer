@@ -20,14 +20,10 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.fetchSortedF
 public class FoodDisplayController {
 
     @FXML
-    private ComboBox<String> sortBy;
-    @FXML
     private VBox centerVBox;
-    @FXML
-    private List<VBox> foodCells;
 
-    public FoodDisplayController(ComboBox<String> sortBy, VBox centerVBox) {
-        this.sortBy = sortBy;
+    public FoodDisplayController(VBox centerVBox) {
+//        this.sortBy = sortBy;
         this.centerVBox = centerVBox;
     }
 
@@ -88,7 +84,7 @@ public class FoodDisplayController {
                 DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
 
                 // refreshDisplay
-                List<Food> refreshedFoods = new ArrayList<>();
+                List<Food> refreshedFoods;
                 refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
                 displayFoods(refreshedFoods);
             });
@@ -98,7 +94,7 @@ public class FoodDisplayController {
                 DatabaseMethods.updateFoodQuantity(food.getFoodId(), food.getQuantity() + quantityChange);
 
                 // refreshDisplay
-                List<Food> refreshedFoods = new ArrayList<>();
+                List<Food> refreshedFoods;
                 refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
                 displayFoods(refreshedFoods);
             });

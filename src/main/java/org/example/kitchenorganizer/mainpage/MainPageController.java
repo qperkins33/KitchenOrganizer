@@ -55,7 +55,7 @@ public class MainPageController implements Initializable {
 
         user = User.getCurrentUser(); // use in actual program (QUIN)
 
-        foodDisplayController = new FoodDisplayController(sortBy, centerVBox);
+        foodDisplayController = new FoodDisplayController(centerVBox);
 
         if (user != null) {
             userName.setText(user.getName());
@@ -93,7 +93,6 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleKitchenSelection() {
-//        String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
         currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
 
         if (currentCollectionName != null) {
@@ -205,6 +204,7 @@ public class MainPageController implements Initializable {
                 if (!name.isEmpty() && user != null) {
                     removeCollectionFromSignedInUsersDatabase(name, user.getId());
                     refreshKitchenSelector();
+                    updateFoodDisplay(currentCollectionName);
                 }
             }
             return null;
@@ -227,11 +227,10 @@ public class MainPageController implements Initializable {
         foodDisplayController.search(searchBar.getText(), user.getFoodInventoryList().get(currentCollection));
 
         searchResult.setText(" Search for: " + searchBar.getText()); //test
-        // Implement search logic
+        // TODO: Implement search logic
     }
     //*********************************************************************
-    // SETTINGS POPUP
-    //TODO enlarge popup and implement logout
+    // TODO SETTINGS POPUP: enlarge popup and implement logout
     @FXML
     private void openSettings() {
         Dialog<Void> settingsPopup = new Dialog<>();
@@ -306,6 +305,7 @@ public class MainPageController implements Initializable {
         nameField.setPromptText("Food Name");
 
         ComboBox<String> measurementUnitDropdown = new ComboBox<>();
+        // TODO: Add better measurement units
         measurementUnitDropdown.getItems().addAll(
                 "Quantity", "Grams (g)", "Liters (L)", "Teaspoons (tsp)", "Cups"
         );
