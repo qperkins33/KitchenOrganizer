@@ -30,9 +30,9 @@ public class MainPageController implements Initializable {
     int currentCollection;
 
     @FXML
-    private ComboBox<String> kitchenSelector;
+    private ComboBox<String> kitchenSelectorComboBox;
     @FXML
-    private VBox centerVBox; // VBox used to display main content in center of page (Foods)
+    private VBox foodsCenterVBox; // VBox used to display main content in center of page (Foods)
     @FXML
     private Text userName;
     @FXML
@@ -50,7 +50,7 @@ public class MainPageController implements Initializable {
 
         user = User.getCurrentUser(); // use in actual program (QUIN)
 
-        foodDisplayController = new FoodDisplayController(centerVBox);
+        foodDisplayController = new FoodDisplayController(foodsCenterVBox);
 
         if (user != null) {
             userName.setText(user.getName());
@@ -79,16 +79,16 @@ public class MainPageController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        kitchenSelector.setItems(kitchens);
+        kitchenSelectorComboBox.setItems(kitchens);
         if (!kitchens.isEmpty()) {
-            kitchenSelector.getSelectionModel().selectFirst();
+            kitchenSelectorComboBox.getSelectionModel().selectFirst();
             handleKitchenSelectionComboBox(); // Automatically display foods for the first kitchen
         }
     }
 
     @FXML
     private void handleKitchenSelectionComboBox() {
-        currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
+        currentCollectionName = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
 
         if (currentCollectionName != null) {
             System.out.println("CURRENT KITCHEN: " + currentCollectionName);
@@ -123,7 +123,7 @@ public class MainPageController implements Initializable {
                 kitchens.add(rs.getString("name"));
             }
 
-            kitchenSelector.setItems(kitchens);
+            kitchenSelectorComboBox.setItems(kitchens);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -350,7 +350,7 @@ public class MainPageController implements Initializable {
     @FXML
     private void sort() {
         // Refresh display with sorted foods based on current kitchen and sort selection
-        String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
+        String selectedKitchen = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
         if (selectedKitchen != null) {
             updateFoodDisplayByCollectionName(selectedKitchen); // sorting is done in updateFoodDisplay()
         }

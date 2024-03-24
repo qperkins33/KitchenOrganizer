@@ -19,11 +19,10 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.fetchSortedF
 public class FoodDisplayController {
 
     @FXML
-    private VBox centerVBox;
+    private VBox foodsCenterVBox;
 
-    public FoodDisplayController(VBox centerVBox) {
-//        this.sortBy = sortBy;
-        this.centerVBox = centerVBox;
+    public FoodDisplayController(VBox foodsCenterVBox) {
+        this.foodsCenterVBox = foodsCenterVBox;
     }
 
     /**
@@ -31,7 +30,7 @@ public class FoodDisplayController {
      * @param foods
      */
     public void displayFoods(List<Food> foods) {
-        centerVBox.getChildren().clear();
+        foodsCenterVBox.getChildren().clear();
         HBox currentRow = new HBox();
         currentRow.setAlignment(Pos.TOP_CENTER);
         currentRow.getStyleClass().add("foodRow");
@@ -39,7 +38,7 @@ public class FoodDisplayController {
 
         for (Food food : foods) {
             if (count % 3 == 0 && count > 0) { // rows of 3
-                centerVBox.getChildren().add(currentRow);
+                foodsCenterVBox.getChildren().add(currentRow);
                 currentRow = new HBox();
                 currentRow.setAlignment(Pos.TOP_CENTER);
                 currentRow.getStyleClass().add("foodRow");
@@ -108,7 +107,7 @@ public class FoodDisplayController {
 
         // Add the last row if not already added
         if (!currentRow.getChildren().isEmpty()) {
-            centerVBox.getChildren().add(currentRow);
+            foodsCenterVBox.getChildren().add(currentRow);
         }
     }
 

@@ -28,7 +28,7 @@
                         <Text text="Select Kitchen Collection: "/>
                     </StackPane>
 
-                    <ComboBox fx:id="kitchenSelector" onAction="#handleKitchenSelectionComboBox"/>
+                    <ComboBox fx:id="kitchenSelectorComboBox" onAction="#handleKitchenSelectionComboBox"/>
                     <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER"/>
                     <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER"/>
 
@@ -53,7 +53,7 @@
         <center>
 <!--            Scrollable-->
             <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="900" prefHeight="625">
-                <VBox fx:id="centerVBox" alignment="TOP_CENTER" ></VBox>
+                <VBox fx:id="foodsCenterVBox" alignment="TOP_CENTER" ></VBox>
             </ScrollPane>
         </center>
 
