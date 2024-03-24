@@ -8,19 +8,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
-import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
-import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
@@ -59,7 +54,7 @@ public class MainPageController implements Initializable {
 
         if (user != null) {
             userName.setText(user.getName());
-            addKitchensToKitchenSelector();
+            addKitchensToKitchenSelectorComboBox();
 
             if (!user.getFoodInventoryList().isEmpty()) {
                 currentCollectionName = user.getFoodInventoryList().get(currentCollection).getCollectionName();
@@ -71,7 +66,7 @@ public class MainPageController implements Initializable {
     //*********************************************************************
     // KITCHEN COLLECTION
 
-    private void addKitchensToKitchenSelector() {
+    private void addKitchensToKitchenSelectorComboBox() {
         ObservableList<String> kitchens = FXCollections.observableArrayList();
         // Fetch kitchen names from the database
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
@@ -87,21 +82,21 @@ public class MainPageController implements Initializable {
         kitchenSelector.setItems(kitchens);
         if (!kitchens.isEmpty()) {
             kitchenSelector.getSelectionModel().selectFirst();
-            handleKitchenSelection(); // Automatically display foods for the first kitchen
+            handleKitchenSelectionComboBox(); // Automatically display foods for the first kitchen
         }
     }
 
     @FXML
-    private void handleKitchenSelection() {
+    private void handleKitchenSelectionComboBox() {
         currentCollectionName = kitchenSelector.getSelectionModel().getSelectedItem();
 
         if (currentCollectionName != null) {
             System.out.println("CURRENT KITCHEN: " + currentCollectionName);
-            updateFoodDisplay(currentCollectionName);
+            updateFoodDisplayByCollectionName(currentCollectionName);
         }
     }
 
-    private void updateFoodDisplay(String selectedKitchen) {
+    private void updateFoodDisplayByCollectionName(String selectedKitchen) {
         int userId = User.getCurrentUser().getId();
         int collectionId = findCollectionIdByNameAndUserId(selectedKitchen, userId);
 
@@ -114,7 +109,7 @@ public class MainPageController implements Initializable {
         foodDisplayController.displayFoods(foods);
     }
 
-    private void refreshKitchenSelector() {
+    private void refreshKitchenSelectorComboBox() {
         ObservableList<String> kitchens = FXCollections.observableArrayList();
         String sql = "SELECT name FROM FoodCollections WHERE userId = ?";
 
@@ -130,12 +125,6 @@ public class MainPageController implements Initializable {
 
             kitchenSelector.setItems(kitchens);
 
-            // Optionally, select a default or newly added kitchen
-//            if (!kitchens.isEmpty()) {
-////                kitchenSelector.getSelectionModel().selectFirst();
-//                // You may want to update the display based on the newly selected kitchen
-////                updateFoodDisplay(kitchenSelector.getSelectionModel().getSelectedItem());
-//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -168,8 +157,8 @@ public class MainPageController implements Initializable {
                 if (user != null && !name.isEmpty()) {
                     addCollectionToUserDatabase(name, user.getId());
 
-                    updateFoodDisplay(currentCollectionName);
-                    refreshKitchenSelector();
+                    updateFoodDisplayByCollectionName(currentCollectionName);
+                    refreshKitchenSelectorComboBox();
                 }
 
             }
@@ -192,7 +181,7 @@ public class MainPageController implements Initializable {
 
         ComboBox<String> collections = new ComboBox<>();
         collections.setPromptText("Select Collection");
-        populateCollectionNameDropdown(collections);
+        populateCollectionNameComboBox(collections);
         grid.add(new Label("Collection:"), 0, 0);
         grid.add(collections, 1, 0);
 
@@ -206,8 +195,8 @@ public class MainPageController implements Initializable {
                 if (!name.isEmpty() && user != null) {
                     removeCollectionFromSignedInUsersDatabase(name, user.getId());
 
-                    updateFoodDisplay(currentCollectionName);
-                    refreshKitchenSelector();
+                    updateFoodDisplayByCollectionName(currentCollectionName);
+                    refreshKitchenSelectorComboBox();
                 }
             }
             return null;
@@ -235,7 +224,7 @@ public class MainPageController implements Initializable {
     //*********************************************************************
     // TODO SETTINGS POPUP: enlarge popup and implement logout
     @FXML
-    private void openSettings() {
+    private void showSettingsDialog() {
         Dialog<Void> settingsPopup = new Dialog<>();
         settingsPopup.setTitle("Settings");
 
@@ -283,7 +272,7 @@ public class MainPageController implements Initializable {
      * Popup that allows user to enter new foods into inventory
      */
 
-    private void populateCollectionNameDropdown(ComboBox<String> comboBox) {
+    private void populateCollectionNameComboBox(ComboBox<String> comboBox) {
         List<String> collectionNames = getCollectionNamesForUser(user.getId());
         comboBox.getItems().addAll(collectionNames);
     }
@@ -300,7 +289,7 @@ public class MainPageController implements Initializable {
 
         ComboBox<String> collections = new ComboBox<>();
         collections.setPromptText("Select Collection");
-        populateCollectionNameDropdown(collections);
+        populateCollectionNameComboBox(collections);
         grid.add(new Label("Collection:"), 0, 0);
         grid.add(collections, 1, 0);
 
@@ -347,7 +336,7 @@ public class MainPageController implements Initializable {
                 addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
 
                 //refresh
-                updateFoodDisplay(currentCollectionName);
+                updateFoodDisplayByCollectionName(currentCollectionName);
 
             }
             return null;
@@ -363,7 +352,7 @@ public class MainPageController implements Initializable {
         // Refresh display with sorted foods based on current kitchen and sort selection
         String selectedKitchen = kitchenSelector.getSelectionModel().getSelectedItem();
         if (selectedKitchen != null) {
-            updateFoodDisplay(selectedKitchen); // sorting is done in updateFoodDisplay()
+            updateFoodDisplayByCollectionName(selectedKitchen); // sorting is done in updateFoodDisplay()
         }
     }
 

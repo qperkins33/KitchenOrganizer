@@ -20,7 +20,7 @@
                     </StackPane>
                     <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
                     <Button text="Search" onAction="#handleSearch"></Button>
-                    <Button text="Settings" onAction="#openSettings" HBox.hgrow="NEVER" />
+                    <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" />
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" styleClass="menuContainer2">
@@ -28,7 +28,7 @@
                         <Text text="Select Kitchen Collection: "/>
                     </StackPane>
 
-                    <ComboBox fx:id="kitchenSelector" onAction="#handleKitchenSelection"/>
+                    <ComboBox fx:id="kitchenSelector" onAction="#handleKitchenSelectionComboBox"/>
                     <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER"/>
                     <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER"/>
 
