@@ -194,4 +194,23 @@ public class DatabaseMethods {
             System.out.println("Error updating food quantity: " + e.getMessage());
         }
     }
+
+    public static void deleteFoodByFoodId(int foodId) {
+        String sql = "DELETE FROM Foods WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, foodId);
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("Food with ID " + foodId + " was successfully deleted.");
+            } else {
+                System.out.println("No food found with ID " + foodId + ".");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error deleting food from the database: " + e.getMessage());
+        }
+    }
 }

@@ -71,7 +71,17 @@ public class FoodDisplayController {
             Button plus = new Button("+");
             buttons.getChildren().addAll(minus, usedQuantity, plus);
 
+
             //TODO: Add delete food button
+            Button delete = new Button("Delete Food");
+            delete.setOnAction(actionEvent -> {
+                DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
+
+                // refreshDisplay
+                List<Food> refreshedFoods;
+                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
+                displayFoods(refreshedFoods);
+            });
 
             minus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
@@ -98,7 +108,7 @@ public class FoodDisplayController {
             });
 
             // Add Food info and Buttons
-            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons);
+            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons, delete);
             // Add foodCell to currentRow
             currentRow.getChildren().add(foodCell);
             count++;
