@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
+import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 
 import java.net.URL;
@@ -226,20 +227,30 @@ public class MainPageController implements Initializable {
     @FXML
     private void showSettingsDialog() {
         Dialog<Void> settingsPopup = new Dialog<>();
-        settingsPopup.setTitle("Settings");
+//        settingsPopup.setTitle("Settings");
 
         // Set the custom dialog layout
-        VBox layout = new VBox(20);
+        VBox layout = new VBox();
+
+        Text settingsText = new Text("Settings");
+
+        Button deleteAccountButton = new Button("Delete Account");
 
         Button logoutButton = new Button("Logout");
-        layout.getChildren().addAll(logoutButton);
 
+        layout.getChildren().addAll(settingsText, deleteAccountButton, logoutButton);
         settingsPopup.getDialogPane().setContent(layout);
         settingsPopup.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE); // Add a close button
 
+        deleteAccountButton.setOnAction(actionEvent -> {
+            DatabaseMethods.deleteUserByUserId(user.getId());
+            logout(); // TODO: Add method
+            settingsPopup.close();
+        });
+
         // Handle the logout button action
         logoutButton.setOnAction(e -> {
-            logout();
+            logout(); // TODO: Add method
             settingsPopup.close();
         });
 

@@ -213,4 +213,39 @@ public class DatabaseMethods {
             System.err.println("Error deleting food from the database: " + e.getMessage());
         }
     }
+
+    public static void deleteUserByUserId(int userId) {
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             Statement stmt = conn.createStatement()) {
+
+            // Step 1: Delete all Foods associated with the user's FoodCollections
+            String deleteFoodsSql = "DELETE FROM Foods " +
+                    "WHERE collectionId IN (SELECT id FROM FoodCollections WHERE userId = ?)";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteFoodsSql)) {
+                pstmt.setInt(1, userId);
+                pstmt.executeUpdate();
+            }
+
+            // Step 2: Delete all FoodCollections associated with the user
+            String deleteFoodCollectionsSql = "DELETE FROM FoodCollections WHERE userId = ?";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteFoodCollectionsSql)) {
+                pstmt.setInt(1, userId);
+                pstmt.executeUpdate();
+            }
+
+            // Step 3: Delete the user
+            String deleteUserSql = "DELETE FROM Users WHERE id = ?";
+
+            try (PreparedStatement pstmt = conn.prepareStatement(deleteUserSql)) {
+                pstmt.setInt(1, userId);
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("User and all associated data deleted successfully.");
+        } catch (Exception e) {
+            System.out.println("Error deleting user and associated data: " + e.getMessage());
+        }
+    }
 }

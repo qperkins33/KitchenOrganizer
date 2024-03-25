@@ -65,7 +65,7 @@ public class FoodDisplayController {
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeExpDateTextField = new TextField();
             changeExpDateTextField.setPromptText("New Exp Date");
-            Button changeExpDateButton = new Button("*");
+            Button changeExpDateButton = new Button("=");
             changeExpDate.getChildren().addAll(changeExpDateTextField, changeExpDateButton);
 
             // changeQuantityButtons
@@ -120,7 +120,7 @@ public class FoodDisplayController {
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeMinQuantityTextField = new TextField();
             changeMinQuantityTextField.setPromptText("New Min Quantity");
-            Button changeMinQuantityButton = new Button("*");
+            Button changeMinQuantityButton = new Button("=");
             changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
 
             // Add Food info and Buttons
