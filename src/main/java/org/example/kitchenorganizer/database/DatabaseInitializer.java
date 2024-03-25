@@ -96,17 +96,4 @@ public class DatabaseInitializer {
         }
     }
 
-    public static void resetFoodsTable() {
-        // SQL statement to delete all entries from the Foods table
-        String sql = "DELETE FROM Foods";
-
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
-            // Execute the delete statement
-            stmt.execute(sql);
-            System.out.println("Foods table has been reset.");
-        } catch (Exception e) {
-            System.out.println("Error resetting Foods table: " + e.getMessage());
-        }
-    }
 }

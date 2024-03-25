@@ -64,7 +64,7 @@ public class FoodDisplayController {
             HBox changeExpDate = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeExpDateTextField = new TextField();
-            changeExpDateTextField.setPromptText("New Exp Date");
+            changeExpDateTextField.setPromptText("New Days To Exp");
             Button changeExpDateButton = new Button("=");
             changeExpDate.getChildren().addAll(changeExpDateTextField, changeExpDateButton);
 
