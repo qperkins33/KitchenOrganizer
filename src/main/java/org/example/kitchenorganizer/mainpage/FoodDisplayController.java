@@ -60,6 +60,8 @@ public class FoodDisplayController {
             Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
+            // TODO: Add change expiration
+
             // Buttons
             HBox buttons = new HBox();
             buttons.setAlignment(Pos.CENTER);
@@ -70,16 +72,6 @@ public class FoodDisplayController {
 
             Button plus = new Button("+");
             buttons.getChildren().addAll(minus, usedQuantity, plus);
-
-
-            //TODO: Add delete food button
-            Button delete = new Button("Delete Food");
-            delete.setOnAction(actionEvent -> {
-                DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
-
-                // refreshDisplay
-                refreshDisplayFromWithinDisplay(food);
-            });
 
             minus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
@@ -110,6 +102,16 @@ public class FoodDisplayController {
                 // refreshDisplay
                 refreshDisplayFromWithinDisplay(food);
             });
+
+            Button delete = new Button("Delete Food");
+            delete.setOnAction(actionEvent -> {
+                DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
+
+                // refreshDisplay
+                refreshDisplayFromWithinDisplay(food);
+            });
+
+            // TODO: Add change min quantity
 
             // Add Food info and Buttons
             foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons, delete);
