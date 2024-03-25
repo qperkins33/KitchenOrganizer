@@ -78,13 +78,15 @@ public class FoodDisplayController {
                 DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
 
                 // refreshDisplay
-                List<Food> refreshedFoods;
-                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
-                displayFoods(refreshedFoods);
+                refreshDisplayFromWithinDisplay(food);
             });
 
             minus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
+                if (quantityChange < 0) { // quantityChange cannot be negative because that would add instead. (This check is done because a user may enter be confused and assume they need to enter a negative to subtract)
+                    quantityChange *= -1;
+                }
+
                 double newQuantity = food.getQuantity() - quantityChange;
                 if (newQuantity < 0) { // newQuantity cannot be negative
                     newQuantity = 0;
@@ -92,19 +94,21 @@ public class FoodDisplayController {
                 DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
 
                 // refreshDisplay
-                List<Food> refreshedFoods;
-                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
-                displayFoods(refreshedFoods);
+                refreshDisplayFromWithinDisplay(food);
             });
 
             plus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Increase quantity
-                DatabaseMethods.updateFoodQuantity(food.getFoodId(), food.getQuantity() + quantityChange);
+                double newQuantity = food.getQuantity() + quantityChange;
+
+                if (newQuantity < 0) { // newQuantity cannot be negative (In case user was confused, entered a negative number, clicked "+" to subtract, and newQuantity ended up being negative)
+                    newQuantity = 0;
+                }
+
+                DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
 
                 // refreshDisplay
-                List<Food> refreshedFoods;
-                refreshedFoods = fetchSortedFoods(food.getCollectionId(), "name");
-                displayFoods(refreshedFoods);
+                refreshDisplayFromWithinDisplay(food);
             });
 
             // Add Food info and Buttons
@@ -119,6 +123,12 @@ public class FoodDisplayController {
         if (!currentRow.getChildren().isEmpty()) {
             foodsCenterVBox.getChildren().add(currentRow);
         }
+    }
+
+    public void refreshDisplayFromWithinDisplay(Food changedFood) {
+        List<Food> refreshedFoods;
+        refreshedFoods = fetchSortedFoods(changedFood.getCollectionId(), "name");
+        displayFoods(refreshedFoods);
     }
 
     // TODO: Make compatible with database
