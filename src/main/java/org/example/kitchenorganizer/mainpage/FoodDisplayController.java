@@ -73,7 +73,7 @@ public class FoodDisplayController {
             changeQuantityButtons.setAlignment(Pos.CENTER);
             Button minus = new Button("-");
             TextField usedQuantity = new TextField();
-            usedQuantity.setPromptText("Quantity");
+            usedQuantity.setPromptText("Quantity"); // TODO: Center text within TextField
             Button plus = new Button("+");
             changeQuantityButtons.getChildren().addAll(minus, usedQuantity, plus);
 
