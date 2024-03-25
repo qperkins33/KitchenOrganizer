@@ -29,7 +29,7 @@
 .foodCell {
     -fx-border-color: black;
     -fx-background-color: rgba(255, 255, 255, 255);
-    -fx-padding: 20;
+    -fx-padding: 15;
     -fx-font: 20px "Serif Bold"
 }
 

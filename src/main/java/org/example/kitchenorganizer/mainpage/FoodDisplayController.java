@@ -56,22 +56,26 @@ public class FoodDisplayController {
 
             foodNameBox.getChildren().add(foodName);
 
-            Text expDateText = new Text("Days to Expiration: " + String.valueOf(food.getExpDate())); // Convert int to String
+            Text expDateText = new Text("Days to Expiration: " + food.getExpDate());
             Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
             // TODO: Add change expiration
+            HBox changeExpDate = new HBox();
+            changeExpDate.setAlignment(Pos.CENTER);
+            TextField changeExpDateTextField = new TextField();
+            changeExpDateTextField.setPromptText("New Exp Date");
+            Button changeExpDateButton = new Button("*");
+            changeExpDate.getChildren().addAll(changeExpDateTextField, changeExpDateButton);
 
-            // Buttons
-            HBox buttons = new HBox();
-            buttons.setAlignment(Pos.CENTER);
+            // changeQuantityButtons
+            HBox changeQuantityButtons = new HBox();
+            changeQuantityButtons.setAlignment(Pos.CENTER);
             Button minus = new Button("-");
-
             TextField usedQuantity = new TextField();
             usedQuantity.setPromptText("Quantity");
-
             Button plus = new Button("+");
-            buttons.getChildren().addAll(minus, usedQuantity, plus);
+            changeQuantityButtons.getChildren().addAll(minus, usedQuantity, plus);
 
             minus.setOnAction(event -> {
                 double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
@@ -112,9 +116,15 @@ public class FoodDisplayController {
             });
 
             // TODO: Add change min quantity
+            HBox changeMinQuantity = new HBox();
+            changeExpDate.setAlignment(Pos.CENTER);
+            TextField changeMinQuantityTextField = new TextField();
+            changeMinQuantityTextField.setPromptText("New Min Quantity");
+            Button changeMinQuantityButton = new Button("*");
+            changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
 
             // Add Food info and Buttons
-            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, buttons, delete);
+            foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, changeExpDate, changeQuantityButtons, changeMinQuantity, delete);
             // Add foodCell to currentRow
             currentRow.getChildren().add(foodCell);
             count++;
