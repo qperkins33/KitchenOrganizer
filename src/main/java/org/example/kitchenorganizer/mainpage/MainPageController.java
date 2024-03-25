@@ -258,9 +258,8 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     // TODO NOTIFICATIONS: INTERACT WITH USER DATABASE
-
     @FXML
-    private void showCheckInventoryDialog() {
+    private void showCheckInventoryDialog() { //TODO: Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         Notification notification = new Notification(user); // Create an instance of Notification
         String lowInventoryNotifications = notification.gatherLowInventoryFoods(); // Get the low inventory foods
 

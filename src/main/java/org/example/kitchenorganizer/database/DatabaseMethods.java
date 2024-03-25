@@ -4,11 +4,41 @@ import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
 public class DatabaseMethods {
+
+//    public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
+//        List<Food> foods = new ArrayList<>();
+//        String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
+//
+//        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//            pstmt.setInt(1, collectionId);
+//            try (ResultSet rs = pstmt.executeQuery()) {
+//                while (rs.next()) {
+//                    foods.add(new Food(
+//                            rs.getString("name"),
+//                            rs.getDouble("quantity"),
+//                            rs.getString("measurementUnit"),
+//                            rs.getDouble("minQuantity"),
+//                            rs.getInt("expDate"),
+//                            rs.getInt("id"),
+//                            rs.getInt("collectionId")
+//                    ));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return foods;
+//    }
 
     public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
         List<Food> foods = new ArrayList<>();
@@ -19,12 +49,17 @@ public class DatabaseMethods {
             pstmt.setInt(1, collectionId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
+                    // Convert the DATE string from the database to LocalDate
+                    LocalDate expDate = LocalDate.parse(rs.getString("expDate"));
+                    // Calculate the number of days from now until the expiration date
+                    long daysUntilExpiration = LocalDate.now().until(expDate, ChronoUnit.DAYS);
+
                     foods.add(new Food(
                             rs.getString("name"),
                             rs.getDouble("quantity"),
                             rs.getString("measurementUnit"),
                             rs.getDouble("minQuantity"),
-                            rs.getInt("expDate"), //TODO: Change to Date
+                            (int) daysUntilExpiration, // Cast to int
                             rs.getInt("id"),
                             rs.getInt("collectionId")
                     ));
@@ -106,9 +141,41 @@ public class DatabaseMethods {
         }
     }
 
-    public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDate) {
+//    public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDate) {
+//        int userId = User.getCurrentUser().getId(); // This method should return the current user's ID
+//        int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
+//
+//        if (collectionId != -1) {
+//            String sql = "INSERT INTO Foods (collectionId, name, quantity, measurementUnit, minQuantity, expDate) VALUES (?, ?, ?, ?, ?, ?)";
+//            try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+//                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//                pstmt.setInt(1, collectionId);
+//                pstmt.setString(2, name);
+//                pstmt.setDouble(3, quantity);
+//                pstmt.setString(4, measurementUnit);
+//                pstmt.setDouble(5, minQuantity);
+//                pstmt.setInt(6, expDate); // TODO: Adjust to convert to a date format
+//                pstmt.executeUpdate();
+//                System.out.println("New food added successfully to the collection.");
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                System.out.println("Error adding new food: " + e.getMessage());
+//            }
+//        } else {
+//            System.out.println("Collection not found or access error.");
+//        }
+//    }
+
+    public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDateDays) {
         int userId = User.getCurrentUser().getId(); // This method should return the current user's ID
         int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
+
+        // Calculate the expiration date by adding expDateDays to the current date
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, expDateDays);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String expDateStr = sdf.format(calendar.getTime());
 
         if (collectionId != -1) {
             String sql = "INSERT INTO Foods (collectionId, name, quantity, measurementUnit, minQuantity, expDate) VALUES (?, ?, ?, ?, ?, ?)";
@@ -119,10 +186,10 @@ public class DatabaseMethods {
                 pstmt.setDouble(3, quantity);
                 pstmt.setString(4, measurementUnit);
                 pstmt.setDouble(5, minQuantity);
-                pstmt.setInt(6, expDate); // TODO: Adjust to convert to a date format
+                pstmt.setString(6, expDateStr); // Use the formatted date string
                 pstmt.executeUpdate();
                 System.out.println("New food added successfully to the collection.");
-                //TODO: add refresh?
+                // Any necessary refresh operations would go here
 
             } catch (SQLException e) {
                 e.printStackTrace();
