@@ -314,5 +314,7 @@ public class DatabaseMethods {
         } catch (Exception e) {
             System.out.println("Error deleting user and associated data: " + e.getMessage());
         }
+
+        // TODO: Method that checks if any foods are nearing expiration date
     }
 }
