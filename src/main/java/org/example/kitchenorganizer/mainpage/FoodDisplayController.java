@@ -119,7 +119,7 @@ public class FoodDisplayController {
             HBox changeMinQuantity = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeMinQuantityTextField = new TextField();
-            changeMinQuantityTextField.setPromptText("New Min Quantity");
+            changeMinQuantityTextField.setPromptText("New Min QTY");
             Button changeMinQuantityButton = new Button("=");
             changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
 
