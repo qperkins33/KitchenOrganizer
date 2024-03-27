@@ -76,6 +76,13 @@ public class LoginController {
             return;
         }
 
+        // Check if the username already exists in the database
+        if (usernameExists(username)) {
+            createAccountMessageLabel.setTextFill(Color.RED);
+            createAccountMessageLabel.setText("Username already exists. Choose another.");
+            return;
+        }
+
         // Insert new user into the database
         String sql = "INSERT INTO Users (username, password, firstName, lastName) VALUES (?, ?, ?, ?)";
 
@@ -95,14 +102,29 @@ public class LoginController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            if (e.getMessage().contains("UNIQUE constraint failed")) {
-                createAccountMessageLabel.setTextFill(Color.RED);
-                createAccountMessageLabel.setText("Username already exists. Choose another.");
-            } else {
-                createAccountMessageLabel.setTextFill(Color.RED);
-                createAccountMessageLabel.setText("An error occurred: " + e.getMessage());
-            }
+            createAccountMessageLabel.setTextFill(Color.RED);
+            createAccountMessageLabel.setText("An error occurred: " + e.getMessage());
         }
+    }
+
+    private boolean usernameExists(String username) {
+        String sql = "SELECT COUNT(*) FROM Users WHERE username = ?";
+    
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    
+            pstmt.setString(1, username);
+    
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+        return false;
     }
 
     private boolean checkCredentials(String username, String password) {
