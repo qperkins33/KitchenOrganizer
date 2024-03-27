@@ -16,6 +16,7 @@ import org.example.kitchenorganizer.notification.Notification;
 import java.net.URL;
 import java.sql.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
@@ -243,9 +244,18 @@ public class MainPageController implements Initializable {
         settingsPopup.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE); // Add a close button
 
         deleteAccountButton.setOnAction(actionEvent -> {
-            DatabaseMethods.deleteUserByUserId(user.getId());
-            logout(); // TODO: Add method
-            settingsPopup.close();
+            // Display a confirmation dialog
+            Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationDialog.setTitle("Confirm Action");
+            confirmationDialog.setHeaderText("Delete Account");
+            confirmationDialog.setContentText("Are you sure you want to delete your account?");
+
+            Optional<ButtonType> result = confirmationDialog.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                DatabaseMethods.deleteUserByUserId(user.getId());
+                logout(); // TODO: Implement the logout method
+                settingsPopup.close();
+            }
         });
 
         // Handle the logout button action
@@ -286,9 +296,9 @@ public class MainPageController implements Initializable {
         comboBox.getItems().addAll(collectionNames);
     }
     @FXML
-    private void showAddFoodDialog() {
+    private void showAddNewItemDialog() {
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Add New Food");
+        dialog.setTitle("Add New Item");
         ButtonType submitButtonType = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
 

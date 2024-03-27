@@ -2,7 +2,9 @@ package org.example.kitchenorganizer.mainpage;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,6 +15,7 @@ import org.example.kitchenorganizer.database.DatabaseMethods;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.example.kitchenorganizer.database.DatabaseMethods.fetchSortedFoods;
 
@@ -107,14 +110,6 @@ public class FoodDisplayController {
                 refreshDisplayFromWithinDisplay(food);
             });
 
-            Button delete = new Button("Delete Food");
-            delete.setOnAction(actionEvent -> {
-                DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
-
-                // refreshDisplay
-                refreshDisplayFromWithinDisplay(food);
-            });
-
             // TODO: Add change min quantity
             HBox changeMinQuantity = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
@@ -122,6 +117,23 @@ public class FoodDisplayController {
             changeMinQuantityTextField.setPromptText("New Min QTY");
             Button changeMinQuantityButton = new Button("=");
             changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
+
+            Button delete = new Button("Delete");
+            delete.setOnAction(actionEvent -> {
+                // Display a confirmation dialog
+                Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationDialog.setTitle("Confirm Action");
+                confirmationDialog.setHeaderText("Delete " + food.getName());
+                confirmationDialog.setContentText("Are you sure you want to delete " + food.getName() + "?");
+
+                Optional<ButtonType> result = confirmationDialog.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    DatabaseMethods.deleteFoodByFoodId(food.getFoodId());
+                }
+
+                // refreshDisplay
+                refreshDisplayFromWithinDisplay(food);
+            });
 
             // Add Food info and Buttons
             foodCell.getChildren().addAll(foodNameBox, expDateText, quantityText, minQuantityText, changeExpDate, changeQuantityButtons, changeMinQuantity, delete);

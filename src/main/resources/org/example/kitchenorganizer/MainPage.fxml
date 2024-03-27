@@ -69,7 +69,7 @@
                 <Pane HBox.hgrow="ALWAYS"/>
 
                 <Button text="Check Inventory" onAction="#showCheckInventoryDialog" HBox.hgrow="NEVER"/>
-                <Button text="Add New Food" onAction="#showAddFoodDialog" HBox.hgrow="NEVER"/>
+                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER"/>
             </HBox>
 
         </bottom>
