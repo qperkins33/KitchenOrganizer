@@ -63,13 +63,15 @@ public class FoodDisplayController {
             Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
-            // TODO: Add change expiration
+            //**************************************************
+            // TODO: Add change expiration with error alerts
             HBox changeExpDate = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeExpDateTextField = new TextField();
             changeExpDateTextField.setPromptText("New Exp Days");
             Button changeExpDateButton = new Button("=");
             changeExpDate.getChildren().addAll(changeExpDateTextField, changeExpDateButton);
+            //**************************************************
 
             // changeQuantityButtons
             HBox changeQuantityButtons = new HBox();
@@ -139,14 +141,15 @@ public class FoodDisplayController {
                 }
             });
 
-
-            // TODO: Add change min quantity
+            //**************************************************
+            // TODO: Add change min quantity with error alerts
             HBox changeMinQuantity = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeMinQuantityTextField = new TextField();
             changeMinQuantityTextField.setPromptText("New Min QTY");
             Button changeMinQuantityButton = new Button("=");
             changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
+            //**************************************************
 
             Button delete = new Button("Delete");
             delete.setOnAction(actionEvent -> {
