@@ -11,8 +11,8 @@ import org.example.kitchenorganizer.database.DatabaseInitializer;
  * [START APP IN THIS FILE]
  *
  * Login Info:
- * Username: Get from database
- * Password: Get from database
+ * Username: user
+ * Password: pass
  *
  */
 public class App extends Application {

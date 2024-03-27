@@ -232,7 +232,6 @@ public class MainPageController implements Initializable {
         // TODO: Implement search logic
     }
     //*********************************************************************
-    // TODO SETTINGS POPUP: enlarge popup and implement logout
     @FXML
     private void showSettingsDialog(ActionEvent event) {
         Dialog<Void> settingsPopup = new Dialog<>();
@@ -261,14 +260,14 @@ public class MainPageController implements Initializable {
             Optional<ButtonType> result = confirmationDialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 DatabaseMethods.deleteUserByUserId(user.getId());
-                handleLogout(event); // TODO: Implement the logout method
+                handleLogout(event);
                 settingsPopup.close();
             }
         });
 
         // Handle the logout button action
         logoutButton.setOnAction(e -> {
-            handleLogout(event); // TODO: Add method
+            handleLogout(event);
             settingsPopup.close();
         });
 
@@ -324,9 +323,21 @@ public class MainPageController implements Initializable {
         nameField.setPromptText("Item Name");
 
         ComboBox<String> measurementUnitDropdown = new ComboBox<>();
-        // TODO: Add better measurement units
         measurementUnitDropdown.getItems().addAll(
-                "Quantity", "Grams (g)", "Liters (L)", "Teaspoons (tsp)", "Cups"
+                "Quantity",
+                "Grams (g)",
+                "Kilograms (kg)",
+                "Ounces (oz)",
+                "Pounds (lbs)",
+                "Liters (L)",
+                "Milliliters (mL)",
+                "Cups",
+                "Fluid Ounces (fl oz)",
+                "Tablespoons (tbsp)",
+                "Teaspoons (tsp)",
+                "Gallons (gal)",
+                "Quarts (qt)",
+                "Pints (pt)"
         );
         measurementUnitDropdown.setPromptText("Select Measurement Unit");
 
