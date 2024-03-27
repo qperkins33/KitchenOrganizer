@@ -13,7 +13,9 @@ import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,13 +66,42 @@ public class FoodDisplayController {
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
             //**************************************************
-            // TODO: Add change expiration with error alerts
             HBox changeExpDate = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeExpDateTextField = new TextField();
             changeExpDateTextField.setPromptText("New Exp Days");
             Button changeExpDateButton = new Button("=");
             changeExpDate.getChildren().addAll(changeExpDateTextField, changeExpDateButton);
+
+            changeExpDateButton.setOnAction(actionEvent -> {
+                try {
+                    // Attempt to parse the input as an integer
+                    int newExpDateDays = Integer.parseInt(changeExpDateTextField.getText().trim());
+
+                    // Check if the entered value is positive
+                    if (newExpDateDays <= 0) {
+                        // Show an error alert if the value is not positive
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText("Invalid Expiration Days");
+                        alert.setContentText("Please enter a positive number for expiration days.");
+                        alert.showAndWait();
+                        return;
+                    }
+
+                    DatabaseMethods.updateFoodExpDate(food.getFoodId(), newExpDateDays);
+                    refreshDisplayFromWithinDisplay(food);
+
+                } catch (NumberFormatException e) {
+                    // Show an error alert if the input is not a valid integer
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText("Format Error");
+                    alert.setContentText("Please enter a valid integer for expiration days.");
+                    alert.showAndWait();
+                }
+            });
+
             //**************************************************
 
             // changeQuantityButtons

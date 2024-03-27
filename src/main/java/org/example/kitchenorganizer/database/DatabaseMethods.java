@@ -167,6 +167,35 @@ public class DatabaseMethods {
 //        }
 //    }
 
+    public static void updateFoodExpDate(int foodId, int expDateDays) {
+        // Calculate the expiration date by adding expDateDays to the current date
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, expDateDays);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String expDateStr = sdf.format(calendar.getTime());
+
+        // SQL statement to update the expiration date of a specific food item
+        String sql = "UPDATE Foods SET expDate = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Set the new expiration date and food ID in the prepared statement
+            pstmt.setString(1, expDateStr);
+            pstmt.setInt(2, foodId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("The expiration date for food ID " + foodId + " was successfully updated.");
+            } else {
+                System.out.println("No food item found with ID: " + foodId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating food expiration date: " + e.getMessage());
+        }
+    }
+
     public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDateDays) {
         int userId = User.getCurrentUser().getId(); // This method should return the current user's ID
         int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
