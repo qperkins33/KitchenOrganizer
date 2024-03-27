@@ -346,4 +346,28 @@ public class DatabaseMethods {
 
         // TODO: Method that checks if any foods are nearing expiration date
     }
+
+    public static void updateMinQuantity(int foodId, int minQuantity) {
+        String sql = "UPDATE Foods SET minQuantity = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set the parameters for the update statement
+            pstmt.setDouble(1, minQuantity);
+            pstmt.setInt(2, foodId);
+
+            // Execute the update
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Food minimum quantity updated successfully.");
+            } else {
+                System.out.println("Error: Food item not found.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error updating food minimum quantity: " + e.getMessage());
+        }
+    }
 }

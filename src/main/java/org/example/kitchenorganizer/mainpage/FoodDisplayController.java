@@ -180,6 +180,35 @@ public class FoodDisplayController {
             changeMinQuantityTextField.setPromptText("New Min QTY");
             Button changeMinQuantityButton = new Button("=");
             changeMinQuantity.getChildren().addAll(changeMinQuantityTextField, changeMinQuantityButton);
+
+            changeMinQuantityButton.setOnAction(actionEvent -> {
+                try {
+                    // Attempt to parse the input as an integer
+                    int newMinQuantity = Integer.parseInt(changeMinQuantityTextField.getText().trim());
+
+                    // Check if the entered value is positive
+                    if (newMinQuantity < 0) {
+                        // Show an error alert if the value is not positive
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText("Invalid Minimum Quantity");
+                        alert.setContentText("Please enter a positive number for minimum quantity.");
+                        alert.showAndWait();
+                        return;
+                    }
+
+                    DatabaseMethods.updateMinQuantity(food.getFoodId(), newMinQuantity);
+                    refreshDisplayFromWithinDisplay(food);
+
+                } catch (NumberFormatException e) {
+                    // Show an error alert if the input is not a valid integer
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText("Format Error");
+                    alert.setContentText("Please enter a valid integer for minimum quantity.");
+                    alert.showAndWait();
+                }
+            });
             //**************************************************
 
             Button delete = new Button("Delete");
