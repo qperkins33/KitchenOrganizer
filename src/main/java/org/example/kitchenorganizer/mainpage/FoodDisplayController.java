@@ -81,34 +81,64 @@ public class FoodDisplayController {
             changeQuantityButtons.getChildren().addAll(minus, usedQuantity, plus);
 
             minus.setOnAction(event -> {
-                double quantityChange = Double.parseDouble(usedQuantity.getText()); // Negate to decrease quantity
-                if (quantityChange < 0) { // quantityChange cannot be negative because that would add instead. (This check is done because a user may enter be confused and assume they need to enter a negative to subtract)
-                    quantityChange *= -1;
-                }
+                try {
+                    double quantityChange = Double.parseDouble(usedQuantity.getText());
+                    if (quantityChange < 0) {
+                        // Alert the user instead of negating the number
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText("Negative Quantity");
+                        alert.setContentText("Please enter a positive number to subtract.");
+                        alert.showAndWait();
+                        return; // Do not proceed with the operation
+                    }
 
-                double newQuantity = food.getQuantity() - quantityChange;
-                if (newQuantity < 0) { // newQuantity cannot be negative
-                    newQuantity = 0;
+                    double newQuantity = food.getQuantity() - quantityChange;
+                    if (newQuantity < 0) {
+                        // Notify user that the quantity cannot be negative
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Invalid Operation");
+                        alert.setHeaderText("Invalid Used Quantity");
+                        alert.setContentText("The entered quantity exceeds the current stock.\nNew quantity is now: 0");
+                        alert.showAndWait();
+                        newQuantity = 0;
+                    }
+                    DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
+                    refreshDisplayFromWithinDisplay(food);
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText("Format Error");
+                    alert.setContentText("Please enter a valid number.");
+                    alert.showAndWait();
                 }
-                DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
-
-                // refreshDisplay
-                refreshDisplayFromWithinDisplay(food);
             });
 
             plus.setOnAction(event -> {
-                double quantityChange = Double.parseDouble(usedQuantity.getText()); // Increase quantity
-                double newQuantity = food.getQuantity() + quantityChange;
+                try {
+                    double quantityChange = Double.parseDouble(usedQuantity.getText());
+                    if (quantityChange < 0) {
+                        // Alert the user about the negative input
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Invalid Input");
+                        alert.setHeaderText("Negative Quantity");
+                        alert.setContentText("Please enter a positive number to add.");
+                        alert.showAndWait();
+                        return; // Do not proceed with the operation
+                    }
 
-                if (newQuantity < 0) { // newQuantity cannot be negative (In case user was confused, entered a negative number, clicked "+" to subtract, and newQuantity ended up being negative)
-                    newQuantity = 0;
+                    double newQuantity = food.getQuantity() + quantityChange;
+                    DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
+                    refreshDisplayFromWithinDisplay(food);
+                } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Invalid Input");
+                    alert.setHeaderText("Format Error");
+                    alert.setContentText("Please enter a valid number.");
+                    alert.showAndWait();
                 }
-
-                DatabaseMethods.updateFoodQuantity(food.getFoodId(), newQuantity);
-
-                // refreshDisplay
-                refreshDisplayFromWithinDisplay(food);
             });
+
 
             // TODO: Add change min quantity
             HBox changeMinQuantity = new HBox();
