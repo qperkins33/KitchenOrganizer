@@ -20,7 +20,7 @@
                     </StackPane>
                     <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
                     <Button text="Search" onAction="#handleSearch"></Button>
-                    <Button text="Logout" onAction="#handleLogout" HBox.hgrow="NEVER" />
+<!--                    <Button text="Logout" onAction="#handleLogout" HBox.hgrow="NEVER" />-->
                     <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" />
                 </HBox>
 
