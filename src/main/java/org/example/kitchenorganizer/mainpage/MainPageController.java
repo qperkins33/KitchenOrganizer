@@ -1,18 +1,26 @@
 package org.example.kitchenorganizer.mainpage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.List;
@@ -226,7 +234,7 @@ public class MainPageController implements Initializable {
     //*********************************************************************
     // TODO SETTINGS POPUP: enlarge popup and implement logout
     @FXML
-    private void showSettingsDialog() {
+    private void showSettingsDialog(ActionEvent event) {
         Dialog<Void> settingsPopup = new Dialog<>();
 //        settingsPopup.setTitle("Settings");
 
@@ -253,14 +261,14 @@ public class MainPageController implements Initializable {
             Optional<ButtonType> result = confirmationDialog.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 DatabaseMethods.deleteUserByUserId(user.getId());
-                logout(); // TODO: Implement the logout method
+                handleLogout(event); // TODO: Implement the logout method
                 settingsPopup.close();
             }
         });
 
         // Handle the logout button action
         logoutButton.setOnAction(e -> {
-            logout(); // TODO: Add method
+            handleLogout(event); // TODO: Add method
             settingsPopup.close();
         });
 
@@ -410,12 +418,31 @@ public class MainPageController implements Initializable {
         }
     }
 
-    //*********************************************************************
-    /**
-     * Logout button located within settings
-     */
-    private void logout() {
-        // TODO: Make settings logout button work
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        // Clear the current user session
+        User.setCurrentUser(null);
+
+        // Navigate back to the login page
+        try {
+            Parent loader = FXMLLoader.load(getClass().getResource("/org/example/kitchenorganizer/LoginForm.fxml"));
+            // Get the current stage from the event's source
+            Node source = (Node) event.getSource();
+            if (source != null) {
+                Stage stage = (Stage) source.getScene().getWindow();
+
+                // Check if stage is not null before proceeding
+                if (stage != null) {
+                    Scene scene = new Scene(loader);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    System.out.println("Stage is null, can't switch scenes");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
