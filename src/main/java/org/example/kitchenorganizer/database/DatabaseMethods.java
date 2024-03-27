@@ -347,7 +347,7 @@ public class DatabaseMethods {
         // TODO: Method that checks if any foods are nearing expiration date
     }
 
-    public static void updateMinQuantity(int foodId, int minQuantity) {
+    public static void updateMinQuantity(int foodId, double minQuantity) {
         String sql = "UPDATE Foods SET minQuantity = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);

@@ -173,7 +173,6 @@ public class FoodDisplayController {
             });
 
             //**************************************************
-            // TODO: Add change min quantity with error alerts
             HBox changeMinQuantity = new HBox();
             changeExpDate.setAlignment(Pos.CENTER);
             TextField changeMinQuantityTextField = new TextField();
@@ -183,8 +182,8 @@ public class FoodDisplayController {
 
             changeMinQuantityButton.setOnAction(actionEvent -> {
                 try {
-                    // Attempt to parse the input as an integer
-                    int newMinQuantity = Integer.parseInt(changeMinQuantityTextField.getText().trim());
+                    // Attempt to parse the input as a double
+                    double newMinQuantity = Double.parseDouble(changeMinQuantityTextField.getText().trim());
 
                     // Check if the entered value is positive
                     if (newMinQuantity < 0) {
