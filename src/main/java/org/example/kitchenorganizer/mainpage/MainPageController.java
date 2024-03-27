@@ -377,11 +377,11 @@ public class MainPageController implements Initializable {
                     double minQuantity = Double.parseDouble(minQuantityField.getText().trim());
                     int expDate = Integer.parseInt(expDateField.getText().trim());
 
-                    if (quantity < 0 || minQuantity < 0) { // Negative number check
+                    if (quantity < 0 || minQuantity < 0 || expDate < 0) { // Negative number check
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Input Error");
                         alert.setHeaderText("Invalid Input Format");
-                        alert.setContentText("Please ensure \"Quantity\" and \"Minimum Quantity\" fields contain valid POSITIVE numbers.");
+                        alert.setContentText("Please ensure \"Quantity\", \"Minimum Quantity\", and \"Days Until Expiration\" fields contain valid POSITIVE numbers.");
                         alert.showAndWait();
                         return null;
                     }
