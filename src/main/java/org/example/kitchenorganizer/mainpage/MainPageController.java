@@ -313,7 +313,7 @@ public class MainPageController implements Initializable {
         grid.add(collections, 1, 0);
 
         TextField nameField = new TextField();
-        nameField.setPromptText("Food Name");
+        nameField.setPromptText("Item Name");
 
         ComboBox<String> measurementUnitDropdown = new ComboBox<>();
         // TODO: Add better measurement units
@@ -329,7 +329,7 @@ public class MainPageController implements Initializable {
         TextField expDateField = new TextField();
         expDateField.setPromptText("Days Until Expiration");
 
-        grid.add(new Label("Food Name:"), 0, 1);
+        grid.add(new Label("Item Name:"), 0, 1);
         grid.add(nameField, 1, 1);
         grid.add(new Label("Measurement Unit:"), 0, 2);
         grid.add(measurementUnitDropdown, 1, 2);
@@ -343,22 +343,57 @@ public class MainPageController implements Initializable {
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == submitButtonType) {
-                String collection = collections.getValue();
-                String name = nameField.getText();
-                double quantity = Double.parseDouble(quantityField.getText());
-                String measurementUnit = measurementUnitDropdown.getValue();
-                double minQuantity = Double.parseDouble(minQuantityField.getText());
-                int expDate = Integer.parseInt(expDateField.getText());
+            if (dialogButton == submitButtonType) { // Empty form check
+                // Check if all fields are filled
+                if (collections.getValue() == null ||
+                        nameField.getText().trim().isEmpty() ||
+                        measurementUnitDropdown.getValue() == null ||
+                        quantityField.getText().trim().isEmpty() ||
+                        minQuantityField.getText().trim().isEmpty() ||
+                        expDateField.getText().trim().isEmpty()) {
 
-                // Add the food to the specified collection in the database
-                addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
+                    // Show an alert dialog to inform the user that all fields are required
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Incomplete Form");
+                    alert.setHeaderText("Missing Information");
+                    alert.setContentText("Please fill out all fields before submitting.");
+                    alert.showAndWait();
+                    return null;
+                }
 
-                //refresh
-                updateFoodDisplayByCollectionName(currentCollectionName);
+                try {
+                    String collection = collections.getValue();
+                    String name = nameField.getText().trim();
+                    double quantity = Double.parseDouble(quantityField.getText().trim());
+                    String measurementUnit = measurementUnitDropdown.getValue();
+                    double minQuantity = Double.parseDouble(minQuantityField.getText().trim());
+                    int expDate = Integer.parseInt(expDateField.getText().trim());
 
+                    if (quantity < 0 || minQuantity < 0) { // Negative number check
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Input Error");
+                        alert.setHeaderText("Invalid Input Format");
+                        alert.setContentText("Please ensure \"Quantity\" and \"Minimum Quantity\" fields contain valid POSITIVE numbers.");
+                        alert.showAndWait();
+                        return null;
+                    }
+
+                    // Add the food to the specified collection in the database
+                    addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
+                    // Refresh the display
+                    updateFoodDisplayByCollectionName(currentCollectionName);
+
+                } catch (NumberFormatException e) {
+                    // Show an alert dialog to inform the user about the input error
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Input Error");
+                    alert.setHeaderText("Invalid Input Format");
+                    alert.setContentText("Please ensure numerical fields contain valid numbers.");
+                    alert.showAndWait();
+                    return null;
+                }
             }
-            return null;
+            return null; // This will be reached if the cancel button is pressed
         });
 
         dialog.showAndWait();
