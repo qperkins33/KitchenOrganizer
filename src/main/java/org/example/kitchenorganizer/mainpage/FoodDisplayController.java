@@ -79,7 +79,7 @@ public class FoodDisplayController {
                     int newExpDateDays = Integer.parseInt(changeExpDateTextField.getText().trim());
 
                     // Check if the entered value is positive
-                    if (newExpDateDays <= 0) {
+                    if (newExpDateDays < 0) {
                         // Show an error alert if the value is not positive
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Invalid Input");
