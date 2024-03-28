@@ -33,7 +33,7 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.*;
  */
 public class MainPageController implements Initializable {
 
-    public String currentCollectionName;
+    public String currentCollectionName; //TODO: Make available in FoodDisplayController
 
     User user;
     int currentCollection;
