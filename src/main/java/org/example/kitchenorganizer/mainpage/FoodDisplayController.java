@@ -248,7 +248,6 @@ public class FoodDisplayController {
         displayFoods(refreshedFoods);
     }
 
-    // TODO: Make compatible with database
     @FXML
     public void search(String searchedFood, String currentCollectionName) {
         displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName)); //TODO: Make usable

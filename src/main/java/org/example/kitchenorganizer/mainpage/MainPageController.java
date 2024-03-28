@@ -202,31 +202,20 @@ public class MainPageController implements Initializable {
     }
 
     //*********************************************************************
-    // TODO SEARCH: Update to work with database, make popup that displays search results
-
-    @FXML
-    private Label searchResult; // Reference to the Label added in FXML (using to test if searchbar works)
-
     @FXML
     private TextField searchBar;
 
     @FXML
     private void handleSearch() {
         foodDisplayController.search(searchBar.getText().trim(), currentCollectionName);
-
-        searchResult.setText(" Search for: " + searchBar.getText()); //test
-        // TODO: Implement search logic
-
-        // Search
-        String searchedFood = searchBar.getText().trim();
     }
     @FXML
     private void previousPage() {
-        //implementation
+        // TODO: Implementation
     }
     @FXML
     private void nextPage() {
-        //implementation
+        // TODO: Implementation
     }
     //*********************************************************************
     @FXML
@@ -272,7 +261,7 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     @FXML
-    private void showCheckInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
+    private void showCheckAllInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         Notification notification = new Notification(user.getId()); // Create an instance of Notification
         String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
 
@@ -360,7 +349,7 @@ public class MainPageController implements Initializable {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == submitButtonType) { // Empty form check
-                // Check if all fields are filled
+                // Checks if all fields are filled
                 if (collections.getValue() == null ||
                         nameField.getText().trim().isEmpty() ||
                         measurementUnitDropdown.getValue() == null ||
@@ -451,6 +440,10 @@ public class MainPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) {
+        // TODO: Implementation
     }
 }
 

@@ -65,14 +65,15 @@
                     <Text fx:id="userName" />
                 </HBox>
 
-                <!--Test to process search (Displays in bottom left corner)-->
-                <Label fx:id="searchResult" alignment="CENTER"/>
                 <Pane HBox.hgrow="ALWAYS"/>
 
+                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER"/>
+                <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS"/>
+                <Button text="Check Current Collection's Inventory" onAction="#showCheckCurrentInventoryDialog" HBox.hgrow="NEVER"/>
+                <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER"/>
+                <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS"/>
                 <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
                 <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
-                <Button text="Check All Inventory" onAction="#showCheckInventoryDialog" HBox.hgrow="NEVER"/>
-                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER"/>
             </HBox>
 
         </bottom>
