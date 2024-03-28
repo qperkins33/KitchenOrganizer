@@ -230,6 +230,10 @@ public class MainPageController implements Initializable {
 
         searchResult.setText(" Search for: " + searchBar.getText()); //test
         // TODO: Implement search logic
+
+        // Search
+        String searchedFood = searchBar.getText().trim();
+        List<Food> searchResults = DatabaseMethods.returnFoodsThatMatchSearch(user.getId(), searchedFood);
     }
     //*********************************************************************
     @FXML

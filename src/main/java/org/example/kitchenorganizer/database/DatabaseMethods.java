@@ -14,6 +14,43 @@ import java.util.List;
 
 public class DatabaseMethods {
 
+    // Database search
+    public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood) {
+        List<Food> matchingFoods = new ArrayList<>();
+        // SQL query to find foods that match the search term, case-insensitively, in any of the user's collections
+        String sql = "SELECT f.* FROM Foods f " +
+                "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
+                "WHERE fc.userId = ? AND LOWER(f.name) LIKE LOWER(?)";
+
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setString(2, "%" + searchedFood + "%"); // Use % for SQL LIKE wildcard matching
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    // Assuming Food constructor and table columns as in your fetchSortedFoods method
+                    LocalDate expDate = LocalDate.parse(rs.getString("expDate"));
+                    long daysUntilExpiration = LocalDate.now().until(expDate, ChronoUnit.DAYS);
+
+                    matchingFoods.add(new Food(
+                            rs.getString("name"),
+                            rs.getDouble("quantity"),
+                            rs.getString("measurementUnit"),
+                            rs.getDouble("minQuantity"),
+                            (int) daysUntilExpiration, // Cast to int for days until expiration
+                            rs.getInt("id"),
+                            rs.getInt("collectionId")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error searching for foods: " + e.getMessage());
+        }
+        return matchingFoods;
+    }
+
 //    public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
 //        List<Food> foods = new ArrayList<>();
 //        String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
