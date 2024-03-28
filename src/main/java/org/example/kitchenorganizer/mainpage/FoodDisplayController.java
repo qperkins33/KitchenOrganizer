@@ -35,7 +35,7 @@ public class FoodDisplayController {
      * @param foods
      * This method was made by Quin. I simply moved it to this class.
      */
-    public void displayFoods(List<Food> foods) {
+    private void displayFoods(List<Food> foods) {
         foodsCenterVBox.getChildren().clear();
         HBox currentRow = new HBox();
         currentRow.setAlignment(Pos.TOP_CENTER);
@@ -250,11 +250,11 @@ public class FoodDisplayController {
 
     // TODO: Make compatible with database
     @FXML
-    public void search(String searchedFood) {
+    public void search(String searchedFood, String currentCollectionName) {
         displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName)); //TODO: Make usable
     }
 
-    void updateFoodDisplayByCollectionName(String selectedKitchen, MainPageController mainPageController) {
+    void updateFoodDisplayByCollectionName(String selectedKitchen) {
         int userId = User.getCurrentUser().getId();
         int collectionId = findCollectionIdByNameAndUserId(selectedKitchen, userId);
 

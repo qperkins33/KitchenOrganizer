@@ -67,7 +67,7 @@ public class MainPageController implements Initializable {
 
             if (!user.getFoodInventoryList().isEmpty()) {
                 currentCollectionName = user.getFoodInventoryList().get(currentCollection).getCollectionName();
-                foodDisplayController.displayFoods(user.getFoodInventoryList().get(currentCollection).getItemsList());
+                foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
             }
         }
     }
@@ -101,7 +101,7 @@ public class MainPageController implements Initializable {
 
         if (currentCollectionName != null) {
             System.out.println("CURRENT KITCHEN: " + currentCollectionName);
-            foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
+            foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
         }
     }
 
@@ -153,7 +153,7 @@ public class MainPageController implements Initializable {
                 if (user != null && !name.isEmpty()) {
                     addCollectionToUserDatabase(name, user.getId());
 
-                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
                     refreshKitchenSelectorComboBox();
                 }
 
@@ -191,7 +191,7 @@ public class MainPageController implements Initializable {
                 if (!name.isEmpty() && user != null) {
                     removeCollectionFromSignedInUsersDatabase(name, user.getId());
 
-                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
                     refreshKitchenSelectorComboBox();
                 }
             }
@@ -212,7 +212,7 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleSearch() {
-        foodDisplayController.search(searchBar.getText().trim());
+        foodDisplayController.search(searchBar.getText().trim(), currentCollectionName);
 
         searchResult.setText(" Search for: " + searchBar.getText()); //test
         // TODO: Implement search logic
@@ -389,7 +389,7 @@ public class MainPageController implements Initializable {
                     // Add the food to the specified collection in the database
                     addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
                     // Refresh the display
-                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
 
                 } catch (NumberFormatException e) {
                     // Show an alert dialog to inform the user about the input error
@@ -414,7 +414,7 @@ public class MainPageController implements Initializable {
         // Refresh display with sorted foods based on current kitchen and sort selection
         String selectedKitchen = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
         if (selectedKitchen != null) {
-            foodDisplayController.updateFoodDisplayByCollectionName(selectedKitchen, this); // sorting is done in updateFoodDisplay()
+            foodDisplayController.updateFoodDisplayByCollectionName(selectedKitchen); // sorting is done in updateFoodDisplay()
         }
     }
 
