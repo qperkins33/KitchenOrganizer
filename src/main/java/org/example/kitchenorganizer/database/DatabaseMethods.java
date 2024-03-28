@@ -17,7 +17,7 @@ public class DatabaseMethods {
     // Database search
     public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood) {
         List<Food> matchingFoods = new ArrayList<>();
-        // SQL query to find foods that match the search term, case-insensitively, in any of the user's collections
+        // Select that returns foods that include searched String
         String sql = "SELECT f.* FROM Foods f " +
                 "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
                 "WHERE fc.userId = ? AND LOWER(f.name) LIKE LOWER(?)";
@@ -25,11 +25,10 @@ public class DatabaseMethods {
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
-            pstmt.setString(2, "%" + searchedFood + "%"); // Use % for SQL LIKE wildcard matching
+            pstmt.setString(2, "%" + searchedFood + "%");
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    // Assuming Food constructor and table columns as in your fetchSortedFoods method
                     LocalDate expDate = LocalDate.parse(rs.getString("expDate"));
                     long daysUntilExpiration = LocalDate.now().until(expDate, ChronoUnit.DAYS);
 
