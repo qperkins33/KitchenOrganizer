@@ -251,7 +251,7 @@ public class FoodDisplayController {
     // TODO: Make compatible with database
     @FXML
     public void search(String searchedFood) {
-        displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood));
+        displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, 6)); // Collection id 6 test
     }
 
     void updateFoodDisplayByCollectionName(String selectedKitchen, MainPageController mainPageController) {

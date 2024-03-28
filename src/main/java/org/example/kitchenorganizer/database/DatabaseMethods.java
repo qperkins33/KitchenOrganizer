@@ -15,17 +15,18 @@ import java.util.List;
 public class DatabaseMethods {
 
     // Database search
-    public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood) {
+    public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood, int collectionId) {
         List<Food> matchingFoods = new ArrayList<>();
-        // Select that returns foods that include searched String
+        // Update the SQL query to also filter by the specific collectionId
         String sql = "SELECT f.* FROM Foods f " +
                 "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
-                "WHERE fc.userId = ? AND LOWER(f.name) LIKE LOWER(?)";
+                "WHERE fc.userId = ? AND f.collectionId = ? AND LOWER(f.name) LIKE LOWER(?)";
 
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
-            pstmt.setString(2, "%" + searchedFood + "%");
+            pstmt.setInt(2, collectionId); // Filter by collectionId
+            pstmt.setString(3, "%" + searchedFood + "%"); // Use wildcard % for partial matches
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -49,6 +50,7 @@ public class DatabaseMethods {
         }
         return matchingFoods;
     }
+
 
 //    public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
 //        List<Food> foods = new ArrayList<>();
