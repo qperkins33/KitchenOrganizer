@@ -2,15 +2,13 @@ package org.example.kitchenorganizer.mainpage;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.FoodCollection;
+import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 
 import java.text.SimpleDateFormat;
@@ -19,20 +17,23 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
-import static org.example.kitchenorganizer.database.DatabaseMethods.fetchSortedFoods;
+import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class FoodDisplayController {
 
     @FXML
     private VBox foodsCenterVBox;
+    private ComboBox<String> sortBy;
 
-    public FoodDisplayController(VBox foodsCenterVBox) {
+    public FoodDisplayController(VBox foodsCenterVBox, ComboBox<String> sortBy) {
         this.foodsCenterVBox = foodsCenterVBox;
+        this.sortBy = sortBy;
     }
 
     /**
      * Displays foods from user's current inventory on the main page
      * @param foods
+     * This method was made by Quin. I simply moved it to this class.
      */
     public void displayFoods(List<Food> foods) {
         foodsCenterVBox.getChildren().clear();
@@ -249,14 +250,20 @@ public class FoodDisplayController {
 
     // TODO: Make compatible with database
     @FXML
-    public void search(String query, FoodCollection foodList) {
-        List<Food> matchingFoods = new ArrayList<Food>();
-        for (Food f : foodList.getItemsList()) {
-            //Using toLowerCase to effectively ignore case
-            if (f.getName().toLowerCase().contains(query.toLowerCase())) {
-                matchingFoods.add(f);
-            }
+    public void search(String searchedFood) {
+        displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood));
+    }
+
+    void updateFoodDisplayByCollectionName(String selectedKitchen, MainPageController mainPageController) {
+        int userId = User.getCurrentUser().getId();
+        int collectionId = findCollectionIdByNameAndUserId(selectedKitchen, userId);
+
+        String sortOrder = "name"; // Default sort order
+        if (sortBy.getValue() != null && sortBy.getValue().equals("Expiration")) {
+            sortOrder = "expDate";
         }
-        displayFoods(matchingFoods);
+
+        List<Food> foods = fetchSortedFoods(collectionId, sortOrder);
+        displayFoods(foods);
     }
 }

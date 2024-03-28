@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
 import org.example.kitchenorganizer.database.DatabaseMethods;
@@ -60,7 +59,7 @@ public class MainPageController implements Initializable {
 
         user = User.getCurrentUser(); // use in actual program (QUIN)
 
-        foodDisplayController = new FoodDisplayController(foodsCenterVBox);
+        foodDisplayController = new FoodDisplayController(foodsCenterVBox, sortBy);
 
         if (user != null) {
             userName.setText(user.getName());
@@ -102,21 +101,8 @@ public class MainPageController implements Initializable {
 
         if (currentCollectionName != null) {
             System.out.println("CURRENT KITCHEN: " + currentCollectionName);
-            updateFoodDisplayByCollectionName(currentCollectionName);
+            foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
         }
-    }
-
-    private void updateFoodDisplayByCollectionName(String selectedKitchen) {
-        int userId = User.getCurrentUser().getId();
-        int collectionId = findCollectionIdByNameAndUserId(selectedKitchen, userId);
-
-        String sortOrder = "name"; // Default sort order
-        if (sortBy.getValue() != null && sortBy.getValue().equals("Expiration")) {
-            sortOrder = "expDate";
-        }
-
-        List<Food> foods = fetchSortedFoods(collectionId, sortOrder);
-        foodDisplayController.displayFoods(foods);
     }
 
     private void refreshKitchenSelectorComboBox() {
@@ -167,7 +153,7 @@ public class MainPageController implements Initializable {
                 if (user != null && !name.isEmpty()) {
                     addCollectionToUserDatabase(name, user.getId());
 
-                    updateFoodDisplayByCollectionName(currentCollectionName);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
                     refreshKitchenSelectorComboBox();
                 }
 
@@ -205,7 +191,7 @@ public class MainPageController implements Initializable {
                 if (!name.isEmpty() && user != null) {
                     removeCollectionFromSignedInUsersDatabase(name, user.getId());
 
-                    updateFoodDisplayByCollectionName(currentCollectionName);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
                     refreshKitchenSelectorComboBox();
                 }
             }
@@ -226,14 +212,13 @@ public class MainPageController implements Initializable {
 
     @FXML
     private void handleSearch() {
-        foodDisplayController.search(searchBar.getText(), user.getFoodInventoryList().get(currentCollection));
+        foodDisplayController.search(searchBar.getText().trim());
 
         searchResult.setText(" Search for: " + searchBar.getText()); //test
         // TODO: Implement search logic
 
         // Search
         String searchedFood = searchBar.getText().trim();
-        List<Food> searchResults = DatabaseMethods.returnFoodsThatMatchSearch(user.getId(), searchedFood);
     }
     //*********************************************************************
     @FXML
@@ -404,7 +389,7 @@ public class MainPageController implements Initializable {
                     // Add the food to the specified collection in the database
                     addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
                     // Refresh the display
-                    updateFoodDisplayByCollectionName(currentCollectionName);
+                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName, this);
 
                 } catch (NumberFormatException e) {
                     // Show an alert dialog to inform the user about the input error
@@ -429,7 +414,7 @@ public class MainPageController implements Initializable {
         // Refresh display with sorted foods based on current kitchen and sort selection
         String selectedKitchen = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
         if (selectedKitchen != null) {
-            updateFoodDisplayByCollectionName(selectedKitchen); // sorting is done in updateFoodDisplay()
+            foodDisplayController.updateFoodDisplayByCollectionName(selectedKitchen, this); // sorting is done in updateFoodDisplay()
         }
     }
 
