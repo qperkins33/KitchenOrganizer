@@ -71,7 +71,7 @@
 
                 <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
                 <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
-                <Button text="Check Inventory" onAction="#showCheckInventoryDialog" HBox.hgrow="NEVER"/>
+                <Button text="Check All Inventory" onAction="#showCheckInventoryDialog" HBox.hgrow="NEVER"/>
                 <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER"/>
             </HBox>
 
