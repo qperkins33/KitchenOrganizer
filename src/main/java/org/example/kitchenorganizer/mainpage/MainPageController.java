@@ -220,6 +220,14 @@ public class MainPageController implements Initializable {
         // Search
         String searchedFood = searchBar.getText().trim();
     }
+    @FXML
+    private void previousPage() {
+        //implementation
+    }
+    @FXML
+    private void nextPage() {
+        //implementation
+    }
     //*********************************************************************
     @FXML
     private void showSettingsDialog(ActionEvent event) {
