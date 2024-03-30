@@ -211,11 +211,11 @@ public class MainPageController implements Initializable {
     }
     @FXML
     private void previousPage() {
-        // TODO: Implementation
+        foodDisplayController.decrementPageNum();
     }
     @FXML
     private void nextPage() {
-        // TODO: Implementation
+        foodDisplayController.incrementPageNum();
     }
     //*********************************************************************
     @FXML

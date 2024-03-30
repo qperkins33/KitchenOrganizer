@@ -21,13 +21,18 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class FoodDisplayController {
 
-    @FXML
     private VBox foodsCenterVBox;
     private ComboBox<String> sortBy;
+    private int pageNum;
+    private int maxFoodsPerPage;
+    private List<Food> currentFoodList;
 
     public FoodDisplayController(VBox foodsCenterVBox, ComboBox<String> sortBy) {
         this.foodsCenterVBox = foodsCenterVBox;
         this.sortBy = sortBy;
+        pageNum = 0;
+        maxFoodsPerPage = 6;
+        currentFoodList = null;
     }
 
     /**
@@ -42,7 +47,8 @@ public class FoodDisplayController {
         currentRow.getStyleClass().add("foodRow");
         int count = 0;
 
-        for (Food food : foods) {
+        while (count < 6 && pageNum * maxFoodsPerPage + count < foods.size()) {
+            Food food = foods.get(pageNum * maxFoodsPerPage + count);
             if (count % 3 == 0 && count > 0) { // rows of 3
                 foodsCenterVBox.getChildren().add(currentRow);
                 currentRow = new HBox();
@@ -243,14 +249,27 @@ public class FoodDisplayController {
     }
 
     public void refreshDisplayFromWithinDisplay(Food changedFood) {
-        List<Food> refreshedFoods;
-        refreshedFoods = fetchSortedFoods(changedFood.getCollectionId(), "name");
-        displayFoods(refreshedFoods);
+        currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), "name");
+        pageNum = 0;
+        displayFoods(currentFoodList);
     }
 
-    @FXML
     public void search(String searchedFood, String currentCollectionName) {
-        displayFoods(returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName)); //TODO: Make usable
+        currentFoodList = returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName);
+        pageNum = 0;
+        displayFoods(currentFoodList); //TODO: Make usable
+    }
+    public void incrementPageNum() {
+        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
+            pageNum++;
+            displayFoods(currentFoodList);
+        }
+    }
+    public void decrementPageNum() {
+        if (pageNum > 0) {
+            pageNum--;
+            displayFoods(currentFoodList);
+        }
     }
 
     void updateFoodDisplayByCollectionName(String selectedKitchen) {
@@ -262,7 +281,8 @@ public class FoodDisplayController {
             sortOrder = "expDate";
         }
 
-        List<Food> foods = fetchSortedFoods(collectionId, sortOrder);
-        displayFoods(foods);
+        pageNum = 0;
+        currentFoodList = fetchSortedFoods(collectionId, sortOrder);
+        displayFoods(currentFoodList);
     }
 }
