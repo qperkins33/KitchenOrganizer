@@ -259,18 +259,24 @@ public class FoodDisplayController {
         pageNum = 0;
         displayFoods(currentFoodList); //TODO: Make usable
     }
-    public void incrementPageNum() {
-        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
-            pageNum++;
-            displayFoods(currentFoodList);
-        }
-    }
-    public void decrementPageNum() {
-        if (pageNum > 0) {
-            pageNum--;
-            displayFoods(currentFoodList);
-        }
-    }
+
+    // TODO: incrementPageNum and decrementPageNum do not properly change page.
+    //  The new page will not be up to date because user may have changed the contents of the database
+    //  and the currentCollectionName will also not be correct. So if a user searches, the search result
+    //  will be from page 1 and never from page 2. I commented out the sections that do not work.
+    //  Either we can fix it or just delete them entirely.
+//    public void incrementPageNum() {
+//        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
+//            pageNum++;
+//            displayFoods(currentFoodList);
+//        }
+//    }
+//    public void decrementPageNum() {
+//        if (pageNum > 0) {
+//            pageNum--;
+//            displayFoods(currentFoodList);
+//        }
+//    }
 
     void updateFoodDisplayByCollectionName(String selectedKitchen) {
         int userId = User.getCurrentUser().getId();
