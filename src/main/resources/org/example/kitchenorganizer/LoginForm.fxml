@@ -5,58 +5,28 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.kitchenorganizer.login.LoginController">
-
-    <top>
-        <Text text="Kitchen Organizer"/>
-    </top>
-
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.kitchenorganizer.login.LoginController" stylesheets="@LoginForm.css">
     <center>
-        <VBox alignment="CENTER" spacing="20"
-              style="-fx-padding: 20;">
-            <Text text="Login Form"/>
-            <HBox alignment="CENTER">
-                <Text text="Username:"></Text>
-                <TextField fx:id="usernameField"></TextField>
-            </HBox>
-            <HBox alignment="CENTER">
-                <Text text="Password:"></Text>
-                <PasswordField fx:id="passwordField"></PasswordField>
-            </HBox>
-            <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Login"/>
-            <Label fx:id="loginMessageLabel" text="" />
-
+        <VBox alignment="CENTER" spacing="20" styleClass="login-container">
+            <Text text="Kitchen Organizer" styleClass="title"/>
+            <Text text="Login Form" styleClass="subtitle"/>
+            <TextField fx:id="usernameField" promptText="Username"/>
+            <PasswordField fx:id="passwordField" promptText="Password"/>
+            <Button fx:id="loginButton" onAction="#handleLoginButtonAction" text="Log In" maxWidth="Infinity"/>
+            <Label fx:id="loginMessageLabel" text=""/>
         </VBox>
     </center>
-
-
     <bottom>
-
-        <VBox alignment="CENTER" spacing="20"
-              style="-fx-padding: 20;">
-
-            <Label fx:id="createAccountMessageLabel" text="" />
-
-            <Text text="New User? Create Account"/>
         <HBox alignment="CENTER">
-            <Text text="First Name:"></Text>
-            <TextField fx:id="firstNameField"></TextField>
+            <VBox alignment="CENTER" spacing="20" styleClass="create-account-container">
+                <Label fx:id="createAccountMessageLabel" text=""/>
+                <Text text="New User? Create Account" styleClass="subtitle"/>
+                <TextField fx:id="firstNameField" promptText="First Name"/>
+                <TextField fx:id="lastNameField" promptText="Last Name"/>
+                <TextField fx:id="newUsernameField" promptText="Username"/>
+                <PasswordField fx:id="newPasswordField" promptText="Password"/>
+                <Button fx:id="createAccountButton" onAction="#handleCreateAccountButtonAction" text="Create Account" maxWidth="Infinity"/>
+            </VBox>
         </HBox>
-        <HBox alignment="CENTER">
-            <Text text="Last Name:"></Text>
-            <TextField fx:id="lastNameField"></TextField>
-        </HBox>
-        <HBox alignment="CENTER">
-            <Text text="Username:"></Text>
-            <TextField fx:id="newUsernameField"></TextField>
-        </HBox>
-        <HBox alignment="CENTER">
-            <Text text="Password:"></Text>
-            <PasswordField fx:id="newPasswordField"></PasswordField>
-        </HBox>
-        <Button fx:id="createAccountButton" onAction="#handleCreateAccountButtonAction" text="Create Account"/>
-        </VBox>
     </bottom>
-
 </BorderPane>
