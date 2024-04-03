@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Notification {
+public class Notification implements Notify {
     private final int userId;
     private String collectionName; // null when not specified (CHECK ALL COLLECTIONS THEN)
     private static final String URL = "jdbc:sqlite:mydatabase.db";
@@ -33,6 +33,7 @@ public class Notification {
         this.collectionName = collectionName;
     }
 
+    @Override
     public String gatherNotifications() {
         Set<String> expiredFoods = fetchExpiredFoods();
         StringBuilder notifications = appendNotifications(new StringBuilder(), expiredFoods, EXPIRED_MESSAGE);
