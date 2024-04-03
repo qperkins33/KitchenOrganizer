@@ -353,7 +353,4 @@ public class DatabaseMethods {
             System.out.println("Error updating food minimum quantity: " + e.getMessage());
         }
     }
-
-    // TODO (Possibly): Method that checks if any foods are nearing expiration date
-
 }
