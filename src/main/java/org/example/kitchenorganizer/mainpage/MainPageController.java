@@ -288,7 +288,7 @@ public class MainPageController implements Initializable {
     // TODO
     @FXML
     public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
-        Notification notification = new Notification(user.getId()); // Create an instance of Notification
+        Notification notification = new Notification(user.getId(), currentCollectionName); // Create an instance of Notification
         String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
 
         Dialog<Void> dialog = new Dialog<>();
