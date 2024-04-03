@@ -4,63 +4,57 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Notification { //TODO: Clean up code. Lots of overlapping code.
+public class Notification {
     private final int userId;
-    private String collectionName;
-    private Set<String> expiredFoods;
+    private String collectionName; // null when not specified (CHECK ALL COLLECTIONS THEN)
     private static final String URL = "jdbc:sqlite:mydatabase.db";
-    private String expiredMessage = " - Expired\n";
-    private String lowQuantityMessage = " - Low inventory\n";
-    private String sufficientMessage = "All items are well stocked.";
+    private static final String EXPIRED_MESSAGE = " - Expired\n";
+    private static final String LOW_QUANTITY_MESSAGE = " - Low inventory\n";
+    private static final String SUFFICIENT_MESSAGE = "All items are well stocked.";
 
-
+    /**
+     * Used when searching through all collections
+     * @param userId
+     */
     public Notification(int userId) {
         this.userId = userId;
     }
+
+    /**
+     * Used when searching through specific collection
+     * @param userId
+     * @param collectionName
+     */
     public Notification(int userId, String collectionName) {
         this.userId = userId;
         this.collectionName = collectionName;
     }
 
     public String gatherNotifications() {
-        StringBuilder notifications = new StringBuilder();
+        Set<String> expiredFoods = fetchExpiredFoods();
+        StringBuilder notifications = appendNotifications(new StringBuilder(), expiredFoods, EXPIRED_MESSAGE);
 
-        // Check if a specific collection name is given.
-        if (collectionName != null && !collectionName.isEmpty()) {
-            // Fetch notifications for the specified collection.
-            expiredFoods = fetchExpiredFoods(collectionName);
-            expiredFoods.forEach(foodName -> notifications.append(foodName).append(expiredMessage));
-            notifications.append(fetchLowInventoryFoods(expiredFoods, collectionName));
-        } else {
-            // Fetch notifications for all collections.
-            expiredFoods = fetchExpiredFoods();
-            expiredFoods.forEach(foodName -> notifications.append(foodName).append(expiredMessage));
-            notifications.append(fetchLowInventoryFoods(expiredFoods));
-        }
+        Set<String> lowInventoryFoods = fetchLowInventoryFoods(expiredFoods);
+        appendNotifications(notifications, lowInventoryFoods, LOW_QUANTITY_MESSAGE);
 
-        if (notifications.length() == 0) {
-            return sufficientMessage;
-        } else {
-            return notifications.toString();
-        }
+        // if else
+        return notifications.isEmpty() ? SUFFICIENT_MESSAGE : notifications.toString();
     }
 
+    /**
+     * Fetch expired foods. Check current inventory if collectionName != null. Otherwise, check all collections.
+     * @return Set String expiredFoods
+     */
     private Set<String> fetchExpiredFoods() {
         Set<String> expiredFoods = new HashSet<>();
-        String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? AND f.expDate < ?";
-
-        LocalDate today = LocalDate.now();
-        String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? " +
+                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.expDate < CURRENT_DATE"; // Check if expired by using CURRENT_DATE
 
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, this.userId);
-            pstmt.setString(2, todayStr);
+             PreparedStatement pstmt = prepareStatement(conn, sql)) {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     expiredFoods.add(rs.getString("name"));
@@ -72,74 +66,49 @@ public class Notification { //TODO: Clean up code. Lots of overlapping code.
         return expiredFoods;
     }
 
-    private String fetchLowInventoryFoods(Set<String> excludedFoods) {
-        StringBuilder lowInventoryFoods = new StringBuilder();
-        String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? AND f.quantity < f.minQuantity";
+    /**
+     * Fetch low inventory foods. Check current inventory if collectionName != null. Otherwise, check all collections.
+     * @return Set String lowInventoryFoods
+     */
+    private Set<String> fetchLowInventoryFoods(Set<String> excludedFoods) {
+        Set<String> lowInventoryFoods = new HashSet<>();
+        String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? " +
+                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.quantity < f.minQuantity";
 
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, this.userId);
+             PreparedStatement pstmt = prepareStatement(conn, sql)) {
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     String foodName = rs.getString("name");
-                    if (!excludedFoods.contains(foodName)) { // Only add if not already reported as expired
-                        lowInventoryFoods.append(foodName).append(lowQuantityMessage);
+                    if (!excludedFoods.contains(foodName)) {
+                        lowInventoryFoods.add(foodName);
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return lowInventoryFoods.toString();
+        return lowInventoryFoods;
     }
 
-    private Set<String> fetchExpiredFoods(String collectionName) {
-        Set<String> expiredFoods = new HashSet<>();
-        String sql = "SELECT f.name FROM Foods f " +
-                "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
-                "WHERE fc.userId = ? AND fc.name = ? AND f.expDate < ?";
-
-        LocalDate today = LocalDate.now();
-        String todayStr = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
-
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, this.userId);
-            pstmt.setString(2, collectionName);
-            pstmt.setString(3, todayStr);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    expiredFoods.add(rs.getString("name"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     * Prepare database statement
+     * @param conn
+     * @param sql
+     * @return
+     * @throws Exception
+     */
+    private PreparedStatement prepareStatement(Connection conn, String sql) throws Exception {
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setInt(1, this.userId);
+        if (collectionName != null) {
+            pstmt.setString(2, collectionName); // Second parameter will always be collectionName when needed
         }
-        return expiredFoods;
+        return pstmt;
     }
 
-    private String fetchLowInventoryFoods(Set<String> excludedFoods, String collectionName) {
-        StringBuilder lowInventoryFoods = new StringBuilder();
-        String sql = "SELECT f.name FROM Foods f " +
-                "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
-                "WHERE fc.userId = ? AND fc.name = ? AND f.quantity < f.minQuantity";
-
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, this.userId);
-            pstmt.setString(2, collectionName);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String foodName = rs.getString("name");
-                    if (!excludedFoods.contains(foodName)) { // Only add if not already reported as expired
-                        lowInventoryFoods.append(foodName).append(lowQuantityMessage);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lowInventoryFoods.toString();
+    private StringBuilder appendNotifications(StringBuilder builder, Set<String> items, String message) {
+        items.forEach(item -> builder.append(item).append(message));
+        return builder;
     }
-
 }
