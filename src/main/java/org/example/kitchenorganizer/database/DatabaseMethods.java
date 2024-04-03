@@ -51,34 +51,6 @@ public class DatabaseMethods {
         return matchingFoods;
     }
 
-
-
-//    public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
-//        List<Food> foods = new ArrayList<>();
-//        String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
-//
-//        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setInt(1, collectionId);
-//            try (ResultSet rs = pstmt.executeQuery()) {
-//                while (rs.next()) {
-//                    foods.add(new Food(
-//                            rs.getString("name"),
-//                            rs.getDouble("quantity"),
-//                            rs.getString("measurementUnit"),
-//                            rs.getDouble("minQuantity"),
-//                            rs.getInt("expDate"),
-//                            rs.getInt("id"),
-//                            rs.getInt("collectionId")
-//                    ));
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return foods;
-//    }
-
     public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
         List<Food> foods = new ArrayList<>();
         String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
@@ -179,32 +151,6 @@ public class DatabaseMethods {
             System.out.println("Error removing collection: " + e.getMessage());
         }
     }
-
-//    public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDate) {
-//        int userId = User.getCurrentUser().getId(); // This method should return the current user's ID
-//        int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
-//
-//        if (collectionId != -1) {
-//            String sql = "INSERT INTO Foods (collectionId, name, quantity, measurementUnit, minQuantity, expDate) VALUES (?, ?, ?, ?, ?, ?)";
-//            try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
-//                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//                pstmt.setInt(1, collectionId);
-//                pstmt.setString(2, name);
-//                pstmt.setDouble(3, quantity);
-//                pstmt.setString(4, measurementUnit);
-//                pstmt.setDouble(5, minQuantity);
-//                pstmt.setInt(6, expDate); // TODO: Adjust to convert to a date format
-//                pstmt.executeUpdate();
-//                System.out.println("New food added successfully to the collection.");
-//
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                System.out.println("Error adding new food: " + e.getMessage());
-//            }
-//        } else {
-//            System.out.println("Collection not found or access error.");
-//        }
-//    }
 
     public static void updateFoodExpDate(int foodId, int expDateDays) {
         // Calculate the expiration date by adding expDateDays to the current date
@@ -382,8 +328,6 @@ public class DatabaseMethods {
         } catch (Exception e) {
             System.out.println("Error deleting user and associated data: " + e.getMessage());
         }
-
-        // TODO: Method that checks if any foods are nearing expiration date
     }
 
     public static void updateMinQuantity(int foodId, double minQuantity) {
@@ -409,4 +353,7 @@ public class DatabaseMethods {
             System.out.println("Error updating food minimum quantity: " + e.getMessage());
         }
     }
+
+    // TODO (Possibly): Method that checks if any foods are nearing expiration date
+
 }

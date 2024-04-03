@@ -284,6 +284,25 @@ public class MainPageController implements Initializable {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();
     }
+
+    // TODO
+    @FXML
+    public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
+        Notification notification = new Notification(user.getId()); // Create an instance of Notification
+        String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Low Inventory Notification");
+
+        VBox content = new VBox();
+        TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
+        textArea.setEditable(false);
+        content.getChildren().add(textArea);
+
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
+        dialog.showAndWait();
+    }
     //*********************************************************************
     // ADD NEW FOOD
 
@@ -447,10 +466,6 @@ public class MainPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) {
-        // TODO: Implementation
     }
 }
 
