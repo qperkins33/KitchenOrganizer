@@ -2,7 +2,6 @@ package org.example.kitchenorganizer.database;
 
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
-
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -11,10 +10,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 public class DatabaseMethods {
 
-    // Database search
+    /**
+     * Used to search a through a user's food collection from the database.
+     * (SEARCH BAR)
+     *
+     * @param userId
+     * @param searchedFood
+     * @param collectionName
+     * @return List of Foods that partially or fully match user's search
+     */
     public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood, String collectionName) {
         List<Food> matchingFoods = new ArrayList<>();
         // Adjust the SQL query to filter by the collection name
@@ -51,6 +57,15 @@ public class DatabaseMethods {
         return matchingFoods;
     }
 
+    /**
+     * Returns a list of user's foods from a specific collection. Orders list based on Name or Expiration.
+     * Used when changing display order of foods on main page.
+     * (SORT BY)
+     *
+     * @param collectionId
+     * @param sortOrder
+     * @return Sorted Foods List
+     */
     public static List<Food> fetchSortedFoods(int collectionId, String sortOrder) {
         List<Food> foods = new ArrayList<>();
         String sql = "SELECT * FROM Foods WHERE collectionId = ? ORDER BY " + sortOrder;
@@ -82,6 +97,12 @@ public class DatabaseMethods {
         return foods;
     }
 
+    /**
+     * Adds new empty collection to user's database.
+     *
+     * @param collectionName
+     * @param userId
+     */
     public static void addCollectionToUserDatabase(String collectionName, int userId) {
         // Check if the collection name already exists for the user
         String checkSql = "SELECT id FROM FoodCollections WHERE name = ? AND userId = ?";
@@ -110,6 +131,13 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Removes existing collection from user's database.
+     * Also, removes everything associated with the collection including foods.
+     *
+     * @param collectionName
+     * @param userId
+     */
     public static void removeCollectionFromSignedInUsersDatabase(String collectionName, int userId) {
         // Step 1: Find the collection ID
         int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
@@ -152,6 +180,14 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Updates existing food's expiration date with new expiration date.
+     * Converts int expDateDays into Date based on today's date.
+     * Stores expiration date as future Date.
+     *
+     * @param foodId
+     * @param expDateDays
+     */
     public static void updateFoodExpDate(int foodId, int expDateDays) {
         // Calculate the expiration date by adding expDateDays to the current date
         Calendar calendar = Calendar.getInstance();
@@ -181,6 +217,17 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Adds new food to the user's database.
+     * Links food with correct collection name.
+     *
+     * @param collectionName
+     * @param name
+     * @param quantity
+     * @param measurementUnit
+     * @param minQuantity
+     * @param expDateDays
+     */
     public static void addFoodToCollection(String collectionName, String name, double quantity, String measurementUnit, double minQuantity, int expDateDays) {
         int userId = User.getCurrentUser().getId(); // This method should return the current user's ID
         int collectionId = findCollectionIdByNameAndUserId(collectionName, userId);
@@ -214,6 +261,13 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Finds collection id based on user's id and user's unique collection name.
+     *
+     * @param collectionName
+     * @param userId
+     * @return Desired collection's id
+     */
     public static int findCollectionIdByNameAndUserId(String collectionName, int userId) {
         String sql = "SELECT id FROM FoodCollections WHERE name = ? AND userId = ?";
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
@@ -232,6 +286,12 @@ public class DatabaseMethods {
         return -1; // Return -1 if not found or error
     }
 
+    /**
+     * Retrieves a list of a user's collection names from database.
+     *
+     * @param userID
+     * @return List of collection names
+     */
     public static List<String> getCollectionNamesForUser(int userID) {
         List<String> collections = new ArrayList<>();
         // Correct the SQL query by removing the concatenation with userID, as you're setting it via PreparedStatement
@@ -252,6 +312,12 @@ public class DatabaseMethods {
         return collections;
     }
 
+    /**
+     * Updates existing food's food quantity.
+     *
+     * @param foodId
+     * @param quantityChange
+     */
     public static void updateFoodQuantity(int foodId, double quantityChange) {
         String sql = "UPDATE Foods SET quantity = ? WHERE id = ?";
 
@@ -276,6 +342,11 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Deletes food from the database
+     *
+     * @param foodId
+     */
     public static void deleteFoodByFoodId(int foodId) {
         String sql = "DELETE FROM Foods WHERE id = ?";
 
@@ -295,6 +366,11 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Deletes user and all user associated items from the database.
+     *
+     * @param userId
+     */
     public static void deleteUserByUserId(int userId) {
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
              Statement stmt = conn.createStatement()) {
@@ -330,6 +406,12 @@ public class DatabaseMethods {
         }
     }
 
+    /**
+     * Updates existing food's food minimum quantity.
+     *
+     * @param foodId
+     * @param minQuantity
+     */
     public static void updateMinQuantity(int foodId, double minQuantity) {
         String sql = "UPDATE Foods SET minQuantity = ? WHERE id = ?";
 
