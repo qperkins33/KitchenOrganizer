@@ -216,14 +216,14 @@ public class MainPageController implements Initializable {
     //  will be from page 1 and never from page 2. I commented out the sections that do not work.
     //  Either we can fix it or just delete them entirely because the Select Kitchen drop down box works.
     //  But currently more issues were created than solved when implementing previous page and next page.
-//    @FXML
-//    private void previousPage() {
-//        foodDisplayController.decrementPageNum();
-//    }
-//    @FXML
-//    private void nextPage() {
-//        foodDisplayController.incrementPageNum();
-//    }
+    @FXML
+    private void previousPage() {
+        foodDisplayController.decrementPageNum();
+    }
+    @FXML
+    private void nextPage() {
+        foodDisplayController.incrementPageNum();
+    }
     //*********************************************************************
     @FXML
     private void showSettingsDialog(ActionEvent event) {

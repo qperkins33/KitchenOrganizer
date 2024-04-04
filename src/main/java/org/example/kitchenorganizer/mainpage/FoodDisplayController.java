@@ -250,7 +250,6 @@ public class FoodDisplayController {
 
     public void refreshDisplayFromWithinDisplay(Food changedFood) {
         currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), "name");
-        pageNum = 0;
         displayFoods(currentFoodList);
     }
 
@@ -265,18 +264,18 @@ public class FoodDisplayController {
     //  and the currentCollectionName will also not be correct. So if a user searches, the search result
     //  will be from page 1 and never from page 2. I commented out the sections that do not work.
     //  Either we can fix it or just delete them entirely.
-//    public void incrementPageNum() {
-//        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
-//            pageNum++;
-//            displayFoods(currentFoodList);
-//        }
-//    }
-//    public void decrementPageNum() {
-//        if (pageNum > 0) {
-//            pageNum--;
-//            displayFoods(currentFoodList);
-//        }
-//    }
+    public void incrementPageNum() {
+        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
+            pageNum++;
+            displayFoods(currentFoodList);
+        }
+    }
+    public void decrementPageNum() {
+        if (pageNum > 0) {
+            pageNum--;
+            displayFoods(currentFoodList);
+        }
+    }
 
     void updateFoodDisplayByCollectionName(String selectedKitchen) {
         int userId = User.getCurrentUser().getId();

@@ -73,8 +73,8 @@
                 <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER"/>
                 <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS"/>
 <!--                TODO: incrementPageNum and decrementPageNum do not properly change page. Either fix or delete.-->
-<!--                <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>-->
-<!--                <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>-->
+                <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
+                <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
             </HBox>
 
         </bottom>
