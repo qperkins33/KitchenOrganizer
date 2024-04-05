@@ -14,12 +14,15 @@ import java.util.List;
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class KitchenController {
-    private String currentCollectionName;
+    //All methods here were implemented by Quin. I only moved them here for cohesion.
     private FoodDisplayController foodDisplayController;
     private ComboBox<String> kitchenSelectorComboBox;
-    public KitchenController(FoodDisplayController foodDisplayController, ComboBox<String> kitchenSelectorComboBox) {
+    private MainPageController mainPageController;
+    public KitchenController(FoodDisplayController foodDisplayController, ComboBox<String> kitchenSelectorComboBox,
+                             MainPageController mainPageController) {
         this.foodDisplayController = foodDisplayController;
         this.kitchenSelectorComboBox = kitchenSelectorComboBox;
+        this.mainPageController = mainPageController;
     }
     public void showRemoveCollectionDialog() {
         Dialog<Void> dialog = new Dialog<>();
@@ -47,7 +50,7 @@ public class KitchenController {
                 if (!name.isEmpty() && User.getCurrentUser() != null) {
                     removeCollectionFromSignedInUsersDatabase(name, User.getCurrentUser().getId());
 
-                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
+                    foodDisplayController.updateFoodDisplayByCollectionName(mainPageController.currentCollectionName);
                     refreshKitchenSelectorComboBox();
                 }
             }
@@ -82,7 +85,7 @@ public class KitchenController {
                 if (User.getCurrentUser() != null && !name.isEmpty()) {
                     addCollectionToUserDatabase(name, User.getCurrentUser().getId());
 
-                    foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
+                    foodDisplayController.updateFoodDisplayByCollectionName(mainPageController.currentCollectionName);
                     refreshKitchenSelectorComboBox();
                 }
 
@@ -113,11 +116,11 @@ public class KitchenController {
         }
     }
     public void handleKitchenSelectionComboBox() {
-        currentCollectionName = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
+        mainPageController.currentCollectionName = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
 
-        if (currentCollectionName != null) {
-            System.out.println("CURRENT KITCHEN: " + currentCollectionName);
-            foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName);
+        if (mainPageController.currentCollectionName != null) {
+            System.out.println("CURRENT KITCHEN: " + mainPageController.currentCollectionName);
+            foodDisplayController.updateFoodDisplayByCollectionName(mainPageController.currentCollectionName);
         }
     }
     public void addKitchensToKitchenSelectorComboBox() {
