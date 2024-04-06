@@ -26,10 +26,12 @@ public class FoodDisplayController {
     private int pageNum;
     private int maxFoodsPerPage;
     private List<Food> currentFoodList;
+    private Text pageInfoText;
 
-    public FoodDisplayController(VBox foodsCenterVBox, ComboBox<String> sortBy) {
+    public FoodDisplayController(VBox foodsCenterVBox, ComboBox<String> sortBy, Text pageInfoText) {
         this.foodsCenterVBox = foodsCenterVBox;
         this.sortBy = sortBy;
+        this.pageInfoText = pageInfoText;
         pageNum = 0;
         maxFoodsPerPage = 6;
         currentFoodList = null;
@@ -55,10 +57,19 @@ public class FoodDisplayController {
                 currentRow.setAlignment(Pos.TOP_CENTER);
                 currentRow.getStyleClass().add("foodRow");
             }
-
             VBox foodCell = new VBox();
             foodCell.setAlignment(Pos.CENTER);
-            foodCell.getStyleClass().add("foodCell");
+            if (food.getExpDate() <= 0) {
+                foodCell.getStyleClass().add("foodCellExpired");
+            }
+            else if (food.getQuantity() < food.getMinQuantity()) {
+                foodCell.getStyleClass().add("foodCellLowQuantity");
+            }
+            else {
+                foodCell.getStyleClass().add("foodCell");
+            }
+
+
 
             // Food info
             HBox foodNameBox = new HBox();
@@ -256,6 +267,11 @@ public class FoodDisplayController {
     public void search(String searchedFood, String currentCollectionName) {
         currentFoodList = returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName);
         pageNum = 0;
+        pageInfoText.setText(String.format(" Page %d of %d ", pageNum + 1,
+                //To ensure an extra page is not added when the food list is divisible by maxFoodsPerPage,
+                //and to ensure that the max page is not 0 when the collection is empty.
+                (currentFoodList.size() % maxFoodsPerPage == 0 && !currentFoodList.isEmpty())
+                        ? currentFoodList.size() / maxFoodsPerPage: currentFoodList.size() / maxFoodsPerPage + 1));
         displayFoods(currentFoodList); //TODO: Make usable
     }
 
@@ -265,19 +281,29 @@ public class FoodDisplayController {
     //  will be from page 1 and never from page 2. I commented out the sections that do not work.
     //  Either we can fix it or just delete them entirely.
     public void incrementPageNum() {
-        if (pageNum * maxFoodsPerPage < currentFoodList.size()) {
+        if ((pageNum + 1) * maxFoodsPerPage < currentFoodList.size()) {
             pageNum++;
+            pageInfoText.setText(String.format(" Page %d of %d ", pageNum + 1,
+                    //To ensure an extra page is not added when the food list is divisible by maxFoodsPerPage,
+                    //and to ensure that the max page is not 0 when the collection is empty.
+                    (currentFoodList.size() % maxFoodsPerPage == 0 && !currentFoodList.isEmpty())
+                            ? currentFoodList.size() / maxFoodsPerPage: currentFoodList.size() / maxFoodsPerPage + 1));
             displayFoods(currentFoodList);
         }
     }
     public void decrementPageNum() {
         if (pageNum > 0) {
             pageNum--;
+            pageInfoText.setText(String.format(" Page %d of %d ", pageNum + 1,
+                    //To ensure an extra page is not added when the food list is divisible by maxFoodsPerPage,
+                    //and to ensure that the max page is not 0 when the collection is empty.
+                    (currentFoodList.size() % maxFoodsPerPage == 0 && !currentFoodList.isEmpty())
+                            ? currentFoodList.size() / maxFoodsPerPage: currentFoodList.size() / maxFoodsPerPage + 1));
             displayFoods(currentFoodList);
         }
     }
 
-    void updateFoodDisplayByCollectionName(String selectedKitchen) {
+    public void updateFoodDisplayByCollectionName(String selectedKitchen) {
         int userId = User.getCurrentUser().getId();
         int collectionId = findCollectionIdByNameAndUserId(selectedKitchen, userId);
 
@@ -288,6 +314,11 @@ public class FoodDisplayController {
 
         pageNum = 0;
         currentFoodList = fetchSortedFoods(collectionId, sortOrder);
+        pageInfoText.setText(String.format(" Page %d of %d ", pageNum + 1,
+                //To ensure an extra page is not added when the food list is divisible by maxFoodsPerPage,
+                //and to ensure that the max page is not 0 when the collection is empty.
+                (currentFoodList.size() % maxFoodsPerPage == 0 && !currentFoodList.isEmpty())
+                ? currentFoodList.size() / maxFoodsPerPage: currentFoodList.size() / maxFoodsPerPage + 1));
         displayFoods(currentFoodList);
     }
 }

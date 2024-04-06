@@ -75,6 +75,7 @@
 <!--                TODO: incrementPageNum and decrementPageNum do not properly change page. Either fix or delete.-->
                 <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
                 <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
+                <Text fx:id="pageInfoText"/>
             </HBox>
 
         </bottom>

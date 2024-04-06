@@ -45,6 +45,8 @@ public class MainPageController implements Initializable {
     @FXML
     private Text userName;
     @FXML
+    private Text pageInfoText;
+    @FXML
     private ComboBox<String> sortBy;
     private FoodDisplayController foodDisplayController;
     private KitchenController kitchenController;
@@ -60,7 +62,7 @@ public class MainPageController implements Initializable {
 
         user = User.getCurrentUser(); // use in actual program (QUIN)
 
-        foodDisplayController = new FoodDisplayController(foodsCenterVBox, sortBy);
+        foodDisplayController = new FoodDisplayController(foodsCenterVBox, sortBy, pageInfoText);
         kitchenController = new KitchenController(foodDisplayController, kitchenSelectorComboBox, this);
         dialogController = new DialogController(foodDisplayController, this);
 
