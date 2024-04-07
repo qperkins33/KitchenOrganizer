@@ -1,5 +1,4 @@
 package org.example.kitchenorganizer.mainpage;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +10,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
 import static org.example.kitchenorganizer.database.DatabaseMethods.addFoodToCollection;
 import static org.example.kitchenorganizer.database.DatabaseMethods.getCollectionNamesForUser;
 

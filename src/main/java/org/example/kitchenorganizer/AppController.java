@@ -1,11 +1,9 @@
 package org.example.kitchenorganizer;
-
 import org.example.kitchenorganizer.classes.InventoryItem;
 import org.example.kitchenorganizer.login.LoginController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

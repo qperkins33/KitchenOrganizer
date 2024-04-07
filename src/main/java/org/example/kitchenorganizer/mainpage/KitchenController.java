@@ -1,16 +1,12 @@
 package org.example.kitchenorganizer.mainpage;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseInitializer;
-
 import java.sql.*;
 import java.util.List;
-
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class KitchenController {

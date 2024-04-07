@@ -1,22 +1,14 @@
 package org.example.kitchenorganizer.mainpage;
-
-import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.Food;
-import org.example.kitchenorganizer.classes.FoodCollection;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseMethods;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
-
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class FoodDisplayController {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+
 <VBox fx:controller="org.example.kitchenorganizer.mainpage.MainPageController" xmlns:fx="http://javafx.com/fxml">
     <BorderPane>
         <stylesheets>
@@ -20,7 +20,6 @@
                     </StackPane>
                     <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
                     <Button text="Search" onAction="#handleSearch"></Button>
-<!--                    <Button text="Logout" onAction="#handleLogout" HBox.hgrow="NEVER" />-->
                     <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" />
                 </HBox>
 
@@ -41,7 +40,6 @@
                     <ComboBox fx:id="sortBy" onAction="#sort">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
-<!--                                TODO: Code a method to sort displayed foods from database-->
                                 <String fx:value="Name"/>
                                 <String fx:value="Expiration"/>
                             </FXCollections>
@@ -72,7 +70,6 @@
                 <Button text="Check Current Collection's Inventory" onAction="#showCheckCurrentInventoryDialog" HBox.hgrow="NEVER"/>
                 <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER"/>
                 <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS"/>
-<!--                TODO: incrementPageNum and decrementPageNum do not properly change page. Either fix or delete.-->
                 <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
                 <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
                 <Text fx:id="pageInfoText"/>

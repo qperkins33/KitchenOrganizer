@@ -1,5 +1,4 @@
 package org.example.kitchenorganizer.database;
-
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import java.sql.*;
