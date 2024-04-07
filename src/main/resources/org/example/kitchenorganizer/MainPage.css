@@ -5,7 +5,6 @@
     -fx-fill: rgba(226,226,226,1);
 }
 
-
 .appTitleContainer {
     -fx-padding: 10;
 }
@@ -35,15 +34,17 @@
     -fx-padding: 15;
     -fx-font-size: 20px;
     -fx-font-family: 'Arial', sans-serif;
-    -fx-font-weight: bold;
 }
+
 .foodCellLowQuantity {
     -fx-border-color: black;
     -fx-background-color: rgba(255, 255, 0, 255);
     -fx-padding: 15;
     -fx-font-size: 20px;
     -fx-font-family: 'Arial', sans-serif;
-    -fx-font-weight: bold;}
+    -fx-font-weight: bold;
+}
+
 .foodCellExpired {
     -fx-border-color: black;
     -fx-background-color: rgba(255, 0, 0, 255);
@@ -59,7 +60,4 @@
     -fx-padding: 15;
     -fx-font-size: 20px;
     -fx-font-family: 'Arial', sans-serif;
-    -fx-font-weight: bold;
 }
-
-
