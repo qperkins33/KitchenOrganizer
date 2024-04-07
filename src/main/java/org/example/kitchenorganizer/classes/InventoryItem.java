@@ -1,6 +1,6 @@
 package org.example.kitchenorganizer.classes;
 
-public abstract class InventoryItem {
+public abstract class InventoryItem { // Abstraction allows for future implementation of different item types such as kitchen appliances
 
     protected String name;
     protected double quantity;

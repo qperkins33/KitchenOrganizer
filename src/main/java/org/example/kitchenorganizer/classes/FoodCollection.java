@@ -1,7 +1,4 @@
 package org.example.kitchenorganizer.classes;
-
-import org.example.kitchenorganizer.classes.Food;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,11 +9,7 @@ public class FoodCollection {
 
     // Constructors
     public FoodCollection() {
-        this.items = new ArrayList<Food>();
-    }
-    public FoodCollection(String name) {
-        this.collectionName = name;
-        this.items = new ArrayList<Food>();
+        this.items = new ArrayList<>();
     }
 
     // Methods
