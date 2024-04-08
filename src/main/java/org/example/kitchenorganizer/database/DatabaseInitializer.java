@@ -88,7 +88,7 @@ public class DatabaseInitializer {
                         ", Quantity: " + rs.getDouble("quantity") +
                         ", Measurement Unit: " + rs.getString("measurementUnit") +
                         ", Min Quantity: " + rs.getDouble("minQuantity") +
-                        ", Expiration Date: " + rs.getString("expDate")); // TODO
+                        ", Expiration Date: " + rs.getString("expDate"));
             }
         } catch (Exception e) {
             System.out.println("Error fetching foods: " + e.getMessage());
