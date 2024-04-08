@@ -22,7 +22,7 @@ Deliverables:
 - Zip your project folder which should contain all of your code, including the gradle build files and the README and submit the zip file to D2L.
 
 *****************************************************************************************************
-Update Milestone 3 README based on above instructions and updated code in project:
+TODO: Update Milestone 3's README for Milestone 4 based on above instructions and updated code in project:
 
 How is the code structured? 
 
@@ -82,11 +82,24 @@ Milestone 4: A README.md or README.txt file specifying the following:
 1. Each functional requirement that this version of the application implements. There
 should be at least 6 functional requirements. For each of these requirements, explain
 how one can test that the program satisfies that requirement.
+- Expiration Date Watcher: The app allows users to add an expiration
+date to each to each food item that can be used to alert the user.
+Foods change color based on their availability. Red foods are expired and yellow
+foods have a low quantity.
+- Food Stock: The app allows users to increase/decrease quantity, delete, and update
+the foods in their inventory.
+- Alerts: The app displays a pop up telling user which foods are running low
+or about to expire. Users can choose to check individual collections or all inventories.
+- Search and Sort: Users can search for specific foods their inventory. Users can also sort
+the display order based on either name or expiration.
+- Add New Food Feature: Users will be able to add new types of foods into the app’s database.
+- Multiple Kitchens: Users can create multiple kitchens in the app so they can keep track
+of items in multiple kitchens.
 
-2. Each non-functional requirement. There should be at least four non-functional
+3. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is
 met in your application.
-- Volume Test Run:
-- [NEW] Usability (User-friendliness. Easy to navigate and features are understandable and easy to find.): 
 - Data Integrity (Ensure data is recorded exactly as intended.): Our app stores expiration dates of foods. User enter expiration date as number of days until expiration, but in the database, it's stored as DATE in order to ensure expiration date is always up to date. When user retrieves from the databse, DATE is turned into and displayed as number of days until expiration date.
-- TODO 4th Requirement
+- Volume Test Run: EXPLAIN
+- [NEW] Usability (User-friendliness. Easy to navigate and features are understandable and easy to find.): EXPLAIN
+- [NEW] Performance (Provide fast and accurate response times.): EXPLAIN
