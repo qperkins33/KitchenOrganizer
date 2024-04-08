@@ -86,3 +86,7 @@ how one can test that the program satisfies that requirement.
 2. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is
 met in your application.
+- Volume Test Run:
+- [NEW] Usability (User-friendliness. Easy to navigate and features are understandable and easy to find.): 
+- Data Integrity (Ensure data is recorded exactly as intended.): Our app stores expiration dates of foods. User enter expiration date as number of days until expiration, but in the database, it's stored as DATE in order to ensure expiration date is always up to date. When user retrieves from the databse, DATE is turned into and displayed as number of days until expiration date.
+- TODO 4th Requirement
