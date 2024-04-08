@@ -15,6 +15,8 @@ public class FoodDisplayController {
 
     private VBox foodsCenterVBox;
     private ComboBox<String> sortBy;
+    private String searchQuery;
+    private String currentCollectionName;
     private int pageNum;
     private int maxFoodsPerPage;
     private List<Food> currentFoodList;
@@ -27,6 +29,8 @@ public class FoodDisplayController {
         pageNum = 0;
         maxFoodsPerPage = 6;
         currentFoodList = null;
+        searchQuery = "";
+        currentCollectionName = "";
     }
 
     /**
@@ -40,8 +44,11 @@ public class FoodDisplayController {
         currentRow.setAlignment(Pos.TOP_CENTER);
         currentRow.getStyleClass().add("foodRow");
         int count = 0;
-
-        while (count < 6 && pageNum * maxFoodsPerPage + count < foods.size()) {
+        if (pageNum * maxFoodsPerPage >= foods.size()) {
+            Text noFoodText = new Text("No food to display");
+            currentRow.getChildren().add(noFoodText);
+        }
+        while (count < maxFoodsPerPage && pageNum * maxFoodsPerPage + count < foods.size()) {
             Food food = foods.get(pageNum * maxFoodsPerPage + count);
             if (count % 3 == 0 && count > 0) { // rows of 3
                 foodsCenterVBox.getChildren().add(currentRow);
@@ -252,11 +259,16 @@ public class FoodDisplayController {
     }
 
     public void refreshDisplayFromWithinDisplay(Food changedFood) {
-        currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), "name");
+        if (searchQuery.isEmpty())
+            currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), "name");
+        else
+            currentFoodList = returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchQuery, currentCollectionName);
         displayFoods(currentFoodList);
     }
 
     public void search(String searchedFood, String currentCollectionName) {
+        this.currentCollectionName = currentCollectionName;
+        searchQuery = searchedFood;
         currentFoodList = returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchedFood, currentCollectionName);
         pageNum = 0;
         pageInfoText.setText(String.format(" Page %d of %d ", pageNum + 1,
