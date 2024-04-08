@@ -82,6 +82,7 @@ Milestone 4: A README.md or README.txt file specifying the following:
 1. Each functional requirement that this version of the application implements. There
 should be at least 6 functional requirements. For each of these requirements, explain
 how one can test that the program satisfies that requirement.
+
 - Expiration Date Watcher: The app allows users to add an expiration
 date to each to each food item that can be used to alert the user.
 Foods change color based on their availability. Red foods are expired and yellow
@@ -99,6 +100,7 @@ of items in multiple kitchens.
 3. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is
 met in your application.
+
 - Data Integrity (Ensure data is recorded exactly as intended.): Our app stores expiration dates of foods. User enter expiration date as number of days until expiration, but in the database, it's stored as DATE in order to ensure expiration date is always up to date. When user retrieves from the databse, DATE is turned into and displayed as number of days until expiration date.
 - Volume Test Run: EXPLAIN
 - [NEW] Usability (User-friendliness. Easy to navigate and features are understandable and easy to find.): EXPLAIN
