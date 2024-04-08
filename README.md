@@ -97,7 +97,7 @@ the display order based on either name or expiration.
 - Multiple Kitchens: Users can create multiple kitchens in the app so they can keep track
 of items in multiple kitchens.
 
-3. Each non-functional requirement. There should be at least four non-functional
+2. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is
 met in your application.
 
