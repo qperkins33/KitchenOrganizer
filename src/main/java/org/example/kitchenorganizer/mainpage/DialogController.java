@@ -244,7 +244,6 @@ public class DialogController {
 
                 if (stage != null) {
                     stage.setScene(scene);
-                    // Set size (FIXES resize problem)
                     stage.setWidth(1300);
                     stage.setHeight(800);
                     stage.show();
