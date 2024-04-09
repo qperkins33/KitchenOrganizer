@@ -61,7 +61,6 @@
 
         <bottom>
             <HBox alignment="CENTER_LEFT">
-<!--                TODO: Create and change to showHelpDialog-->
                 <Button text="Help?" onAction="#showHelpDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"></Button>
 
                 <Pane HBox.hgrow="ALWAYS"/>
