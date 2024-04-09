@@ -21,7 +21,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 900, 800);
+        Scene scene = new Scene(root, 1300, 800);
         scene.getStylesheets().add(getClass().getResource("LoginForm.css").toExternalForm());
 
         primaryStage.setTitle("Kitchen Organizer");

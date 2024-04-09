@@ -33,9 +33,6 @@ public class AppController implements Initializable, LoginController.LoginListen
         this.mainPageContent.setVisible(false);
     }
 
-    /**
-     * TODO: Implement logout (logout button located in settings popup)
-     */
     public void logout() {
         this.loginFormContent.setVisible(true);
         this.mainPageContent.setVisible(false);

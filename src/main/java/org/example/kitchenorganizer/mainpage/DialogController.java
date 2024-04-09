@@ -220,7 +220,7 @@ public class DialogController {
         try {
             // Load login page FXML
             Parent loader = FXMLLoader.load(getClass().getResource("/org/example/kitchenorganizer/LoginForm.fxml"));
-            Scene scene = new Scene(loader, 900, 800); // Set to your desired size
+            Scene scene = new Scene(loader, 1300, 800); // Set to your desired size
 
             // Get the current stage from event's source
             Node source = (Node) event.getSource();
@@ -230,7 +230,7 @@ public class DialogController {
                 if (stage != null) {
                     stage.setScene(scene);
                     // Set size (FIXES resize problem)
-                    stage.setWidth(900);
+                    stage.setWidth(1300);
                     stage.setHeight(800);
                     stage.show();
                 } else {
