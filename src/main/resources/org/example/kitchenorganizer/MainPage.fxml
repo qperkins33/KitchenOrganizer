@@ -59,7 +59,7 @@
         <bottom>
             <HBox alignment="CENTER_LEFT">
                 <Label text=" User's Name: "/>
-                <Text fx:id="userName" />
+                <Text fx:id="userName" styleClass="boldText"/>
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
@@ -74,7 +74,7 @@
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Text fx:id="pageInfoText"/>
+                <Text fx:id="pageInfoText" styleClass="boldText"/>
             </HBox>
         </bottom>
 

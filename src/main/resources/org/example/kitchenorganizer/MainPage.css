@@ -61,3 +61,8 @@
     -fx-font-size: 20px;
     -fx-font-family: 'Arial', sans-serif;
 }
+
+.boldText {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-font-weight: bold;
+}
