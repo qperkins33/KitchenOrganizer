@@ -37,6 +37,11 @@ public class DialogController {
         VBox content = new VBox();
         TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
         textArea.setEditable(false);
+
+        // CSS
+        textArea.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        textArea.getStyleClass().add("accessibilityFontSize");
+
         content.getChildren().add(textArea);
         dialog.getDialogPane().setContent(content);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
@@ -52,8 +57,12 @@ public class DialogController {
         VBox content = new VBox();
         TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
         textArea.setEditable(false);
-        content.getChildren().add(textArea);
 
+        // CSS
+        textArea.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        textArea.getStyleClass().add("accessibilityFontSize");
+
+        content.getChildren().add(textArea);
         dialog.getDialogPane().setContent(content);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();
@@ -67,6 +76,10 @@ public class DialogController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
+
+        // CSS
+        grid.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        grid.getStyleClass().add("accessibilityFontSize");
 
         ComboBox<String> collections = new ComboBox<>();
         collections.setPromptText("Select Collection");
@@ -174,18 +187,20 @@ public class DialogController {
     }
     public void showSettingsDialog(ActionEvent event) {
         Dialog<Void> settingsPopup = new Dialog<>();
-//        settingsPopup.setTitle("Settings");
+        settingsPopup.setTitle("Settings");
 
         // Set the custom dialog layout
         VBox layout = new VBox();
 
-        Text settingsText = new Text("Settings");
+        // CSS
+        layout.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        layout.getStyleClass().add("accessibilityFontSize");
 
         Button deleteAccountButton = new Button("Delete Account");
 
         Button logoutButton = new Button("Logout");
 
-        layout.getChildren().addAll(settingsText, deleteAccountButton, logoutButton);
+        layout.getChildren().addAll(deleteAccountButton, logoutButton);
         settingsPopup.getDialogPane().setContent(layout);
         settingsPopup.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE); // Add a close button
 

@@ -30,6 +30,10 @@ public class KitchenController {
         grid.setHgap(10);
         grid.setVgap(10);
 
+        // CSS
+        grid.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        grid.getStyleClass().add("accessibilityFontSize");
+
         ComboBox<String> collections = new ComboBox<>();
         collections.setPromptText("Select Collection");
         populateCollectionNameComboBox(collections);
@@ -64,6 +68,10 @@ public class KitchenController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
+
+        // CSS
+        grid.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        grid.getStyleClass().add("accessibilityFontSize");
 
         TextField collectionNameField = new TextField();
         collectionNameField.setPromptText("Collection Name");

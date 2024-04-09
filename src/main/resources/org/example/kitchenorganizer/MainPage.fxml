@@ -32,7 +32,7 @@
                     </StackPane>
 
                     <ComboBox fx:id="kitchenSelectorComboBox" onAction="#handleKitchenSelectionComboBox" styleClass="accessibilityFontSize"/>
-                    <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                    <Button text="Add Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                     <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
                     <Pane HBox.hgrow="ALWAYS"/>
