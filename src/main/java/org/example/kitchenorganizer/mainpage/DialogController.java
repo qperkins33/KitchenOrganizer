@@ -60,8 +60,9 @@ public class DialogController {
 
         for (String k : kitchens) {
             Notification notification = new Notification(User.getCurrentUser().getId(), k); // Create an instance of Notification
-            lowInventoryNotifications.append("\n" + k + ":\n\n");
+            lowInventoryNotifications.append(k + ":\n");
             lowInventoryNotifications.append(notification.gatherNotifications()); // Get the low inventory foods
+            lowInventoryNotifications.append("\n*************************\n");
         }
         TextArea textArea = new TextArea(lowInventoryNotifications.toString()); // Use the notifications string directly
         textArea.setEditable(false);
