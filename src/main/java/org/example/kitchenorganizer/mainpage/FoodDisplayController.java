@@ -80,7 +80,13 @@ public class FoodDisplayController {
             foodNameBox.getChildren().add(foodName);
 
             Text expDateText = new Text("Days to Expiration: " + food.getExpDate());
-            Text quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
+            Text quantityText;
+            if (food.getQuantity() < 10000000) {
+                quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
+            }
+            else {
+                quantityText = new Text(food.getMeasurementUnit() + ": " + food.getQuantity());
+            }
             Text minQuantityText = new Text("Min " + food.getMeasurementUnit() + ": " + food.getMinQuantity());
 
             //**************************************************
