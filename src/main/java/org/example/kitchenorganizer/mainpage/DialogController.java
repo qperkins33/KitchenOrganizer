@@ -303,9 +303,35 @@ public class DialogController {
             e.printStackTrace();
         }
     }
+    public void showHelpDialog() {
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Help");
+
+        VBox content = new VBox();
+        TextArea textArea = new TextArea("A red background for foods indicates that the food is expired,\n" +
+                "and a yellow background indicates that the food's quantity is below minimum.\n\n" +
+                "Since the food display shows a limited number of foods at a time,\n" +
+                "the page controls on the bottom right side of the screen is used to show more foods.\n" +
+                "When you click the '+' button, the food display will show the next set of foods.\n" +
+                "The '-' button will show the previous set of foods if you are not on the first page.\n" +
+                "Keep in mind that the page controls are only used for foods in the current collection.\n" +
+                "To switch collections, use the 'Select Kitchen Collection' combo box.");
+        textArea.setEditable(false);
+
+        // CSS
+        textArea.getStylesheets().add(getClass().getResource("/org/example/kitchenorganizer/MainPage.css").toExternalForm());
+        textArea.getStyleClass().add("accessibilityFontSize");
+
+        content.getChildren().add(textArea);
+        dialog.getDialogPane().setContent(content);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
+        dialog.showAndWait();
+    }
 
     private void populateCollectionNameComboBox(ComboBox<String> comboBox) {
         List<String> collectionNames = getCollectionNamesForUser(User.getCurrentUser().getId());
         comboBox.getItems().addAll(collectionNames);
     }
+
+
 }

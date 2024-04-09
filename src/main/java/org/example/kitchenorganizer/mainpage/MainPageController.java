@@ -94,6 +94,11 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     @FXML
+    private void showHelpDialog() {
+        dialogController.showHelpDialog();
+    }
+    //*********************************************************************
+    @FXML
     private void showCheckAllInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         dialogController.showCheckAllInventoryDialog();
     }
