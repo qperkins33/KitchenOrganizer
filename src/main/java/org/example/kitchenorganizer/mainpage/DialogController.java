@@ -14,8 +14,11 @@ import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+
 import static org.example.kitchenorganizer.database.DatabaseMethods.addFoodToCollection;
 import static org.example.kitchenorganizer.database.DatabaseMethods.getCollectionNamesForUser;
 
@@ -150,7 +153,7 @@ public class DialogController {
 
                 try {
                     String collection = collections.getValue();
-                    String name = nameField.getText().trim();
+                    StringBuilder name = new StringBuilder(nameField.getText().trim());
                     double quantity = Double.parseDouble(quantityField.getText().trim());
                     String measurementUnit = measurementUnitDropdown.getValue();
                     double minQuantity = Double.parseDouble(minQuantityField.getText().trim());
@@ -166,7 +169,25 @@ public class DialogController {
                     }
 
                     // Add the food to the specified collection in the database
-                    addFoodToCollection(collection, name, quantity, measurementUnit, minQuantity, expDate);
+                    addFoodToCollection(collection, name.toString(), quantity, measurementUnit, minQuantity, expDate);
+                    //For volume tests only. Tests written by Austin.
+                    if (name.toString().equals("volume test")) {
+                        Random random = new Random();
+                        int length = random.nextInt(5, 100);
+                        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890[]`~!@#$%^&*(){}/=-',.<>_?+|;:";
+                        for (int i = 0; i < 6000; i++) {
+                            name = new StringBuilder();
+                            for (int j = 0; j < length; j++) {
+                                name.append(characters.charAt(random.nextInt(characters.length())));
+                            }
+                            quantity = random.nextDouble(-Float.MAX_VALUE, Float.MAX_VALUE);
+                            measurementUnit = measurementUnitDropdown.getItems().get(random.nextInt(measurementUnitDropdown.getItems().size()));
+                            minQuantity = random.nextInt(0, Integer.MAX_VALUE);
+                            expDate = random.nextInt(-10, 10);
+
+                            addFoodToCollection(collection, name.toString(), quantity, measurementUnit, minQuantity, expDate);
+                        }
+                    }
                     // Refresh the display
                     foodDisplayController.updateFoodDisplayByCollectionName(mainPageController.currentCollectionName);
 
