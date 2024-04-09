@@ -71,7 +71,7 @@ dependencies specified in the Gradle build files. Wait for the build process to 
 Run the App class, which serves as the entry point for the JavaFX application.
 
 - Login: The application will launch, and you will be presented with a login screen.
-Enter the correct username and password (in this case, "user" and "pass") and click the login button.
+Enter the correct username and password from the database (we have multiple profiles made, but you can use "user" and "pass") and click the login button.
 
 - Main Page: Upon successful login, you will be directed to the main page of the application.
 Here, you can view food items and perform actions based on the application's features.
@@ -87,15 +87,26 @@ how one can test that the program satisfies that requirement.
 date to each to each food item that can be used to alert the user.
 Foods change color based on their availability. Red foods are expired and yellow
 foods have a low quantity.
+Test: One can test by _____
+
 - Food Stock: The app allows users to increase/decrease quantity, delete, and update
 the foods in their inventory.
+Test: One can test by _____
+
 - Alerts: The app displays a pop up telling user which foods are running low
 or about to expire. Users can choose to check individual collections or all inventories.
+Test: One can test by _____
+
 - Search and Sort: Users can search for specific foods their inventory. Users can also sort
 the display order based on either name or expiration.
+Test: One can test by _____
+
 - Add New Food Feature: Users will be able to add new types of foods into the app’s database.
+Test: One can test by _____
+
 - Multiple Kitchens: Users can create multiple kitchens in the app so they can keep track
 of items in multiple kitchens.
+Test: One can test by _____
 
 2. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is

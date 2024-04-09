@@ -73,6 +73,9 @@
                 <Button text="-" onAction="#previousPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 <Button text="+" onAction="#nextPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
+                <Pane HBox.hgrow="ALWAYS"/>
+
+                <Text fx:id="pageInfoText" styleClass="boldText"/>
             </HBox>
         </bottom>
 

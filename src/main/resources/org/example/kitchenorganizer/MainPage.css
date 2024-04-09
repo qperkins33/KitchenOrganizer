@@ -61,6 +61,12 @@
     -fx-font-size: 24px;
     -fx-font-family: 'Arial', sans-serif;
 }
+
+.boldText {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-font-weight: bold;
+}
+
 .accessibilityFontSize {
     -fx-font-size: 24px;
 }
