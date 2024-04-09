@@ -22,6 +22,9 @@ public class App extends Application {
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 1300, 800);
+        primaryStage.setMinWidth(1300);
+        primaryStage.setMinHeight(800);
+
         scene.getStylesheets().add(getClass().getResource("LoginForm.css").toExternalForm());
 
         primaryStage.setTitle("Kitchen Organizer");
