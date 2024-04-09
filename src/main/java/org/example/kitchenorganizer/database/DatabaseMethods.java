@@ -22,7 +22,6 @@ public class DatabaseMethods {
      */
     public static List<Food> returnFoodsThatMatchSearch(int userId, String searchedFood, String collectionName) {
         List<Food> matchingFoods = new ArrayList<>();
-        // Adjust the SQL query to filter by the collection name
         String sql = "SELECT f.* FROM Foods f " +
                 "INNER JOIN FoodCollections fc ON f.collectionId = fc.id " +
                 "WHERE fc.userId = ? AND fc.name = ? AND LOWER(f.name) LIKE LOWER(?)";

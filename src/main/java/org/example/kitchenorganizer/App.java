@@ -31,8 +31,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         DatabaseInitializer.initializeDatabase();
-        DatabaseInitializer.displayAllUsers(); // this line displays users in terminal
-        DatabaseInitializer.displayAllFoods(); // this line displays foods in terminal
+        DatabaseInitializer.displayAllUsers(); // this line displays users in terminal (Testing purposes)
 
         launch(args);
     }

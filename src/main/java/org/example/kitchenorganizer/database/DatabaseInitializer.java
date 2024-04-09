@@ -58,8 +58,8 @@ public class DatabaseInitializer {
         }
     }
 
-    //TEST METHODS
-    public static void displayAllUsers() { // Displays all users in output terminal for testing
+    // Testing method that displays all users in terminal
+    public static void displayAllUsers() {
         String sql = "SELECT * FROM Users";
         try (Connection conn = DriverManager.getConnection(URL);
              Statement stmt = conn.createStatement();
@@ -71,27 +71,6 @@ public class DatabaseInitializer {
             }
         } catch (Exception e) {
             System.out.println("Error fetching users: " + e.getMessage());
-        }
-    }
-
-    public static void displayAllFoods() {
-        String sql = "SELECT * FROM Foods";
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            System.out.println("Displaying all foods:");
-            while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") +
-                        ", Collection ID: " + rs.getInt("collectionId") +
-                        ", Name: " + rs.getString("name") +
-                        ", Quantity: " + rs.getDouble("quantity") +
-                        ", Measurement Unit: " + rs.getString("measurementUnit") +
-                        ", Min Quantity: " + rs.getDouble("minQuantity") +
-                        ", Expiration Date: " + rs.getString("expDate"));
-            }
-        } catch (Exception e) {
-            System.out.println("Error fetching foods: " + e.getMessage());
         }
     }
 

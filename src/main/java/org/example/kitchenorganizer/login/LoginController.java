@@ -195,10 +195,6 @@ public class LoginController {
         }
     }
 
-    public void setLoginListener(LoginListener loginListener) { // no usage?
-        this.loginListener = loginListener;
-    }
-
     private void switchToMainPage(ActionEvent event) {
         try {
             // Load the FXML for the main page
@@ -215,7 +211,7 @@ public class LoginController {
                     stage.setScene(scene);
                     stage.show();
                 } else {
-                    System.out.println("Stage is null, can't switch scenes");
+                    System.out.println("Stage is null");
                 }
             }
         } catch (IOException e) {
