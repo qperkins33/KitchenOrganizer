@@ -21,6 +21,9 @@
                     <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." styleClass="accessibilityFontSize" />
                     <Button text="Search" onAction="#handleSearch" styleClass="accessibilityFontSize" ></Button>
                     <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                    <Text text=" Name: " styleClass="userName"/>
+                    <Text fx:id="userName" styleClass="userName" />
+                    <Text text=" "/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" styleClass="menuContainer2">
@@ -58,12 +61,11 @@
 
         <bottom>
             <HBox alignment="CENTER_LEFT">
-                <Label text=" User's Name: " styleClass="accessibilityFontSize"/>
-                <Text fx:id="userName" styleClass="boldText" />
+
+                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 <Button text="Check Current Collection's Inventory" onAction="#showCheckCurrentInventoryDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
@@ -73,7 +75,6 @@
                 <Button text="-" onAction="#previousPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 <Button text="+" onAction="#nextPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
-                <Pane HBox.hgrow="ALWAYS"/>
             </HBox>
         </bottom>
 

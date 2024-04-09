@@ -71,3 +71,10 @@
 .accessibilityFontSize {
     -fx-font-size: 24px;
 }
+
+.userName {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: rgba(226,226,226,1);
+}
