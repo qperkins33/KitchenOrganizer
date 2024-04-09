@@ -81,6 +81,7 @@ public class FoodDisplayController {
 
             Text expDateText = new Text("Days to Expiration: " + food.getExpDate());
             Text quantityText;
+            //To prevent data integrity issues that occur when using decimal format with large numbers.
             if (food.getQuantity() < 10000000) {
                 quantityText = new Text(food.getMeasurementUnit() + ": " + String.format("%.2f", food.getQuantity())); // Format double to String
             }

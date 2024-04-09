@@ -1,4 +1,6 @@
 package org.example.kitchenorganizer.mainpage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.kitchenorganizer.classes.User;
+import org.example.kitchenorganizer.database.DatabaseInitializer;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 import java.io.IOException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -29,14 +35,35 @@ public class DialogController {
         this.mainPageController = mainPageController;
     }
     public void showCheckAllInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
-        Notification notification = new Notification(User.getCurrentUser().getId()); // Create an instance of Notification
-        String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
+        //This was copied from kitchenController.refreshKitchenSelectorComboBox and slightly modified.
+        ArrayList<String> kitchens = new ArrayList<String>();
+        String sql = "SELECT name FROM FoodCollections WHERE userId = ?";
 
+        try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, User.getCurrentUser().getId()); // Assuming user ID is accessible
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                kitchens.add(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Inventory Notification (All Collections)");
 
         VBox content = new VBox();
-        TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
+        StringBuilder lowInventoryNotifications = new StringBuilder();
+
+        for (String k : kitchens) {
+            Notification notification = new Notification(User.getCurrentUser().getId(), k); // Create an instance of Notification
+            lowInventoryNotifications.append("\n" + k + ":\n\n");
+            lowInventoryNotifications.append(notification.gatherNotifications()); // Get the low inventory foods
+        }
+        TextArea textArea = new TextArea(lowInventoryNotifications.toString()); // Use the notifications string directly
         textArea.setEditable(false);
 
         // CSS
@@ -47,6 +74,8 @@ public class DialogController {
         dialog.getDialogPane().setContent(content);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();
+
+
     }
     public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         Notification notification = new Notification(User.getCurrentUser().getId(), mainPageController.currentCollectionName); // Create an instance of Notification

@@ -13,7 +13,7 @@ public class Notification implements Notify {
     private static final String URL = "jdbc:sqlite:mydatabase.db";
     private static final String EXPIRED_MESSAGE = " - Expired\n";
     private static final String LOW_QUANTITY_MESSAGE = " - Low inventory\n";
-    private static final String SUFFICIENT_MESSAGE = "All items are well stocked.";
+    private static final String SUFFICIENT_MESSAGE = "All items are well stocked.\n";
 
     /**
      * Used when searching through all collections
@@ -85,6 +85,7 @@ public class Notification implements Notify {
                         lowInventoryFoods.add(foodName);
                     }
                 }
+                //lowInventoryFoods.add(""); //to add a line at the end
             }
         } catch (Exception e) {
             e.printStackTrace();
