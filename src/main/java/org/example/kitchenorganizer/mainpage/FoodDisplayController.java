@@ -46,6 +46,7 @@ public class FoodDisplayController {
         int count = 0;
         if (pageNum * maxFoodsPerPage >= foods.size()) {
             Text noFoodText = new Text("No food to display");
+            noFoodText.getStyleClass().add("accessibilityFontSize");
             currentRow.getChildren().add(noFoodText);
         }
         while (count < maxFoodsPerPage && pageNum * maxFoodsPerPage + count < foods.size()) {
