@@ -8,13 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.kitchenorganizer.classes.User;
 import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -206,9 +204,9 @@ public class DialogController {
 
         dialog.showAndWait();
     }
-    public void showSettingsDialog(ActionEvent event) {
-        Dialog<Void> settingsPopup = new Dialog<>();
-        settingsPopup.setTitle("Settings");
+    public void showAccountDialog(ActionEvent event) {
+        Dialog<Void> AccountPopup = new Dialog<>();
+        AccountPopup.setTitle("Account");
 
         // Set the custom dialog layout
         VBox layout = new VBox();
@@ -222,8 +220,8 @@ public class DialogController {
         Button logoutButton = new Button("Logout");
 
         layout.getChildren().addAll(deleteAccountButton, logoutButton);
-        settingsPopup.getDialogPane().setContent(layout);
-        settingsPopup.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE); // Add a close button
+        AccountPopup.getDialogPane().setContent(layout);
+        AccountPopup.getDialogPane().getButtonTypes().addAll(ButtonType.CLOSE); // Add a close button
 
         deleteAccountButton.setOnAction(actionEvent -> {
             // Display a confirmation dialog
@@ -236,17 +234,17 @@ public class DialogController {
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 DatabaseMethods.deleteUserByUserId(User.getCurrentUser().getId());
                 handleLogout(event);
-                settingsPopup.close();
+                AccountPopup.close();
             }
         });
 
         // Handle the logout button action
         logoutButton.setOnAction(e -> {
             handleLogout(event);
-            settingsPopup.close();
+            AccountPopup.close();
         });
 
-        settingsPopup.showAndWait();
+        AccountPopup.showAndWait();
     }
     @FXML
     private void handleLogout(ActionEvent event) {

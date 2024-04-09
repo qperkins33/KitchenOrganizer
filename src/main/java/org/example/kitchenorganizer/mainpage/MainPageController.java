@@ -7,9 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.example.kitchenorganizer.classes.User;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class MainPageController implements Initializable {
 
@@ -91,8 +89,8 @@ public class MainPageController implements Initializable {
     }
     //*********************************************************************
     @FXML
-    private void showSettingsDialog(ActionEvent event) {
-        dialogController.showSettingsDialog(event);
+    private void showAccountDialog(ActionEvent event) {
+        dialogController.showAccountDialog(event);
     }
     //*********************************************************************
     @FXML
