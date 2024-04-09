@@ -32,7 +32,7 @@
     -fx-border-color: black;
     -fx-background-color: rgba(255, 255, 255, 255);
     -fx-padding: 15;
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-family: 'Arial', sans-serif;
 }
 
@@ -40,7 +40,7 @@
     -fx-border-color: black;
     -fx-background-color: rgba(255, 255, 0, 255);
     -fx-padding: 15;
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-family: 'Arial', sans-serif;
     -fx-font-weight: bold;
 }
@@ -49,7 +49,7 @@
     -fx-border-color: black;
     -fx-background-color: rgba(255, 0, 0, 255);
     -fx-padding: 15;
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-family: 'Arial', sans-serif;
     -fx-font-weight: bold;
 }
@@ -58,6 +58,9 @@
     -fx-border-color: black;
     -fx-background-color: rgba(226,226,226,255);
     -fx-padding: 15;
-    -fx-font-size: 20px;
+    -fx-font-size: 24px;
     -fx-font-family: 'Arial', sans-serif;
+}
+.accessibilityFontSize {
+    -fx-font-size: 24px;
 }

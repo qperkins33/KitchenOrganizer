@@ -20,7 +20,7 @@ import static org.example.kitchenorganizer.database.DatabaseMethods.addFoodToCol
 import static org.example.kitchenorganizer.database.DatabaseMethods.getCollectionNamesForUser;
 
 public class DialogController {
-    //All methods here were implemented by Quin. I only moved them here for cohesion.
+    //All methods here were implemented by Quin. I only moved them here for cohesion. -Austin
     private MainPageController mainPageController;
     private FoodDisplayController foodDisplayController;
     public DialogController(FoodDisplayController foodDisplayController, MainPageController mainPageController) {
@@ -38,7 +38,6 @@ public class DialogController {
         TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
         textArea.setEditable(false);
         content.getChildren().add(textArea);
-
         dialog.getDialogPane().setContent(content);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
         dialog.showAndWait();

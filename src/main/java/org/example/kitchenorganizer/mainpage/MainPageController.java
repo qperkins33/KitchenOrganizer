@@ -110,11 +110,6 @@ public class MainPageController implements Initializable {
     /**
      * Popup that allows user to enter new foods into inventory
      */
-
-    private void populateCollectionNameComboBox(ComboBox<String> comboBox) {
-        List<String> collectionNames = getCollectionNamesForUser(user.getId());
-        comboBox.getItems().addAll(collectionNames);
-    }
     @FXML
     private void showAddNewItemDialog() {
         dialogController.showAddNewItemDialog();
@@ -125,9 +120,8 @@ public class MainPageController implements Initializable {
     @FXML
     private void sort() {
         // Refresh display with sorted foods based on current kitchen and sort selection
-        String selectedKitchen = kitchenSelectorComboBox.getSelectionModel().getSelectedItem();
-        if (selectedKitchen != null) {
-            foodDisplayController.updateFoodDisplayByCollectionName(selectedKitchen); // sorting is done in updateFoodDisplay()
+        if (currentCollectionName != null) {
+            foodDisplayController.updateFoodDisplayByCollectionName(currentCollectionName); // sorting is done in updateFoodDisplay()
         }
     }
 }

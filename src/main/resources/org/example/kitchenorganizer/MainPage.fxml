@@ -18,26 +18,26 @@
                     <StackPane styleClass="appTitleContainer">
                         <Text fx:id="appTitle" styleClass="appTitle" text="Kitchen Organizer"/>
                     </StackPane>
-                    <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." />
-                    <Button text="Search" onAction="#handleSearch"></Button>
-                    <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" />
+                    <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." styleClass="accessibilityFontSize" />
+                    <Button text="Search" onAction="#handleSearch" styleClass="accessibilityFontSize" ></Button>
+                    <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" styleClass="menuContainer2">
                     <StackPane styleClass="appTitleContainer">
-                        <Text text="Select Kitchen Collection: "/>
+                        <Text text="Select Kitchen Collection: " styleClass="accessibilityFontSize"/>
                     </StackPane>
 
-                    <ComboBox fx:id="kitchenSelectorComboBox" onAction="#handleKitchenSelectionComboBox"/>
-                    <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER"/>
-                    <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER"/>
+                    <ComboBox fx:id="kitchenSelectorComboBox" onAction="#handleKitchenSelectionComboBox" styleClass="accessibilityFontSize"/>
+                    <Button text="Add New Collection" onAction="#showAddCollectionDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                    <Button text="Remove Collection" onAction="#showRemoveCollectionDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
                     <Pane HBox.hgrow="ALWAYS"/>
 
                     <StackPane styleClass="appTitleContainer">
-                        <Text text="Sort By: "/>
+                        <Text text="Sort By: " styleClass="accessibilityFontSize"/>
                     </StackPane>
-                    <ComboBox fx:id="sortBy" onAction="#sort">
+                    <ComboBox fx:id="sortBy" onAction="#sort" styleClass="accessibilityFontSize">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
                                 <String fx:value="Name"/>
@@ -58,23 +58,21 @@
 
         <bottom>
             <HBox alignment="CENTER_LEFT">
-                <Label text=" User's Name: "/>
-                <Text fx:id="userName" />
+                <Label text=" User's Name: " styleClass="accessibilityFontSize"/>
+                <Text fx:id="userName" styleClass="accessibilityFontSize" />
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER"/>
-                <Button text="Check Current Collection's Inventory" onAction="#showCheckCurrentInventoryDialog" HBox.hgrow="NEVER"/>
-                <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER"/>
+                <Button text="Add New Item" onAction="#showAddNewItemDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                <Button text="Check Current Collection's Inventory" onAction="#showCheckCurrentInventoryDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                <Button text="Check All Inventory" onAction="#showCheckAllInventoryDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Button text="Previous Page" onAction="#previousPage" HBox.hgrow="NEVER"/>
-                <Button text="Next Page" onAction="#nextPage" HBox.hgrow="NEVER"/>
+                <Text fx:id="pageInfoText" styleClass="accessibilityFontSize"/>
+                <Button text="-" onAction="#previousPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
+                <Button text="+" onAction="#nextPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
-                <Pane HBox.hgrow="ALWAYS"/>
-
-                <Text fx:id="pageInfoText"/>
             </HBox>
         </bottom>
 

@@ -10,7 +10,7 @@ import java.util.List;
 import static org.example.kitchenorganizer.database.DatabaseMethods.*;
 
 public class KitchenController {
-    //All methods here were implemented by Quin. I only moved them here for cohesion.
+    //All methods here were implemented by Quin. I only moved them here for cohesion. -Austin
     private FoodDisplayController foodDisplayController;
     private ComboBox<String> kitchenSelectorComboBox;
     private MainPageController mainPageController;

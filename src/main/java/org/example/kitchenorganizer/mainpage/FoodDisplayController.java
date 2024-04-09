@@ -126,9 +126,9 @@ public class FoodDisplayController {
             changeQuantityButtons.setAlignment(Pos.CENTER);
             Button minus = new Button("-");
             TextField usedQuantity = new TextField();
-            usedQuantity.setPromptText("Quantity"); // TODO: Center text within TextField
+            usedQuantity.setPromptText("Quantity");
             Button plus = new Button("+");
-            changeQuantityButtons.getChildren().addAll(minus, usedQuantity, plus);
+            changeQuantityButtons.getChildren().addAll(usedQuantity, minus, plus);
 
             minus.setOnAction(event -> {
                 try {
@@ -276,14 +276,9 @@ public class FoodDisplayController {
                 //and to ensure that the max page is not 0 when the collection is empty.
                 (currentFoodList.size() % maxFoodsPerPage == 0 && !currentFoodList.isEmpty())
                         ? currentFoodList.size() / maxFoodsPerPage: currentFoodList.size() / maxFoodsPerPage + 1));
-        displayFoods(currentFoodList); //TODO: Make usable
+        displayFoods(currentFoodList);
     }
 
-    // TODO: incrementPageNum and decrementPageNum do not properly change page.
-    //  The new page will not be up to date because user may have changed the contents of the database
-    //  and the currentCollectionName will also not be correct. So if a user searches, the search result
-    //  will be from page 1 and never from page 2. I commented out the sections that do not work.
-    //  Either we can fix it or just delete them entirely.
     public void incrementPageNum() {
         if ((pageNum + 1) * maxFoodsPerPage < currentFoodList.size()) {
             pageNum++;
