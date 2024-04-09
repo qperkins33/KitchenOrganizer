@@ -59,7 +59,7 @@
         <bottom>
             <HBox alignment="CENTER_LEFT">
                 <Label text=" User's Name: " styleClass="accessibilityFontSize"/>
-                <Text fx:id="userName" styleClass="accessibilityFontSize" />
+                <Text fx:id="userName" styleClass="boldText" />
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
@@ -69,13 +69,11 @@
 
                 <Pane HBox.hgrow="ALWAYS"/>
 
-                <Text fx:id="pageInfoText" styleClass="accessibilityFontSize"/>
+                <Text fx:id="pageInfoText" styleClass="boldText"/>
                 <Button text="-" onAction="#previousPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                 <Button text="+" onAction="#nextPage" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
 
                 <Pane HBox.hgrow="ALWAYS"/>
-
-                <Text fx:id="pageInfoText" styleClass="boldText"/>
             </HBox>
         </bottom>
 

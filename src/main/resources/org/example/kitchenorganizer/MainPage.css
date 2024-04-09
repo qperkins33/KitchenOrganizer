@@ -65,6 +65,7 @@
 .boldText {
     -fx-font-family: 'Arial', sans-serif;
     -fx-font-weight: bold;
+    -fx-font-size: 24px;
 }
 
 .accessibilityFontSize {
