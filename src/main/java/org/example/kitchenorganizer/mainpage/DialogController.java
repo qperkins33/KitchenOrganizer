@@ -32,7 +32,7 @@ public class DialogController {
         String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
 
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Low Inventory Notification");
+        dialog.setTitle("Inventory Notification (All Collections)");
 
         VBox content = new VBox();
         TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
@@ -47,7 +47,7 @@ public class DialogController {
         String lowInventoryNotifications = notification.gatherNotifications(); // Get the low inventory foods
 
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Low Inventory Notification");
+        dialog.setTitle("Inventory Notification (Current Collection)");
 
         VBox content = new VBox();
         TextArea textArea = new TextArea(lowInventoryNotifications); // Use the notifications string directly
