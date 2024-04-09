@@ -161,7 +161,6 @@ public class DialogController {
 
         dialog.getDialogPane().setContent(grid);
 
-
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == submitButtonType) { // Empty form check
                 // Checks if all fields are filled

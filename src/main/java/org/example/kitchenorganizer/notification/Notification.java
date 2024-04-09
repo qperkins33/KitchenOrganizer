@@ -85,7 +85,6 @@ public class Notification implements Notify {
                         lowInventoryFoods.add(foodName);
                     }
                 }
-                //lowInventoryFoods.add(""); //to add a line at the end
             }
         } catch (Exception e) {
             e.printStackTrace();
