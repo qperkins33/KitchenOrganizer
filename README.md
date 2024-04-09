@@ -70,8 +70,7 @@ dependencies specified in the Gradle build files. Wait for the build process to 
 5. Run the Application: After the build process is finished, you should be able to run the application.
 Run the App class, which serves as the entry point for the JavaFX application.
 
-- Login: The application will launch, and you will be presented with a login screen.
-Enter the correct username and password from the database (we have multiple profiles made, but you can use "user" and "pass") and click the login button.
+- Login: The application will launch, and you will be presented with a login screen. Either create an account or log in to an existing account.
 
 - Main Page: Upon successful login, you will be directed to the main page of the application.
 Here, you can view food items and perform actions based on the application's features.
@@ -84,35 +83,44 @@ should be at least 6 functional requirements. For each of these requirements, ex
 how one can test that the program satisfies that requirement.
 
 - Expiration Date Watcher: The app allows users to add an expiration
-date to each to each food item that can be used to alert the user.
+date to each food item that can be used to alert the user.
 Foods change color based on their availability. Red foods are expired and yellow
 foods have a low quantity.
-Test: One can test by _____
+Test: One can test by ensuring the food color is correct when adding a new food, changing the expiration date,
+or changing the quantity of food. 
 
 - Food Stock: The app allows users to increase/decrease quantity, delete, and update
 the foods in their inventory.
-Test: One can test by _____
+Test: One can test by changing the food quantity, expiration date, min quantity, and deleting the food
+to ensure the food updates properly.
 
-- Alerts: The app displays a pop up telling user which foods are running low
-or about to expire. Users can choose to check individual collections or all inventories.
-Test: One can test by _____
+- Alerts: The app displays a pop-up telling users which foods are running low
+or have expired. Users can choose to check individual collections or all inventories.
+Test: One can test by checking that the results for the "Check Current Collection's Inventory" and
+The "Check All Inventory" buttons display the correct results.
 
-- Search and Sort: Users can search for specific foods their inventory. Users can also sort
+- Search and Sort: Users can search for specific foods in their inventory. Users can also sort
 the display order based on either name or expiration.
-Test: One can test by _____
+Test: One can test by changing the value in the "Sort By" combo box and ensuring the foods are sorted properly.
+Search can be tested by typing something into the search bar, clicking 'Search',
+and ensuring all foods containing the characters entered are displayed.
 
 - Add New Food Feature: Users will be able to add new types of foods into the app’s database.
-Test: One can test by _____
+Test: One can test by using the "Add New Item" button to ensure new foods are added properly.
 
 - Multiple Kitchens: Users can create multiple kitchens in the app so they can keep track
 of items in multiple kitchens.
-Test: One can test by _____
+Test: One can test by using the "Add Collection" and "Remove Collection" buttons and checking that collections are added and removed properly.
+Also, ensure that the "Select Kitchen Collection" combo box changes collections properly.
 
 2. Each non-functional requirement. There should be at least four non-functional
 requirements. For each of these requirements explain how you have ensured that it is
 met in your application.
 
-- Data Integrity (Ensure data is recorded exactly as intended.): Our app stores expiration dates of foods. User enter expiration date as number of days until expiration, but in the database, it's stored as DATE in order to ensure expiration date is always up to date. When user retrieves from the databse, DATE is turned into and displayed as number of days until expiration date.
-- Volume Test Run: EXPLAIN
-- [NEW] Usability (User-friendliness. Easy to navigate and features are understandable and easy to find.): EXPLAIN
-- [NEW] Performance (Provide fast and accurate response times.): EXPLAIN
+- Data Integrity (Ensure data is recorded exactly as intended.): Our app stores expiration dates of foods. Users enter the expiration date as the number of days until expiration, but in the database, it's stored as a date to ensure the expiration date is always up to date. When the user retrieves from the database, the date is turned into and displayed as the number of days until the expiration date. Additionally, the user cannot enter a negative number for the expiration date, a non-positive number for quantity, or a negative number for minimum quantity. We also ensure that the user cannot enter the incorrect data type for fields.
+  
+- Volume Test Run: The app displays a limited number of food objects at a time to ensure that large quantities of food objects do not significantly impact performance. We have tested the app with thousands of randomly generated foods in multiple collections to ensure that the app performance is acceptable.
+
+- Usability: All buttons, text fields, and combo boxes are clearly labeled, and all features that need explaining are explained in the help dialog after pressing the 'Help' button. Additionally, whenever an error occurs, there's an explanation for why the error occurred, and what the user can do to prevent the error from occurring again.
+  
+- Portability: Our app can run on multiple operating systems including Windows, MacOS, and Linux with no modifications so it is portable.
