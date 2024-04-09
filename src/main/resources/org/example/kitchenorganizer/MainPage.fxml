@@ -18,7 +18,7 @@
                     <StackPane styleClass="appTitleContainer">
                         <Text fx:id="appTitle" styleClass="appTitle" text="Kitchen Organizer"/>
                     </StackPane>
-                    <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search..." styleClass="accessibilityFontSize" />
+                    <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" promptText="Search in current collection..." styleClass="accessibilityFontSize" />
                     <Button text="Search" onAction="#handleSearch" styleClass="accessibilityFontSize" ></Button>
                     <Button text="Settings" onAction="#showSettingsDialog" HBox.hgrow="NEVER" styleClass="accessibilityFontSize"/>
                     <Text text=" Name: " styleClass="userName"/>
