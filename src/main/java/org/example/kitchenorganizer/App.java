@@ -13,6 +13,14 @@ import org.example.kitchenorganizer.database.DatabaseInitializer;
  * Username: user
  * Password: pass
  *
+ * OR
+ *
+ * Username: volume
+ * Password: test
+ *
+ * OR
+ *
+ * Create New Account
  */
 public class App extends Application {
 
