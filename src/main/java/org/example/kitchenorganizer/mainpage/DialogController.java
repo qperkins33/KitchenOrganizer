@@ -200,24 +200,7 @@ public class DialogController {
 
                     // Add the food to the specified collection in the database
                     addFoodToCollection(collection, name.toString(), quantity, measurementUnit, minQuantity, expDate);
-                    //For volume tests only. Tests written by Austin.
-                    if (name.toString().equals("volume test")) {
-                        Random random = new Random();
-                        int length = random.nextInt(5, 100);
-                        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890[]`~!@#$%^&*(){}/=-',.<>_?+|;:";
-                        for (int i = 0; i < 6000; i++) {
-                            name = new StringBuilder();
-                            for (int j = 0; j < length; j++) {
-                                name.append(characters.charAt(random.nextInt(characters.length())));
-                            }
-                            quantity = random.nextDouble(-Float.MAX_VALUE, Float.MAX_VALUE);
-                            measurementUnit = measurementUnitDropdown.getItems().get(random.nextInt(measurementUnitDropdown.getItems().size()));
-                            minQuantity = random.nextInt(0, Integer.MAX_VALUE);
-                            expDate = random.nextInt(-10, 10);
 
-                            addFoodToCollection(collection, name.toString(), quantity, measurementUnit, minQuantity, expDate);
-                        }
-                    }
                     // Refresh the display
                     foodDisplayController.updateFoodDisplayByCollectionName(mainPageController.currentCollectionName);
 
