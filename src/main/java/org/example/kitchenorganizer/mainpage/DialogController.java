@@ -1,6 +1,4 @@
 package org.example.kitchenorganizer.mainpage;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,17 +15,13 @@ import org.example.kitchenorganizer.database.DatabaseMethods;
 import org.example.kitchenorganizer.notification.Notification;
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-
 import static org.example.kitchenorganizer.database.DatabaseMethods.addFoodToCollection;
 import static org.example.kitchenorganizer.database.DatabaseMethods.getCollectionNamesForUser;
 
 public class DialogController {
-    //All methods here were implemented by Quin. I only moved them here for cohesion. -Austin
     private MainPageController mainPageController;
     private FoodDisplayController foodDisplayController;
     public DialogController(FoodDisplayController foodDisplayController, MainPageController mainPageController) {
@@ -35,8 +29,7 @@ public class DialogController {
         this.mainPageController = mainPageController;
     }
     public void showCheckAllInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
-        //This was copied from kitchenController.refreshKitchenSelectorComboBox and slightly modified.
-        ArrayList<String> kitchens = new ArrayList<String>();
+        ArrayList<String> kitchens = new ArrayList<>();
         String sql = "SELECT name FROM FoodCollections WHERE userId = ?";
 
         try (Connection conn = DriverManager.getConnection(DatabaseInitializer.URL);
@@ -318,6 +311,4 @@ public class DialogController {
         List<String> collectionNames = getCollectionNamesForUser(User.getCurrentUser().getId());
         comboBox.getItems().addAll(collectionNames);
     }
-
-
 }
