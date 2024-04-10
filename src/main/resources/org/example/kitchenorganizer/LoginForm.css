@@ -36,7 +36,7 @@
 Button {
     -fx-pref-width: 100%;
     -fx-padding: 10px;
-    -fx-background-color: rgba(0, 0, 255, 0.75);
+    -fx-background-color: #4CAF50;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
@@ -44,7 +44,7 @@ Button {
 }
 
 Button:hover {
-    -fx-background-color: rgba(50, 50, 255, 0.75);
+    -fx-background-color: #45a049;
 }
 
 .create-account-container {
@@ -58,4 +58,16 @@ Button:hover {
 
 HBox {
     -fx-padding: 20px;
+}
+
+.toggle-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #304ffe;
+    -fx-font-weight: normal;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.toggle-button:hover {
+    -fx-text-fill: #3958e5;
 }
