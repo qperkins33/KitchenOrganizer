@@ -22,38 +22,50 @@ Deliverables:
 - Zip your project folder which should contain all of your code, including the gradle build files and the README and submit the zip file to D2L.
 
 *****************************************************************************************************
-TODO: Update Milestone 3's README for Milestone 4 based on above instructions and updated code in project:
-
 How is the code structured? 
 
 The code is structured into several packages, each containing classes related to specific
 functionalities of the kitchen organizer application.
 
-- org.example.kitchenorganizer.classes: This package contains classes representing various entities
-in the kitchen organizer application, such as Food, FoodCollection, InventoryItem, and User.
-These classes permit to manage food items, user inventory...
+- org.example.kitchenorganizer.classes: This package contains classes representing various entities in the kitchen organizer application, such as Food, FoodCollection, InventoryItem, and User. These classes are uses to create new instances food items, user inventory, etc.
+Setters are not really used because the data must be changed through the database.
+
+- org.example.kitchenorganizer.database: This This package contains the database initializer and a file with the database select methods.
 
 - org.example.kitchenorganizer.notification: This package includes the Notification class,
-which implements the Notify interface. It handles notifications related to low food quantity in the user's inventory.
+which implements the Notify interface. It handles notifications related to low food quantity in the user's inventory. Notification has its own database methods that allows it to check the user's inventory.
 
-- org.example.kitchenorganizer.login: This package contains the LoginController class, which manages the user
-authentication process and login UI. It interacts with the FXML files for the login form.
+- org.example.kitchenorganizer.login: This package contains the LoginController class, which manages the user authentication process and login UI. It interacts with the FXML files for the login form. Uses database methods to check user and pass.
 
-- org.example.kitchenorganizer.mainpage: This package contains the MainPageController class, which manages the display process of the main page and handles user inputs. It interacts with the FXML files for the main page.
+- org.example.kitchenorganizer.mainpage: This package contains MainPageController (Initializes mainpage), FoodDisplayController (Handles the display of foods on the main page), KitchenController (Handles the various kitchen forms on mainpage), and DialogController (Which handles the various dialogs that are used in forms and menus) which all together manage the display process of the main page. They interact with the FXML files for the main page.
 
 - org.example.kitchenorganizer: This package contains the main classes and controllers for the application.
-The App class serves as the entry point for the JavaFX application. The MainPageController class manages the main page UI
-and displays food items from the user's inventory.
+The App class serves as the entry point for the JavaFX application. The AppController class manages the main page and login page.
 
 
 Where are the classes that satisfy the “Code Implementation” requirements?
 
+CLASSES
 - Food.java
 - FoodCollection.java
-- InventoryItem.java
+- InventoryItem.java (ABSTRACT)
 - User.java
+
+NOTIFICATION
 - Notification.java
+- Notify.java (INTERFACE)
+
+LOGIN
 - LoginController.java
+
+MAINPAGE
+- DialogController.java
+- FoodDisplayController.java
+- KitchenController.java
+- MainPageController.java
+
+- App.java (START APP HERE)
+- Controller.java
 
 
 How does one run the application?
@@ -70,7 +82,14 @@ dependencies specified in the Gradle build files. Wait for the build process to 
 5. Run the Application: After the build process is finished, you should be able to run the application.
 Run the App class, which serves as the entry point for the JavaFX application.
 
-- Login: The application will launch, and you will be presented with a login screen. Either create an account or log in to an existing account.
+- Login: The application will launch, and you will be presented with a login screen. Either create a new account or log in to an existing account.
+
+EXISTING USERS:
+Username: user
+Password: pass
+ * OR *
+Username: volume
+Password: test
 
 - Main Page: Upon successful login, you will be directed to the main page of the application.
 Here, you can view food items and perform actions based on the application's features.
