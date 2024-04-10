@@ -150,8 +150,8 @@ public class DialogController {
         grid.add(minQuantityField, 1, 4);
         grid.add(new Label("Days Until Expiration:"), 0, 5);
         grid.add(expDateField, 1, 5);
-        grid.add(new Label("The quantity, min quantity,"), 0, 6);
-        grid.add(new Label("and the days to expiration can be changed later."), 1, 6);
+        grid.add(new Label("(The quantity, min quantity,"), 0, 6);
+        grid.add(new Label("and the days to expiration can be changed later.)"), 1, 6);
 
         dialog.getDialogPane().setContent(grid);
 

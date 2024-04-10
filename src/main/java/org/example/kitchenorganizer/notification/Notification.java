@@ -9,19 +9,11 @@ import java.util.Set;
 
 public class Notification implements Notify {
     private final int userId;
-    private String collectionName; // null when not specified (CHECK ALL COLLECTIONS THEN)
+    private String collectionName;
     private static final String URL = "jdbc:sqlite:mydatabase.db";
     private static final String EXPIRED_MESSAGE = " - Expired\n";
     private static final String LOW_QUANTITY_MESSAGE = " - Low inventory\n";
     private static final String SUFFICIENT_MESSAGE = "All items are well stocked.\n";
-
-    /**
-     * Used when searching through all collections
-     * @param userId
-     */
-    public Notification(int userId) {
-        this.userId = userId;
-    }
 
     /**
      * Used when searching through specific collection
@@ -52,7 +44,7 @@ public class Notification implements Notify {
     private Set<String> fetchExpiredFoods() {
         Set<String> expiredFoods = new HashSet<>();
         String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? " +
-                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.expDate <= CURRENT_DATE"; // Check if expired by using CURRENT_DATE
+                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.expDate <= CURRENT_DATE"; // Check if expired by using CURRENT_DATE. Also, if collectionName happens to be null, all collections are searched.
 
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = prepareStatement(conn, sql)) {
@@ -74,7 +66,7 @@ public class Notification implements Notify {
     private Set<String> fetchLowInventoryFoods(Set<String> excludedFoods) {
         Set<String> lowInventoryFoods = new HashSet<>();
         String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? " +
-                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.quantity < f.minQuantity";
+                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.quantity < f.minQuantity"; // If collectionName happens to be null, all collections are searched.
 
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = prepareStatement(conn, sql)) {
