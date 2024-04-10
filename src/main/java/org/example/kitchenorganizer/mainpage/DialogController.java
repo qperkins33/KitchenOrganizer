@@ -62,7 +62,7 @@ public class DialogController {
             Notification notification = new Notification(User.getCurrentUser().getId(), k); // Create an instance of Notification
             lowInventoryNotifications.append(k + ":\n");
             lowInventoryNotifications.append(notification.gatherNotifications()); // Get the low inventory foods
-            lowInventoryNotifications.append("\n*************************\n");
+            lowInventoryNotifications.append("\n***************************************************************************\n");
         }
         TextArea textArea = new TextArea(lowInventoryNotifications.toString()); // Use the notifications string directly
         textArea.setEditable(false);
@@ -316,9 +316,9 @@ public class DialogController {
                 "Since the food display shows a limited number of foods at a time,\n" +
                 "the page controls on the bottom right side of the screen is used to show more foods.\n" +
                 "When you click the '+' button, the food display will show the next set of foods.\n" +
-                "The '-' button will show the previous set of foods if you are not on the first page.\n" +
-                "Keep in mind that the page controls are only used for foods in the current collection.\n" +
-                "To switch collections, use the 'Select Kitchen Collection' combo box.");
+                "The '-' button will show the previous set of foods if you are not on the first page.\n\n" +
+                "(Keep in mind that the page controls are only used for foods in the current collection.\n" +
+                "To switch collections, use the 'Select Kitchen Collection' combo box.)");
         textArea.setEditable(false);
 
         // CSS
