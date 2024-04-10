@@ -52,7 +52,7 @@ public class Notification implements Notify {
     private Set<String> fetchExpiredFoods() {
         Set<String> expiredFoods = new HashSet<>();
         String sql = "SELECT f.name FROM Foods f INNER JOIN FoodCollections fc ON f.collectionId = fc.id WHERE fc.userId = ? " +
-                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.expDate < CURRENT_DATE"; // Check if expired by using CURRENT_DATE
+                (collectionName != null ? "AND fc.name = ? " : "") + "AND f.expDate <= CURRENT_DATE"; // Check if expired by using CURRENT_DATE
 
         try (Connection conn = DriverManager.getConnection(URL);
              PreparedStatement pstmt = prepareStatement(conn, sql)) {

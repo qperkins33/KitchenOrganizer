@@ -58,7 +58,7 @@ public class DatabaseInitializer {
         }
     }
 
-    // Testing method that displays all users in terminal
+    // Test method that displays all users and passwords to console
     public static void displayAllUsers() {
         String sql = "SELECT * FROM Users";
         try (Connection conn = DriverManager.getConnection(URL);

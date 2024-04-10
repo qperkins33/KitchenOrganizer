@@ -36,9 +36,9 @@ public class MainPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        currentCollection = 0; // value to change displayed collection. (TEST)
+        currentCollection = 0; // value to change displayed collection.
 
-        user = User.getCurrentUser(); // use in actual program (QUIN)
+        user = User.getCurrentUser();
 
         foodDisplayController = new FoodDisplayController(foodsCenterVBox, sortBy, pageInfoText);
         kitchenController = new KitchenController(foodDisplayController, kitchenSelectorComboBox, this);

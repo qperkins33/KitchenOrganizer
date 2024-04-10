@@ -52,23 +52,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getUsername() {
         return this.username;
-    }
-
-    public void addCollectionToInventoryList(List<FoodCollection> newCollection) {
-        this.foodInventoryList = newCollection;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 }
