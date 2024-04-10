@@ -82,16 +82,19 @@ dependencies specified in the Gradle build files. Wait for the build process to 
 5. Run the Application: After the build process is finished, you should be able to run the application.
 Run the App class, which serves as the entry point for the JavaFX application.
 
-- Login: The application will launch, and you will be presented with a login screen. Either create a new account or log in to an existing account.
+6. Login: The application will launch, and you will be presented with a login screen. Either create a new account or log in to an existing account.
 
 EXISTING USERS:
+
 Username: user
 Password: pass
+
  * OR *
+
 Username: volume
 Password: test
 
-- Main Page: Upon successful login, you will be directed to the main page of the application.
+7. Main Page: Upon successful login, you will be directed to the main page of the application.
 Here, you can view food items and perform actions based on the application's features.
 
 *****************************************************************************************************
