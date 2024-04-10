@@ -56,7 +56,7 @@ public class MainPageController implements Initializable {
     }
 
     //*********************************************************************
-    // KITCHEN COLLECTION
+    // KITCHEN COLLECTION HANDLING
     @FXML
     private void handleKitchenSelectionComboBox() {
         kitchenController.handleKitchenSelectionComboBox();
@@ -65,13 +65,13 @@ public class MainPageController implements Initializable {
     private void showAddCollectionDialog() {
         kitchenController.showAddCollectionDialog();
     }
-
     @FXML
     private void showRemoveCollectionDialog() {
         kitchenController.showRemoveCollectionDialog();
     }
 
     //*********************************************************************
+    // SEARCH
     @FXML
     private TextField searchBar;
 
@@ -79,25 +79,19 @@ public class MainPageController implements Initializable {
     private void handleSearch() {
         foodDisplayController.search(searchBar.getText().trim(), currentCollectionName);
     }
-    @FXML
-    private void previousPage() {
-        foodDisplayController.decrementPageNum();
-    }
-    @FXML
-    private void nextPage() {
-        foodDisplayController.incrementPageNum();
-    }
+
     //*********************************************************************
+    // SCREEN BOTTOM DIALOGS
     @FXML
     private void showAccountDialog(ActionEvent event) {
         dialogController.showAccountDialog(event);
     }
-    //*********************************************************************
+
     @FXML
     private void showHelpDialog() {
         dialogController.showHelpDialog();
     }
-    //*********************************************************************
+
     @FXML
     private void showCheckAllInventoryDialog() { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         dialogController.showCheckAllInventoryDialog();
@@ -107,15 +101,20 @@ public class MainPageController implements Initializable {
     public void showCheckCurrentInventoryDialog(ActionEvent actionEvent) { // Notify user about foods where Quantity < MinQuantity and foods where expDateDays < 0
         dialogController.showCheckCurrentInventoryDialog(actionEvent);
     }
-    //*********************************************************************
-    // ADD NEW FOOD
 
-    /**
-     * Popup that allows user to enter new foods into inventory
-     */
     @FXML
     private void showAddNewItemDialog() {
         dialogController.showAddNewItemDialog();
+    }
+
+    // PAGE CHANGE
+    @FXML
+    private void previousPage() {
+        foodDisplayController.decrementPageNum();
+    }
+    @FXML
+    private void nextPage() {
+        foodDisplayController.incrementPageNum();
     }
 
     //*********************************************************************
