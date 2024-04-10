@@ -87,11 +87,13 @@ Run the App class, which serves as the entry point for the JavaFX application.
 EXISTING USERS:
 
 Username: user
+
 Password: pass
 
  * OR *
 
 Username: volume
+
 Password: test
 
 7. Main Page: Upon successful login, you will be directed to the main page of the application.
