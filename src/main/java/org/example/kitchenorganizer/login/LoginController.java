@@ -89,7 +89,7 @@ public class LoginController {
         // Check if the username already exists in the database
         if (usernameExists(username)) {
             createAccountMessageLabel.setTextFill(Color.RED);
-            createAccountMessageLabel.setText("Username already exists. Choose another.");
+            createAccountMessageLabel.setText("Username already exists.");
             return;
         }
 
