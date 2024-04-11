@@ -267,8 +267,12 @@ public class FoodDisplayController {
     }
 
     public void refreshDisplayFromWithinDisplay(Food changedFood) {
+        String sortOrder = "name"; // Default sort order
+        if (sortBy.getValue() != null && sortBy.getValue().equals("Expiration")) {
+            sortOrder = "expDate";
+        }
         if (searchQuery.isEmpty())
-            currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), "name");
+            currentFoodList = fetchSortedFoods(changedFood.getCollectionId(), sortOrder);
         else
             currentFoodList = returnFoodsThatMatchSearch(User.getCurrentUser().getId(), searchQuery, currentCollectionName);
         displayFoods(currentFoodList);
