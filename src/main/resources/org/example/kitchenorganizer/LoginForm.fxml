@@ -21,12 +21,12 @@
             <VBox fx:id="createAccountContainer" alignment="CENTER" spacing="20" styleClass="create-account-container" visible="false" managed="false">
                 <Text text="Kitchen Organizer" styleClass="title"/>
                 <Text fx:id="createAccountTitle" text="Create Account" styleClass="subtitle"/>
-                <Label fx:id="createAccountMessageLabel" text=""/>
                 <TextField fx:id="firstNameField" promptText="First Name"/>
                 <TextField fx:id="lastNameField" promptText="Last Name"/>
                 <TextField fx:id="newUsernameField" promptText="Username"/>
                 <PasswordField fx:id="newPasswordField" promptText="Password"/>
                 <Button fx:id="createAccountButton" onAction="#handleCreateAccountButtonAction" text="Create Account" maxWidth="Infinity"/>
+                <Label fx:id="createAccountMessageLabel" text=""/>
                 <Button fx:id="backToLoginButton" onAction="#handleToggleFormButtonAction" text="Back to Login" styleClass="toggle-button"/>
             </VBox>
         </StackPane>
