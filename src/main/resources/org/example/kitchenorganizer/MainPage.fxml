@@ -54,7 +54,7 @@
 
         <center>
 <!--            Scrollable-->
-            <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="900" prefHeight="625">
+            <ScrollPane fitToWidth="true" fitToHeight="true" pannable="true" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED" prefWidth="1300" prefHeight="800">
                 <VBox fx:id="foodsCenterVBox" alignment="TOP_CENTER" ></VBox>
             </ScrollPane>
         </center>
