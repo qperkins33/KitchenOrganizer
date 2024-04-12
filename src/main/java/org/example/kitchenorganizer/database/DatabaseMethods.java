@@ -1,4 +1,5 @@
 package org.example.kitchenorganizer.database;
+import javafx.scene.control.Alert;
 import org.example.kitchenorganizer.classes.Food;
 import org.example.kitchenorganizer.classes.User;
 import java.sql.*;
@@ -116,6 +117,11 @@ public class DatabaseMethods {
 
             if (rs.next()) {
                 System.out.println("A collection with this name already exists for the user.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Input Error");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("A collection with this name already exists for the user.\n\nPlease ensure entered \"Collection Name\" is unique.");
+                alert.showAndWait();
             } else {
                 insertStmt.setString(1, collectionName);
                 insertStmt.setInt(2, userId);
