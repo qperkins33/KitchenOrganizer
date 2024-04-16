@@ -294,7 +294,8 @@ public class DialogController {
                 "When you click the '+' button, the food display will show the next set of foods.\n" +
                 "The '-' button will show the previous set of foods if you are not on the first page.\n\n" +
                 "(Keep in mind that the page controls are only used for foods in the current collection.\n" +
-                "To switch collections, use the 'Select Kitchen Collection' combo box.)");
+                "To switch collections, use the 'Select Kitchen Collection' combo box.)\n\n" +
+                "To clear the search query, delete all text in the search bar and click 'search.'");
         textArea.setEditable(false);
 
         // CSS
