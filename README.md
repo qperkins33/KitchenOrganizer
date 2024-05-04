@@ -1,27 +1,3 @@
-Project Milestone 4 – Implementation
-Due April 10, 2024 @ 6:00 PM
-
-Requirements:
-Take the work you did in Project Milestone 3 and make it functional. The purpose of this milestone is to
-get your application into a working and fully functional state. Implement the features that you specified
-earlier and ensure that they operate as expected. Go back to Project Milestone 1 and list out the
-functional and non-functional requirements you specified there. Make any adjustments as necessary
-based on changes in your requirements since then. Then implement the revised set of 6 or more
-functional requirements and ensure your application satisfies the 4 non-functional requirements.
-
-Deliverables:
-- A README.md or README.txt file that answers the following questions:
-- How is the code structured? Where are the classes that satisfy the “Code Implementation” requirements?
-- How does one run the application?
-- Zip your project folder which should contain all of your code, including the gradle build files and the README and submit the zip file to D2L.
-
-Deliverables:
-- A README.md or README.txt file specifying the following:
-- Each functional requirement that this version of the application implements. There should be at least 6 functional requirements. For each of these requirements, explain how one can test that the program satisfies that requirement.
-- Each non-functional requirement. There should be at least four non-functional requirements. For each of these requirements explain how you have ensured that it is met in your application.
-- Zip your project folder which should contain all of your code, including the gradle build files and the README and submit the zip file to D2L.
-
-*****************************************************************************************************
 How is the code structured? 
 
 The code is structured into several packages, each containing classes related to specific
